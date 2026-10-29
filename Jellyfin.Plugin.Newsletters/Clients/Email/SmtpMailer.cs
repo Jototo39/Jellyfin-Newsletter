@@ -28,7 +28,7 @@ namespace Jellyfin.Plugin.Newsletters.Clients.Email;
 // [Route("newsletters/[controller]")]
 [Authorize(Policy = Policies.RequiresElevation)]
 [ApiController]
-[Route("SmtpMailer")]
+[Route("NewslettersTest/SmtpMailer")]
 public class SmtpMailer(IServerApplicationHost appHost,
     Logger loggerInstance,
     SQLiteDatabase dbInstance,

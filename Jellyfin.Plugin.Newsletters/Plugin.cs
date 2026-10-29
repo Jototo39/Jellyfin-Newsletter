@@ -41,7 +41,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
             config.LogDirectoryPath = dataPaths.LogDirectoryPath;
 
             // Custom Paths
-            config.NewsletterDir = $"{config.TempDirectory}/Newsletters/";
+            config.NewsletterDir = $"{config.TempDirectory}/NewslettersTest/";
         }
 
         SetConfigPaths(applicationPaths);
@@ -51,10 +51,10 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
     }
 
     /// <inheritdoc />
-    public override string Name => "Newsletters";
+    public override string Name => "Newsletters (TEST)";
 
     /// <inheritdoc />
-    public override Guid Id => Guid.Parse("60f478ab-2dd6-4ea0-af10-04d033f75979");
+    public override Guid Id => Guid.Parse("46b209f0-7073-4224-a212-cd9dc64efaa4");
 
     /// <summary>
     /// Gets the current plugin instance.

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div id="NewsletterConfigPage" data-role="page" class="page type-interior pluginConfigurationPage"
+    <div id="NewsletterTestConfigPage" data-role="page" class="page type-interior pluginConfigurationPage"
         data-require="emby-input,emby-button,emby-select,emby-checkbox">
         <div data-role="content">
             <div class="content-primary">
@@ -707,7 +707,7 @@
         </style>
         <script type="text/javascript">
             var NewsletterConfig = {
-                pluginUniqueId: '60f478ab-2dd6-4ea0-af10-04d033f75979'
+                pluginUniqueId: '46b209f0-7073-4224-a212-cd9dc64efaa4'
             };
 
             // In-memory config storage for multi-config management
@@ -756,7 +756,7 @@
 
             function testRadarrConfig(id) {
                 Dashboard.showLoadingMsg();
-                var url = ApiClient.getUrl('UpcomingMedia/TestRadarr') + '?configurationId=' + encodeURIComponent(id);
+                var url = ApiClient.getUrl('NewslettersTest/UpcomingMedia/TestRadarr') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url }).then(function () {
                     Dashboard.hideLoadingMsg();
                     alert('Radarr connection successful!');
@@ -836,7 +836,7 @@
 
             function testSonarrConfig(id) {
                 Dashboard.showLoadingMsg();
-                var url = ApiClient.getUrl('UpcomingMedia/TestSonarr') + '?configurationId=' + encodeURIComponent(id);
+                var url = ApiClient.getUrl('NewslettersTest/UpcomingMedia/TestSonarr') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url }).then(function () {
                     Dashboard.hideLoadingMsg();
                     alert('Sonarr connection successful!');
@@ -1156,7 +1156,7 @@
 
             function testDiscordConfig(id) {
                 Dashboard.showLoadingMsg();
-                var url = ApiClient.getUrl('Discord/SendDiscordTestMessage') + '?configurationId=' + encodeURIComponent(id);
+                var url = ApiClient.getUrl('NewslettersTest/Discord/SendDiscordTestMessage') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
                     alert(formatMessage(response) || "Test Discord message sent! Check your webhook channel.");
@@ -1365,7 +1365,7 @@
 
             function testTelegramConfig(id) {
                 Dashboard.showLoadingMsg();
-                var url = ApiClient.getUrl('Telegram/SendTelegramTestMessage') + '?configurationId=' + encodeURIComponent(id);
+                var url = ApiClient.getUrl('NewslettersTest/Telegram/SendTelegramTestMessage') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
                     alert(formatMessage(response) || "Test Telegram message sent! Check your chat.");
@@ -1540,7 +1540,7 @@
 
             function testEmailConfig(id) {
                 Dashboard.showLoadingMsg();
-                var url = ApiClient.getUrl('SmtpMailer/SendTestMail') + '?configurationId=' + encodeURIComponent(id);
+                var url = ApiClient.getUrl('NewslettersTest/SmtpMailer/SendTestMail') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
                     alert(formatMessage(response) || "Test email sent! Check your inbox.");
@@ -1779,7 +1779,7 @@
 
             function testMatrixConfig(id) {
                 Dashboard.showLoadingMsg();
-                var url = ApiClient.getUrl('Matrix/SendMatrixTestMessage') + '?configurationId=' + encodeURIComponent(id);
+                var url = ApiClient.getUrl('NewslettersTest/Matrix/SendMatrixTestMessage') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
                     alert(formatMessage(response) || "Test Matrix message sent! Check your room.");
@@ -2144,14 +2144,14 @@
                 cfgPreviewId = id;
                 var frame = document.getElementById('CfgPreviewFrame');
                 document.getElementById('CfgPreviewTitle').textContent = 'Preview: ' + config.Name;
-                document.querySelector('#NewsletterConfigPage .content-primary').classList.add('cfg-preview-open');
+                document.querySelector('#NewsletterTestConfigPage .content-primary').classList.add('cfg-preview-open');
                 document.getElementById('CfgPreviewPane').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 frame.srcdoc = '<p style="font-family: sans-serif">Loading&hellip;</p>';
 
                 // Send the current config; the server returns the HTML of the next newsletter
                 ApiClient.ajax({
                     type: 'POST',
-                    url: ApiClient.getUrl('Newsletters/ClientPreview/' + client.route),
+                    url: ApiClient.getUrl('NewslettersTest/ClientPreview/' + client.route),
                     contentType: 'application/json',
                     data: JSON.stringify(config),
                     dataType: 'text'
@@ -2166,7 +2166,7 @@
 
             function hideConfigPreview() {
                 cfgPreviewId = null;
-                document.querySelector('#NewsletterConfigPage .content-primary').classList.remove('cfg-preview-open');
+                document.querySelector('#NewsletterTestConfigPage .content-primary').classList.remove('cfg-preview-open');
                 document.getElementById('CfgPreviewFrame').srcdoc = '';
             }
 
@@ -2221,7 +2221,7 @@
 
                 list.innerHTML = '<p class="no-configs-text">Loading&hellip;</p>';
 
-                ApiClient.getJSON(ApiClient.getUrl('Newsletters/Preview')).then(function (data) {
+                ApiClient.getJSON(ApiClient.getUrl('NewslettersTest/Preview')).then(function (data) {
                     queueData = data;
                     renderQueue();
                 }).catch(function (error) {
@@ -2429,7 +2429,7 @@
                 applyLocalQueueChange(filenames, excluded);
                 renderQueue();
 
-                var url = ApiClient.getUrl('Newsletters/Preview/' + (excluded ? 'Exclude' : 'Include'));
+                var url = ApiClient.getUrl('NewslettersTest/Preview/' + (excluded ? 'Exclude' : 'Include'));
                 ApiClient.ajax({
                     type: 'POST',
                     url: url,
@@ -2554,7 +2554,7 @@
                 });
             }
 
-            document.querySelector('#NewsletterConfigPage')
+            document.querySelector('#NewsletterTestConfigPage')
                 .addEventListener('pageshow', function () {
                     Dashboard.showLoadingMsg();
                     loadConfig();

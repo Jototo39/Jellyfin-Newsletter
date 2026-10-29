@@ -24,7 +24,7 @@ namespace Jellyfin.Plugin.Newsletters.Clients.Telegram;
 /// </summary>
 [Authorize(Policy = Policies.RequiresElevation)]
 [ApiController]
-[Route("Telegram")]
+[Route("NewslettersTest/Telegram")]
 public class TelegramClient(IServerApplicationHost appHost,
     Logger loggerInstance,
     SQLiteDatabase dbInstance,

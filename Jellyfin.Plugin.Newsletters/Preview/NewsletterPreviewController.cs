@@ -11,7 +11,7 @@ namespace Jellyfin.Plugin.Newsletters.Preview;
 /// </summary>
 [ApiController]
 [Authorize(Policy = "RequiresElevation")]
-[Route("Newsletters/Preview")]
+[Route("NewslettersTest/Preview")]
 [Produces(MediaTypeNames.Application.Json)]
 public class NewsletterPreviewController : ControllerBase
 {

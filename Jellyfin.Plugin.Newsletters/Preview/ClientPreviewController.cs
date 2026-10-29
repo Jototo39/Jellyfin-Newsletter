@@ -29,7 +29,7 @@ namespace Jellyfin.Plugin.Newsletters.Preview;
 /// </summary>
 [ApiController]
 [Authorize(Policy = "RequiresElevation")]
-[Route("Newsletters/ClientPreview")]
+[Route("NewslettersTest/ClientPreview")]
 public class ClientPreviewController(
     IServerApplicationHost appHost,
     Logger loggerInstance,

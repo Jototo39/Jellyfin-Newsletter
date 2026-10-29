@@ -25,16 +25,16 @@ namespace Jellyfin.Plugin.Newsletters.ScheduledTasks
         }
 
         /// <inheritdoc />
-        public string Name => "Newsletter Item Scraper";
+        public string Name => "Newsletter Item Scraper (TEST)";
 
         /// <inheritdoc />
         public string Description => "Gather info on recently added media and store it for Newsletters";
 
         /// <inheritdoc />
-        public string Category => "Newsletters";
+        public string Category => "Newsletters (TEST)";
 
         /// <inheritdoc />
-        public string Key => "ScanNewsletters";
+        public string Key => "ScanNewslettersTest";
 
         /// <inheritdoc />
         public bool IsHidden => true;

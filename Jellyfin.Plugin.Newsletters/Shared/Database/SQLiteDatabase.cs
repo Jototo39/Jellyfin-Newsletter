@@ -41,7 +41,7 @@ public class SQLiteDatabase
         _ = raw.sqlite3_enable_shared_cache(1);
 
         ThreadSafeMode = raw.sqlite3_threadsafe();
-        dbFilePath = config.DataPath + "/newsletters.db"; // get directory from config
+        dbFilePath = config.DataPath + "/newsletters-test.db"; // get directory from config
         dbLockPath = dbFilePath + ".lock";
     }
 

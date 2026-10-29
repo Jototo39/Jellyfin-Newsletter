@@ -17,16 +17,16 @@ namespace Jellyfin.Plugin.Newsletters.ScheduledTasks
         private readonly Logger logger = loggerInstance;
 
         /// <inheritdoc />
-        public string Name => "Newsletter";
+        public string Name => "Newsletter (TEST)";
 
         /// <inheritdoc />
         public string Description => "Send Newsletters to all the specified hooks in plugin";
 
         /// <inheritdoc />
-        public string Category => "Newsletters";
+        public string Category => "Newsletters (TEST)";
 
         /// <inheritdoc />
-        public string Key => "Newsletters";
+        public string Key => "NewslettersTest";
 
         /// <summary>
         /// Creates the triggers that define when the task will run.
@@ -34,11 +34,8 @@ namespace Jellyfin.Plugin.Newsletters.ScheduledTasks
         /// <returns>IEnumerable{BaseTaskTrigger}.</returns>
         public IEnumerable<TaskTriggerInfo> GetDefaultTriggers()
         {
-            yield return new TaskTriggerInfo
-            {
-                Type = TaskTriggerInfoType.IntervalTrigger,
-                IntervalTicks = TimeSpan.FromHours(168).Ticks
-            };
+            // TEST edition: never sends on a schedule, only when run by hand.
+            yield break;
         }
 
         /// <inheritdoc />

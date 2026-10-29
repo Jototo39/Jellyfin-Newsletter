@@ -68,7 +68,7 @@ public class Logger
     /// <param name="type">Type of warning ("ERR", "WARN", "INFO").</param>
     private void Inform(object msg, string type)
     {
-        string logMsgPrefix = $"[NLP]: {GetDateTime()} - [{type}] ";
+        string logMsgPrefix = $"[NLP-TEST]: {GetDateTime()} - [{type}] ";
         Console.WriteLine($"{logMsgPrefix}{msg}");
         var logFile = GetCurrentLogFile();
         File.AppendAllText(logFile, $"{logMsgPrefix}{msg}\n");

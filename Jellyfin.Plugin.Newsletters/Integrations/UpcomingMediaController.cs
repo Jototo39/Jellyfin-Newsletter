@@ -13,7 +13,7 @@ namespace Jellyfin.Plugin.Newsletters.Integrations;
 /// </summary>
 [ApiController]
 [Authorize(Policy = "RequiresElevation")]
-[Route("UpcomingMedia")]
+[Route("NewslettersTest/UpcomingMedia")]
 [Produces(MediaTypeNames.Application.Json)]
 public class UpcomingMediaController : ControllerBase
 {

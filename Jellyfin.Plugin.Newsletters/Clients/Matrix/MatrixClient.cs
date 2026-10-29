@@ -20,7 +20,7 @@ namespace Jellyfin.Plugin.Newsletters.Clients.Matrix;
 /// </summary>
 [Authorize(Policy = "RequiresElevation")]
 [ApiController]
-[Route("Matrix")]
+[Route("NewslettersTest/Matrix")]
 public class MatrixClient(IServerApplicationHost appHost,
     Logger loggerInstance,
     SQLiteDatabase dbInstance,

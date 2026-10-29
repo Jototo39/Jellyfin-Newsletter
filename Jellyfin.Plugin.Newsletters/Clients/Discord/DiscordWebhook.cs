@@ -23,7 +23,7 @@ namespace Jellyfin.Plugin.Newsletters.Clients.Discord;
 /// </summary>
 [Authorize(Policy = Policies.RequiresElevation)]
 [ApiController]
-[Route("Discord")]
+[Route("NewslettersTest/Discord")]
 public class DiscordWebhook(IServerApplicationHost appHost,
     Logger loggerInstance,
     SQLiteDatabase dbInstance,
