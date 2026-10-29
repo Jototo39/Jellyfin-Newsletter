@@ -110,4 +110,56 @@ html = html.replace("update' + (configType", "nlTest_update' + (configType")
 html = re.sub(r"\b(" + "|".join(sorted(names, key=len, reverse=True)) + r")\b", r"nlTest_\1", html)
 page.write_text(html, encoding="utf-8")
 
+# Jellyfin keeps pages already visited in the DOM, hidden, and both settings pages use the same
+# element IDs (RadarrConfigList, FeaturedEmoji...). So the TEST page only looks things up inside
+# its own page, and while it is hidden it parks its IDs in data-nl-test-id so the official page's
+# document-wide lookups cannot find them.
+html = page.read_text(encoding="utf-8")
+page_sel = "document.querySelector('#NewsletterTestConfigPage"
+html = html.replace(page_sel, "NLTEST_PAGE_SEL")
+for old, new in (
+    ("document.getElementById(", "nlTest_byId("),
+    ("document.querySelectorAll(", "nlTest_root().querySelectorAll("),
+    ("document.querySelector(", "nlTest_root().querySelector("),
+    ("document.getElementsByClassName(", "nlTest_root().getElementsByClassName("),
+):
+    html = html.replace(old, new)
+html = html.replace("NLTEST_PAGE_SEL", page_sel)
+helpers = """<script type="text/javascript">
+            // TEST edition: scope every lookup to this page (see BuildScripts/make-test-edition.py).
+            function nlTest_root() {
+                return document.querySelector('#NewsletterTestConfigPage') || document;
+            }
+
+            function nlTest_byId(id) {
+                return nlTest_root().querySelector('#' + CSS.escape(id));
+            }
+
+            function nlTest_parkIds(park) {
+                var root = document.querySelector('#NewsletterTestConfigPage');
+                if (!root) return;
+                if (park) {
+                    root.querySelectorAll('[id]').forEach(function (el) { el.setAttribute('data-nl-test-id', el.id); el.removeAttribute('id'); });
+                } else {
+                    root.querySelectorAll('[data-nl-test-id]').forEach(function (el) { el.id = el.getAttribute('data-nl-test-id'); el.removeAttribute('data-nl-test-id'); });
+                }
+            }
+"""
+old = '<script type="text/javascript">\n'
+if html.count(old) != 1:
+    sys.exit("configPage.html: script tag not found once")
+html = html.replace(old, helpers, 1)
+old = """                .addEventListener('pageshow', function () {
+                    Dashboard.showLoadingMsg();"""
+if html.count(old) != 1:
+    sys.exit("configPage.html: pageshow handler not found once")
+html = html.replace(old, """                .addEventListener('pageshow', function () {
+                    nlTest_parkIds(false);
+                    Dashboard.showLoadingMsg();""", 1)
+old = "            document.querySelector('#NewsletterTestConfigPage')\n                .addEventListener('pageshow'"
+if html.count(old) != 1:
+    sys.exit("configPage.html: page element lookup not found once")
+html = html.replace(old, "            document.querySelector('#NewsletterTestConfigPage')\n                .addEventListener('pagehide', function () { nlTest_parkIds(true); });\n            document.querySelector('#NewsletterTestConfigPage')\n                .addEventListener('viewhide', function () { nlTest_parkIds(true); });\n\n" + old, 1)
+page.write_text(html, encoding="utf-8")
+
 print("TEST edition applied. GUID:", TEST_GUID)

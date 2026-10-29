@@ -706,6 +706,24 @@
             }
         </style>
         <script type="text/javascript">
+            // TEST edition: scope every lookup to this page (see BuildScripts/make-test-edition.py).
+            function nlTest_root() {
+                return document.querySelector('#NewsletterTestConfigPage') || document;
+            }
+
+            function nlTest_byId(id) {
+                return nlTest_root().querySelector('#' + CSS.escape(id));
+            }
+
+            function nlTest_parkIds(park) {
+                var root = document.querySelector('#NewsletterTestConfigPage');
+                if (!root) return;
+                if (park) {
+                    root.querySelectorAll('[id]').forEach(function (el) { el.setAttribute('data-nl-test-id', el.id); el.removeAttribute('id'); });
+                } else {
+                    root.querySelectorAll('[data-nl-test-id]').forEach(function (el) { el.id = el.getAttribute('data-nl-test-id'); el.removeAttribute('data-nl-test-id'); });
+                }
+            }
             var nlTest_NewsletterConfig = {
                 pluginUniqueId: '46b209f0-7073-4224-a212-cd9dc64efaa4'
             };
@@ -721,15 +739,15 @@
             // Tab switching function
             window.nlTest_openTab = function (evt, tabName) {
                 var i, tabcontent, tablinks;
-                tabcontent = document.getElementsByClassName("tab-content");
+                tabcontent = nlTest_root().getElementsByClassName("tab-content");
                 for (i = 0; i < tabcontent.length; i++) {
                     tabcontent[i].style.display = "none";
                 }
-                tablinks = document.getElementsByClassName("tab-link");
+                tablinks = nlTest_root().getElementsByClassName("tab-link");
                 for (i = 0; i < tablinks.length; i++) {
                     tablinks[i].className = tablinks[i].className.replace(" active", "");
                 }
-                document.getElementById(tabName).style.display = "block";
+                nlTest_byId(tabName).style.display = "block";
                 evt.currentTarget.className += " active";
                 nlTest_hideConfigPreview();
             };
@@ -767,22 +785,22 @@
             }
 
             function nlTest_toggleRadarrAccordion(id) {
-                var accordion = document.getElementById('radarr-accordion-' + id);
+                var accordion = nlTest_byId('radarr-accordion-' + id);
                 if (accordion) accordion.classList.toggle('expanded');
             }
 
             function nlTest_updateRadarrConfigFromUI(id) {
                 var config = nlTest_radarrConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
-                config.Name = document.getElementById('radarr-name-' + id).value || 'Radarr';
-                config.Url = document.getElementById('radarr-url-' + id).value;
-                config.ApiKey = document.getElementById('radarr-apikey-' + id).value;
-                var headerTitle = document.querySelector('#radarr-accordion-' + id + ' .config-name');
+                config.Name = nlTest_byId('radarr-name-' + id).value || 'Radarr';
+                config.Url = nlTest_byId('radarr-url-' + id).value;
+                config.ApiKey = nlTest_byId('radarr-apikey-' + id).value;
+                var headerTitle = nlTest_root().querySelector('#radarr-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
             function nlTest_renderRadarrConfigs() {
-                var container = document.getElementById('RadarrConfigList');
+                var container = nlTest_byId('RadarrConfigList');
                 if (nlTest_radarrConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Radarr instances configured. Click "Add Radarr Instance" to create one.</p>';
                     return;
@@ -847,22 +865,22 @@
             }
 
             function nlTest_toggleSonarrAccordion(id) {
-                var accordion = document.getElementById('sonarr-accordion-' + id);
+                var accordion = nlTest_byId('sonarr-accordion-' + id);
                 if (accordion) accordion.classList.toggle('expanded');
             }
 
             function nlTest_updateSonarrConfigFromUI(id) {
                 var config = nlTest_sonarrConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
-                config.Name = document.getElementById('sonarr-name-' + id).value || 'Sonarr';
-                config.Url = document.getElementById('sonarr-url-' + id).value;
-                config.ApiKey = document.getElementById('sonarr-apikey-' + id).value;
-                var headerTitle = document.querySelector('#sonarr-accordion-' + id + ' .config-name');
+                config.Name = nlTest_byId('sonarr-name-' + id).value || 'Sonarr';
+                config.Url = nlTest_byId('sonarr-url-' + id).value;
+                config.ApiKey = nlTest_byId('sonarr-apikey-' + id).value;
+                var headerTitle = nlTest_root().querySelector('#sonarr-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
             function nlTest_renderSonarrConfigs() {
-                var container = document.getElementById('SonarrConfigList');
+                var container = nlTest_byId('SonarrConfigList');
                 if (nlTest_sonarrConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Sonarr instances configured. Click "Add Sonarr Instance" to create one.</p>';
                     return;
@@ -1034,7 +1052,7 @@
             }
 
             function nlTest_getSelectedCollections(configType, clientId) {
-                return Array.from(document.querySelectorAll('.' + configType + '-collection-' + clientId + ':checked')).map(function (cb) {
+                return Array.from(nlTest_root().querySelectorAll('.' + configType + '-collection-' + clientId + ':checked')).map(function (cb) {
                     return { Id: cb.getAttribute('data-collection-id'), Name: cb.getAttribute('data-collection-name') };
                 });
             }
@@ -1175,7 +1193,7 @@
             }
 
             function nlTest_toggleDiscordAccordion(id) {
-                var accordion = document.getElementById('discord-accordion-' + id);
+                var accordion = nlTest_byId('discord-accordion-' + id);
                 if (accordion) {
                     accordion.classList.toggle('expanded');
                 }
@@ -1185,56 +1203,56 @@
                 var config = nlTest_discordConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
-                config.Name = document.getElementById('discord-name-' + id).value || 'Unnamed';
-                config.IsEnabled = document.getElementById('discord-enabled-' + id).checked;
-                config.WebhookURL = document.getElementById('discord-url-' + id).value;
-                config.WebhookName = document.getElementById('discord-webhookname-' + id).value;
-                config.Mentions = document.getElementById('discord-mentions-' + id).value;
-                config.DescriptionEnabled = document.getElementById('discord-desc-' + id).checked;
-                config.ThumbnailEnabled = document.getElementById('discord-thumb-' + id).checked;
-                config.RatingEnabled = document.getElementById('discord-rating-' + id).checked;
-                config.PGRatingEnabled = document.getElementById('discord-pgrating-' + id).checked;
-                config.DurationEnabled = document.getElementById('discord-duration-' + id).checked;
-                config.EpisodesEnabled = document.getElementById('discord-episodes-' + id).checked;
-                config.GenresEnabled = document.getElementById('discord-genres-' + id).checked;
-                config.SeriesAddEmbedColor = document.getElementById('discord-series-add-color-' + id).value;
-                config.SeriesDeleteEmbedColor = document.getElementById('discord-series-delete-color-' + id).value;
-                config.SeriesUpdateEmbedColor = document.getElementById('discord-series-update-color-' + id).value;
-                config.SeriesUpcomingEmbedColor = document.getElementById('discord-series-upcoming-color-' + id).value;
-                config.SeriesFeaturedEmbedColor = document.getElementById('discord-series-featured-color-' + id).value;
-                config.SeriesCollectionEmbedColor = document.getElementById('discord-series-collection-color-' + id).value;
-                config.MoviesAddEmbedColor = document.getElementById('discord-movies-add-color-' + id).value;
-                config.MoviesDeleteEmbedColor = document.getElementById('discord-movies-delete-color-' + id).value;
-                config.MoviesUpdateEmbedColor = document.getElementById('discord-movies-update-color-' + id).value;
-                config.MoviesUpcomingEmbedColor = document.getElementById('discord-movies-upcoming-color-' + id).value;
-                config.MoviesFeaturedEmbedColor = document.getElementById('discord-movies-featured-color-' + id).value;
-                config.MoviesCollectionEmbedColor = document.getElementById('discord-movies-collection-color-' + id).value;
-                config.MaxItemsPerSection = Math.max(0, parseInt(document.getElementById('discord-max-items-' + id).value) || 0);
-                config.PosterType = document.getElementById('discord-poster-type-' + id).value;
+                config.Name = nlTest_byId('discord-name-' + id).value || 'Unnamed';
+                config.IsEnabled = nlTest_byId('discord-enabled-' + id).checked;
+                config.WebhookURL = nlTest_byId('discord-url-' + id).value;
+                config.WebhookName = nlTest_byId('discord-webhookname-' + id).value;
+                config.Mentions = nlTest_byId('discord-mentions-' + id).value;
+                config.DescriptionEnabled = nlTest_byId('discord-desc-' + id).checked;
+                config.ThumbnailEnabled = nlTest_byId('discord-thumb-' + id).checked;
+                config.RatingEnabled = nlTest_byId('discord-rating-' + id).checked;
+                config.PGRatingEnabled = nlTest_byId('discord-pgrating-' + id).checked;
+                config.DurationEnabled = nlTest_byId('discord-duration-' + id).checked;
+                config.EpisodesEnabled = nlTest_byId('discord-episodes-' + id).checked;
+                config.GenresEnabled = nlTest_byId('discord-genres-' + id).checked;
+                config.SeriesAddEmbedColor = nlTest_byId('discord-series-add-color-' + id).value;
+                config.SeriesDeleteEmbedColor = nlTest_byId('discord-series-delete-color-' + id).value;
+                config.SeriesUpdateEmbedColor = nlTest_byId('discord-series-update-color-' + id).value;
+                config.SeriesUpcomingEmbedColor = nlTest_byId('discord-series-upcoming-color-' + id).value;
+                config.SeriesFeaturedEmbedColor = nlTest_byId('discord-series-featured-color-' + id).value;
+                config.SeriesCollectionEmbedColor = nlTest_byId('discord-series-collection-color-' + id).value;
+                config.MoviesAddEmbedColor = nlTest_byId('discord-movies-add-color-' + id).value;
+                config.MoviesDeleteEmbedColor = nlTest_byId('discord-movies-delete-color-' + id).value;
+                config.MoviesUpdateEmbedColor = nlTest_byId('discord-movies-update-color-' + id).value;
+                config.MoviesUpcomingEmbedColor = nlTest_byId('discord-movies-upcoming-color-' + id).value;
+                config.MoviesFeaturedEmbedColor = nlTest_byId('discord-movies-featured-color-' + id).value;
+                config.MoviesCollectionEmbedColor = nlTest_byId('discord-movies-collection-color-' + id).value;
+                config.MaxItemsPerSection = Math.max(0, parseInt(nlTest_byId('discord-max-items-' + id).value) || 0);
+                config.PosterType = nlTest_byId('discord-poster-type-' + id).value;
 
                 // Update Event Toggles
-                config.NewsletterOnItemAddedEnabled = document.getElementById('discord-event-add-' + id).checked;
-                config.NewsletterOnItemUpdatedEnabled = document.getElementById('discord-event-update-' + id).checked;
-                config.NewsletterOnItemDeletedEnabled = document.getElementById('discord-event-delete-' + id).checked;
-                config.NewsletterOnUpcomingItemEnabled = document.getElementById('discord-event-upcoming-' + id).checked;
-                config.NewsletterOnFeaturedEnabled = document.getElementById('discord-event-featured-' + id).checked;
+                config.NewsletterOnItemAddedEnabled = nlTest_byId('discord-event-add-' + id).checked;
+                config.NewsletterOnItemUpdatedEnabled = nlTest_byId('discord-event-update-' + id).checked;
+                config.NewsletterOnItemDeletedEnabled = nlTest_byId('discord-event-delete-' + id).checked;
+                config.NewsletterOnUpcomingItemEnabled = nlTest_byId('discord-event-upcoming-' + id).checked;
+                config.NewsletterOnFeaturedEnabled = nlTest_byId('discord-event-featured-' + id).checked;
 
                 // Update Library Selections
-                var seriesChecked = document.querySelectorAll('.discord-series-lib-' + id + ':checked');
+                var seriesChecked = nlTest_root().querySelectorAll('.discord-series-lib-' + id + ':checked');
                 config.SelectedSeriesLibraries = Array.from(seriesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                var moviesChecked = document.querySelectorAll('.discord-movies-lib-' + id + ':checked');
+                var moviesChecked = nlTest_root().querySelectorAll('.discord-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
                 config.SelectedCollections = nlTest_getSelectedCollections('discord', id);
 
                 // Update header title
-                var headerTitle = document.querySelector('#discord-accordion-' + id + ' .config-name');
+                var headerTitle = nlTest_root().querySelector('#discord-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
             function nlTest_renderDiscordConfigs() {
-                var container = document.getElementById('DiscordConfigList');
+                var container = nlTest_byId('DiscordConfigList');
                 if (nlTest_discordConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Discord configurations yet. Click "Add Discord Webhook" to create one.</p>';
                     return;
@@ -1384,7 +1402,7 @@
             }
 
             function nlTest_toggleTelegramAccordion(id) {
-                var accordion = document.getElementById('telegram-accordion-' + id);
+                var accordion = nlTest_byId('telegram-accordion-' + id);
                 if (accordion) {
                     accordion.classList.toggle('expanded');
                 }
@@ -1394,42 +1412,42 @@
                 var config = nlTest_telegramConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
-                config.Name = document.getElementById('telegram-name-' + id).value || 'Unnamed';
-                config.IsEnabled = document.getElementById('telegram-enabled-' + id).checked;
-                config.BotToken = document.getElementById('telegram-token-' + id).value;
-                config.ChatId = document.getElementById('telegram-chatid-' + id).value;
-                config.DescriptionEnabled = document.getElementById('telegram-desc-' + id).checked;
-                config.ThumbnailEnabled = document.getElementById('telegram-thumb-' + id).checked;
-                config.RatingEnabled = document.getElementById('telegram-rating-' + id).checked;
-                config.PGRatingEnabled = document.getElementById('telegram-pgrating-' + id).checked;
-                config.DurationEnabled = document.getElementById('telegram-duration-' + id).checked;
-                config.EpisodesEnabled = document.getElementById('telegram-episodes-' + id).checked;
-                config.GenresEnabled = document.getElementById('telegram-genres-' + id).checked;
-                config.MaxItemsPerSection = Math.max(0, parseInt(document.getElementById('telegram-max-items-' + id).value) || 0);
-                config.PosterType = document.getElementById('telegram-poster-type-' + id).value;
+                config.Name = nlTest_byId('telegram-name-' + id).value || 'Unnamed';
+                config.IsEnabled = nlTest_byId('telegram-enabled-' + id).checked;
+                config.BotToken = nlTest_byId('telegram-token-' + id).value;
+                config.ChatId = nlTest_byId('telegram-chatid-' + id).value;
+                config.DescriptionEnabled = nlTest_byId('telegram-desc-' + id).checked;
+                config.ThumbnailEnabled = nlTest_byId('telegram-thumb-' + id).checked;
+                config.RatingEnabled = nlTest_byId('telegram-rating-' + id).checked;
+                config.PGRatingEnabled = nlTest_byId('telegram-pgrating-' + id).checked;
+                config.DurationEnabled = nlTest_byId('telegram-duration-' + id).checked;
+                config.EpisodesEnabled = nlTest_byId('telegram-episodes-' + id).checked;
+                config.GenresEnabled = nlTest_byId('telegram-genres-' + id).checked;
+                config.MaxItemsPerSection = Math.max(0, parseInt(nlTest_byId('telegram-max-items-' + id).value) || 0);
+                config.PosterType = nlTest_byId('telegram-poster-type-' + id).value;
 
                 // Update Event Toggles
-                config.NewsletterOnItemAddedEnabled = document.getElementById('telegram-event-add-' + id).checked;
-                config.NewsletterOnItemUpdatedEnabled = document.getElementById('telegram-event-update-' + id).checked;
-                config.NewsletterOnItemDeletedEnabled = document.getElementById('telegram-event-delete-' + id).checked;
-                config.NewsletterOnUpcomingItemEnabled = document.getElementById('telegram-event-upcoming-' + id).checked;
-                config.NewsletterOnFeaturedEnabled = document.getElementById('telegram-event-featured-' + id).checked;
+                config.NewsletterOnItemAddedEnabled = nlTest_byId('telegram-event-add-' + id).checked;
+                config.NewsletterOnItemUpdatedEnabled = nlTest_byId('telegram-event-update-' + id).checked;
+                config.NewsletterOnItemDeletedEnabled = nlTest_byId('telegram-event-delete-' + id).checked;
+                config.NewsletterOnUpcomingItemEnabled = nlTest_byId('telegram-event-upcoming-' + id).checked;
+                config.NewsletterOnFeaturedEnabled = nlTest_byId('telegram-event-featured-' + id).checked;
 
                 // Update Library Selections
-                var seriesChecked = document.querySelectorAll('.telegram-series-lib-' + id + ':checked');
+                var seriesChecked = nlTest_root().querySelectorAll('.telegram-series-lib-' + id + ':checked');
                 config.SelectedSeriesLibraries = Array.from(seriesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                var moviesChecked = document.querySelectorAll('.telegram-movies-lib-' + id + ':checked');
+                var moviesChecked = nlTest_root().querySelectorAll('.telegram-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
                 config.SelectedCollections = nlTest_getSelectedCollections('telegram', id);
 
-                var headerTitle = document.querySelector('#telegram-accordion-' + id + ' .config-name');
+                var headerTitle = nlTest_root().querySelector('#telegram-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
             function nlTest_renderTelegramConfigs() {
-                var container = document.getElementById('TelegramConfigList');
+                var container = nlTest_byId('TelegramConfigList');
                 if (nlTest_telegramConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Telegram configurations yet. Click "Add Telegram Bot" to create one.</p>';
                     return;
@@ -1559,7 +1577,7 @@
             }
 
             function nlTest_toggleEmailAccordion(id) {
-                var accordion = document.getElementById('email-accordion-' + id);
+                var accordion = nlTest_byId('email-accordion-' + id);
                 if (accordion) {
                     accordion.classList.toggle('expanded');
                 }
@@ -1569,53 +1587,53 @@
                 var config = nlTest_emailConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
-                config.Name = document.getElementById('email-name-' + id).value || 'Unnamed';
-                config.IsEnabled = document.getElementById('email-enabled-' + id).checked;
-                config.SMTPServer = document.getElementById('email-server-' + id).value;
-                config.SMTPPort = parseInt(document.getElementById('email-port-' + id).value) || 587;
-                config.SMTPUser = document.getElementById('email-user-' + id).value;
-                config.SMTPPass = document.getElementById('email-pass-' + id).value;
-                config.VisibleToAddr = document.getElementById('email-to-' + id).value;
-                config.ToAddr = document.getElementById('email-bcc-' + id).value;
-                config.FromAddr = document.getElementById('email-from-' + id).value;
-                config.Subject = document.getElementById('email-subject-' + id).value;
-                config.NewsletterTitle = document.getElementById('email-title-' + id).value;
-                config.Body = document.getElementById('email-body-' + id).value;
-                config.Entry = document.getElementById('email-entry-' + id).value;
-                config.Header = document.getElementById('email-header-' + id).value;
-                config.TemplateCategory = document.getElementById('email-category-' + id).value;
-                config.EnableSsl = document.getElementById('email-ssl-' + id).checked;
-                config.UseAuthentication = document.getElementById('email-auth-' + id).checked;
-                config.MaxItemsPerSection = Math.max(0, parseInt(document.getElementById('email-max-items-' + id).value) || 0);
-                config.PosterType = document.getElementById('email-poster-type-' + id).value;
-                config.MaxEmailSize = Math.max(1, parseInt(document.getElementById('email-max-email-size-' + id).value) || 15);
+                config.Name = nlTest_byId('email-name-' + id).value || 'Unnamed';
+                config.IsEnabled = nlTest_byId('email-enabled-' + id).checked;
+                config.SMTPServer = nlTest_byId('email-server-' + id).value;
+                config.SMTPPort = parseInt(nlTest_byId('email-port-' + id).value) || 587;
+                config.SMTPUser = nlTest_byId('email-user-' + id).value;
+                config.SMTPPass = nlTest_byId('email-pass-' + id).value;
+                config.VisibleToAddr = nlTest_byId('email-to-' + id).value;
+                config.ToAddr = nlTest_byId('email-bcc-' + id).value;
+                config.FromAddr = nlTest_byId('email-from-' + id).value;
+                config.Subject = nlTest_byId('email-subject-' + id).value;
+                config.NewsletterTitle = nlTest_byId('email-title-' + id).value;
+                config.Body = nlTest_byId('email-body-' + id).value;
+                config.Entry = nlTest_byId('email-entry-' + id).value;
+                config.Header = nlTest_byId('email-header-' + id).value;
+                config.TemplateCategory = nlTest_byId('email-category-' + id).value;
+                config.EnableSsl = nlTest_byId('email-ssl-' + id).checked;
+                config.UseAuthentication = nlTest_byId('email-auth-' + id).checked;
+                config.MaxItemsPerSection = Math.max(0, parseInt(nlTest_byId('email-max-items-' + id).value) || 0);
+                config.PosterType = nlTest_byId('email-poster-type-' + id).value;
+                config.MaxEmailSize = Math.max(1, parseInt(nlTest_byId('email-max-email-size-' + id).value) || 15);
 
                 // Max email size only matters when posters are attached to the email
-                var maxEmailSizeContainer = document.getElementById('email-max-email-size-container-' + id);
+                var maxEmailSizeContainer = nlTest_byId('email-max-email-size-container-' + id);
                 if (maxEmailSizeContainer) maxEmailSizeContainer.style.display = config.PosterType === 'attachment' ? '' : 'none';
 
                 // Update Event Toggles
-                config.NewsletterOnItemAddedEnabled = document.getElementById('email-event-add-' + id).checked;
-                config.NewsletterOnItemUpdatedEnabled = document.getElementById('email-event-update-' + id).checked;
-                config.NewsletterOnItemDeletedEnabled = document.getElementById('email-event-delete-' + id).checked;
-                config.NewsletterOnUpcomingItemEnabled = document.getElementById('email-event-upcoming-' + id).checked;
-                config.NewsletterOnFeaturedEnabled = document.getElementById('email-event-featured-' + id).checked;
+                config.NewsletterOnItemAddedEnabled = nlTest_byId('email-event-add-' + id).checked;
+                config.NewsletterOnItemUpdatedEnabled = nlTest_byId('email-event-update-' + id).checked;
+                config.NewsletterOnItemDeletedEnabled = nlTest_byId('email-event-delete-' + id).checked;
+                config.NewsletterOnUpcomingItemEnabled = nlTest_byId('email-event-upcoming-' + id).checked;
+                config.NewsletterOnFeaturedEnabled = nlTest_byId('email-event-featured-' + id).checked;
 
                 // Update Library Selections
-                var seriesChecked = document.querySelectorAll('.email-series-lib-' + id + ':checked');
+                var seriesChecked = nlTest_root().querySelectorAll('.email-series-lib-' + id + ':checked');
                 config.SelectedSeriesLibraries = Array.from(seriesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                var moviesChecked = document.querySelectorAll('.email-movies-lib-' + id + ':checked');
+                var moviesChecked = nlTest_root().querySelectorAll('.email-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
                 config.SelectedCollections = nlTest_getSelectedCollections('email', id);
 
-                var headerTitle = document.querySelector('#email-accordion-' + id + ' .config-name');
+                var headerTitle = nlTest_root().querySelector('#email-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
             function nlTest_renderEmailConfigs() {
-                var container = document.getElementById('EmailConfigList');
+                var container = nlTest_byId('EmailConfigList');
                 if (nlTest_emailConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No email configurations yet. Click "Add Email Configuration" to create one.</p>';
                     return;
@@ -1798,7 +1816,7 @@
             }
 
             function nlTest_toggleMatrixAccordion(id) {
-                var accordion = document.getElementById('matrix-accordion-' + id);
+                var accordion = nlTest_byId('matrix-accordion-' + id);
                 if (accordion) accordion.classList.toggle('expanded');
             }
 
@@ -1806,39 +1824,39 @@
                 var config = nlTest_matrixConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
-                config.Name = document.getElementById('matrix-name-' + id).value || 'Unnamed';
-                config.IsEnabled = document.getElementById('matrix-enabled-' + id).checked;
-                config.HomeserverUrl = document.getElementById('matrix-url-' + id).value;
-                config.AccessToken = document.getElementById('matrix-token-' + id).value;
-                config.RoomId = document.getElementById('matrix-room-' + id).value;
-                config.NewsletterTitle = document.getElementById('matrix-title-' + id).value;
-                config.Body = document.getElementById('matrix-body-' + id).value;
-                config.Entry = document.getElementById('matrix-entry-' + id).value;
-                config.Header = document.getElementById('matrix-header-' + id).value;
-                config.TemplateCategory = document.getElementById('matrix-category-' + id).value;
-                config.MaxItemsPerSection = Math.max(0, parseInt(document.getElementById('matrix-max-items-' + id).value) || 0);
-                config.PosterType = document.getElementById('matrix-poster-type-' + id).value;
+                config.Name = nlTest_byId('matrix-name-' + id).value || 'Unnamed';
+                config.IsEnabled = nlTest_byId('matrix-enabled-' + id).checked;
+                config.HomeserverUrl = nlTest_byId('matrix-url-' + id).value;
+                config.AccessToken = nlTest_byId('matrix-token-' + id).value;
+                config.RoomId = nlTest_byId('matrix-room-' + id).value;
+                config.NewsletterTitle = nlTest_byId('matrix-title-' + id).value;
+                config.Body = nlTest_byId('matrix-body-' + id).value;
+                config.Entry = nlTest_byId('matrix-entry-' + id).value;
+                config.Header = nlTest_byId('matrix-header-' + id).value;
+                config.TemplateCategory = nlTest_byId('matrix-category-' + id).value;
+                config.MaxItemsPerSection = Math.max(0, parseInt(nlTest_byId('matrix-max-items-' + id).value) || 0);
+                config.PosterType = nlTest_byId('matrix-poster-type-' + id).value;
 
-                config.NewsletterOnItemAddedEnabled = document.getElementById('matrix-event-add-' + id).checked;
-                config.NewsletterOnItemUpdatedEnabled = document.getElementById('matrix-event-update-' + id).checked;
-                config.NewsletterOnItemDeletedEnabled = document.getElementById('matrix-event-delete-' + id).checked;
-                config.NewsletterOnUpcomingItemEnabled = document.getElementById('matrix-event-upcoming-' + id).checked;
-                config.NewsletterOnFeaturedEnabled = document.getElementById('matrix-event-featured-' + id).checked;
+                config.NewsletterOnItemAddedEnabled = nlTest_byId('matrix-event-add-' + id).checked;
+                config.NewsletterOnItemUpdatedEnabled = nlTest_byId('matrix-event-update-' + id).checked;
+                config.NewsletterOnItemDeletedEnabled = nlTest_byId('matrix-event-delete-' + id).checked;
+                config.NewsletterOnUpcomingItemEnabled = nlTest_byId('matrix-event-upcoming-' + id).checked;
+                config.NewsletterOnFeaturedEnabled = nlTest_byId('matrix-event-featured-' + id).checked;
 
-                var seriesChecked = document.querySelectorAll('.matrix-series-lib-' + id + ':checked');
+                var seriesChecked = nlTest_root().querySelectorAll('.matrix-series-lib-' + id + ':checked');
                 config.SelectedSeriesLibraries = Array.from(seriesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                var moviesChecked = document.querySelectorAll('.matrix-movies-lib-' + id + ':checked');
+                var moviesChecked = nlTest_root().querySelectorAll('.matrix-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
                 config.SelectedCollections = nlTest_getSelectedCollections('matrix', id);
 
-                var headerTitle = document.querySelector('#matrix-accordion-' + id + ' .config-name');
+                var headerTitle = nlTest_root().querySelector('#matrix-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
             function nlTest_renderMatrixConfigs() {
-                var container = document.getElementById('MatrixConfigList');
+                var container = nlTest_byId('MatrixConfigList');
                 if (nlTest_matrixConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Matrix configurations yet. Click "Add Matrix Config" to create one.</p>';
                     return;
@@ -1936,7 +1954,7 @@
             var nlTest_featuredSearchTimer = null;
 
             function nlTest_renderFeatured() {
-                var container = document.getElementById('FeaturedList');
+                var container = nlTest_byId('FeaturedList');
                 if (!container) return;
 
                 if (!nlTest_featuredItems.length) {
@@ -1960,7 +1978,7 @@
             function nlTest_searchFeatured(term) {
                 if (nlTest_featuredSearchTimer) clearTimeout(nlTest_featuredSearchTimer);
 
-                var results = document.getElementById('FeaturedResults');
+                var results = nlTest_byId('FeaturedResults');
                 if (!results) return;
 
                 if (!term || term.trim().length < 2) {
@@ -2012,9 +2030,9 @@
                     nlTest_renderFeatured();
                 }
 
-                var search = document.getElementById('FeaturedSearch');
+                var search = nlTest_byId('FeaturedSearch');
                 if (search) search.value = '';
-                var results = document.getElementById('FeaturedResults');
+                var results = nlTest_byId('FeaturedResults');
                 if (results) results.innerHTML = '';
             }
 
@@ -2085,21 +2103,21 @@
                 ApiClient.getPluginConfiguration(nlTest_NewsletterConfig.pluginUniqueId).then(function (config) {
                     // General tab fields
                     nlTest_FIELDS.checkboxes.forEach(function (id) {
-                        var el = document.querySelector('#' + id);
+                        var el = nlTest_root().querySelector('#' + id);
                         if (el) config[id] = el.checked;
                     });
                     nlTest_FIELDS.inputs.forEach(function (id) {
-                        var el = document.querySelector('#' + id);
+                        var el = nlTest_root().querySelector('#' + id);
                         if (el) config[id] = el.value;
                     });
 
                     // Formatting Settings
-                    var decimalPlacesEl = document.querySelector('#CommunityRatingDecimalPlaces');
+                    var decimalPlacesEl = nlTest_root().querySelector('#CommunityRatingDecimalPlaces');
                     var decimalPlaces = decimalPlacesEl ? parseInt(decimalPlacesEl.value) : 1;
                     config.CommunityRatingDecimalPlaces = isNaN(decimalPlaces) ? 1 : decimalPlaces;
 
                     // Upcoming Media Settings
-                    var daysAheadEl = document.querySelector('#UpcomingDaysAhead');
+                    var daysAheadEl = nlTest_root().querySelector('#UpcomingDaysAhead');
                     var daysAhead = daysAheadEl ? parseInt(daysAheadEl.value) : 7;
                     config.UpcomingDaysAhead = isNaN(daysAhead) ? 7 : daysAhead;
 
@@ -2111,7 +2129,7 @@
                     config.RadarrConfigurations = nlTest_radarrConfigs;
                     config.SonarrConfigurations = nlTest_sonarrConfigs;
                     config.FeaturedItemIds = nlTest_featuredItems.map(function (i) { return i.Id; });
-                    var featuredEmojiEl = document.querySelector('#FeaturedEmoji');
+                    var featuredEmojiEl = nlTest_root().querySelector('#FeaturedEmoji');
                     if (featuredEmojiEl) config.FeaturedEmoji = (featuredEmojiEl.value || '').trim() || '\u2B50';
 
                     ApiClient.updatePluginConfiguration(nlTest_NewsletterConfig.pluginUniqueId, config).then(function (result) {
@@ -2142,10 +2160,10 @@
                 if (!config) return;
 
                 nlTest_cfgPreviewId = id;
-                var frame = document.getElementById('CfgPreviewFrame');
-                document.getElementById('CfgPreviewTitle').textContent = 'Preview: ' + config.Name;
+                var frame = nlTest_byId('CfgPreviewFrame');
+                nlTest_byId('CfgPreviewTitle').textContent = 'Preview: ' + config.Name;
                 document.querySelector('#NewsletterTestConfigPage .content-primary').classList.add('cfg-preview-open');
-                document.getElementById('CfgPreviewPane').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                nlTest_byId('CfgPreviewPane').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 frame.srcdoc = '<p style="font-family: sans-serif">Loading&hellip;</p>';
 
                 // Send the current config; the server returns the HTML of the next newsletter
@@ -2167,7 +2185,7 @@
             function nlTest_hideConfigPreview() {
                 nlTest_cfgPreviewId = null;
                 document.querySelector('#NewsletterTestConfigPage .content-primary').classList.remove('cfg-preview-open');
-                document.getElementById('CfgPreviewFrame').srcdoc = '';
+                nlTest_byId('CfgPreviewFrame').srcdoc = '';
             }
 
             // Closes the pane when the configuration it is previewing is deleted.
@@ -2209,14 +2227,14 @@
 
             function nlTest_setQueueFilter(filter) {
                 nlTest_queueFilter = filter;
-                document.querySelectorAll('.queue-filter-btn').forEach(function (btn) {
+                nlTest_root().querySelectorAll('.queue-filter-btn').forEach(function (btn) {
                     btn.classList.toggle('active', btn.getAttribute('data-queue-filter') === filter);
                 });
                 nlTest_renderQueue();
             }
 
             function nlTest_loadQueue() {
-                var list = document.getElementById('QueueList');
+                var list = nlTest_byId('QueueList');
                 if (!list) return;
 
                 list.innerHTML = '<p class="no-configs-text">Loading&hellip;</p>';
@@ -2231,8 +2249,8 @@
             }
 
             function nlTest_renderQueue() {
-                var list = document.getElementById('QueueList');
-                var summary = document.getElementById('QueueSummary');
+                var list = nlTest_byId('QueueList');
+                var summary = nlTest_byId('QueueSummary');
                 if (!list || !nlTest_queueData) return;
 
                 var allGroups = nlTest_queueData.Groups || [];
@@ -2499,7 +2517,7 @@
                     console.log("Loading config...", config);
 
                     // Display Last Published Date
-                    var dateDisplayEl = document.getElementById('LastPublishedDateDisplay');
+                    var dateDisplayEl = nlTest_byId('LastPublishedDateDisplay');
                     if (dateDisplayEl) {
                         if (config.LastPublishedDate) {
                             var date = new Date(config.LastPublishedDate);
@@ -2511,24 +2529,24 @@
 
                     // General tab fields
                     nlTest_FIELDS.checkboxes.forEach(function (id) {
-                        var el = document.querySelector('#' + id);
+                        var el = nlTest_root().querySelector('#' + id);
                         if (el) el.checked = config[id];
                     });
 
                     nlTest_FIELDS.inputs.forEach(function (id) {
-                        var el = document.querySelector('#' + id);
+                        var el = nlTest_root().querySelector('#' + id);
                         if (el && config[id] !== undefined) el.value = config[id];
                     });
 
                     // Specific Mappings
-                    var featuredEmojiEl = document.querySelector('#FeaturedEmoji');
+                    var featuredEmojiEl = nlTest_root().querySelector('#FeaturedEmoji');
                     if (featuredEmojiEl) featuredEmojiEl.value = config.FeaturedEmoji || '\u2B50';
 
-                    var ratingEl = document.querySelector('#CommunityRatingDecimalPlaces');
+                    var ratingEl = nlTest_root().querySelector('#CommunityRatingDecimalPlaces');
                     if (ratingEl) ratingEl.value = config.CommunityRatingDecimalPlaces !== undefined ? config.CommunityRatingDecimalPlaces : 1;
 
                     // Load Upcoming Days Ahead
-                    var daysAheadEl = document.querySelector('#UpcomingDaysAhead');
+                    var daysAheadEl = nlTest_root().querySelector('#UpcomingDaysAhead');
                     if (daysAheadEl) daysAheadEl.value = config.UpcomingDaysAhead !== undefined ? config.UpcomingDaysAhead : 7;
 
                     // Load multi-configurations
@@ -2555,12 +2573,18 @@
             }
 
             document.querySelector('#NewsletterTestConfigPage')
+                .addEventListener('pagehide', function () { nlTest_parkIds(true); });
+            document.querySelector('#NewsletterTestConfigPage')
+                .addEventListener('viewhide', function () { nlTest_parkIds(true); });
+
+            document.querySelector('#NewsletterTestConfigPage')
                 .addEventListener('pageshow', function () {
+                    nlTest_parkIds(false);
                     Dashboard.showLoadingMsg();
                     nlTest_loadConfig();
                 });
 
-            document.querySelector('#NewsletterConfigForm')
+            nlTest_root().querySelector('#NewsletterConfigForm')
                 .addEventListener('submit', function (e) {
                     Dashboard.showLoadingMsg();
                     nlTest_saveConfig();
