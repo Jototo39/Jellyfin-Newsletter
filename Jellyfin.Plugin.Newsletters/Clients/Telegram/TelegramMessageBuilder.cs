@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Jellyfin.Plugin.Newsletters.Collections;
 using Jellyfin.Plugin.Newsletters.Configuration;
 using Jellyfin.Plugin.Newsletters.Featured;
 using Jellyfin.Plugin.Newsletters.Integrations;
@@ -80,13 +81,16 @@ public class TelegramMessageBuilder(
             foreach (var item in sortedItems)
             {
                 string eventType = item.EventType?.ToLowerInvariant() ?? "add";
-                string libraryName = eventType == "upcoming" ? (item.LibraryId ?? string.Empty) : LibraryNames.Resolve(item.LibraryId, libraryNameMap);
+                string libraryName = eventType == CollectionItems.EventType
+                    ? item.CollectionName
+                    : eventType == "upcoming" ? (item.LibraryId ?? string.Empty) : LibraryNames.Resolve(item.LibraryId, libraryNameMap);
 
                 // Skip items beyond the per-section cap
                 if (maxItemsPerSection > 0)
                 {
                     // Featured picks form a single section spanning libraries, the way the HTML
-                    // clients group them, so the cap applies to that whole section.
+                    // clients group them, so the cap applies to that whole section. A collection
+                    // entry carries its collection name as libraryName, so each collection is a section.
                     string sectionKey = eventType == FeaturedItems.EventType
                         ? $"{eventType}|{FeaturedItems.SectionName}"
                         : $"{eventType}|{libraryName}";
