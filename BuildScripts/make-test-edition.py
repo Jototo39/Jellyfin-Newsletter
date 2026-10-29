@@ -100,4 +100,14 @@ edit("Jellyfin.Plugin.Newsletters.csproj", [
     ("<RootNamespace>Jellyfin.Plugin.Newsletters</RootNamespace>", "<RootNamespace>Jellyfin.Plugin.NewslettersTest</RootNamespace>", 1),
 ])
 
+# Jellyfin runs a plugin page's script in the browser's global scope, so the two settings pages
+# would share NewsletterConfig (the plugin GUID), loadConfig, saveConfig, discordConfigs... and
+# one page could load or save the other plugin's settings. Prefix every global the TEST page defines.
+page = SRC / "Configuration/configPage.html"
+html = page.read_text(encoding="utf-8")
+names = set(re.findall(r"^            (?:var|function) (\w+)", html, re.M)) | {"openTab", "_featuredSearchCache"}
+html = html.replace("update' + (configType", "nlTest_update' + (configType")
+html = re.sub(r"\b(" + "|".join(sorted(names, key=len, reverse=True)) + r")\b", r"nlTest_\1", html)
+page.write_text(html, encoding="utf-8")
+
 print("TEST edition applied. GUID:", TEST_GUID)

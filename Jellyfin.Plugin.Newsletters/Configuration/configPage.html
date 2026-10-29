@@ -15,13 +15,13 @@
                     <!-- Tab Navigation -->
                     <div class="tab-bar">
                         <button type="button" class="tab-link active"
-                            onclick="openTab(event, 'General')">General</button>
-                        <button type="button" class="tab-link" onclick="openTab(event, 'Queue')">Queue</button>
-                        <button type="button" class="tab-link" onclick="openTab(event, 'Featured')">Featured</button>
-                        <button type="button" class="tab-link" onclick="openTab(event, 'Email')">Email</button>
-                        <button type="button" class="tab-link" onclick="openTab(event, 'Discord')">Discord</button>
-                        <button type="button" class="tab-link" onclick="openTab(event, 'Telegram')">Telegram</button>
-                        <button type="button" class="tab-link" onclick="openTab(event, 'Matrix')">Matrix</button>
+                            onclick="nlTest_openTab(event, 'General')">General</button>
+                        <button type="button" class="tab-link" onclick="nlTest_openTab(event, 'Queue')">Queue</button>
+                        <button type="button" class="tab-link" onclick="nlTest_openTab(event, 'Featured')">Featured</button>
+                        <button type="button" class="tab-link" onclick="nlTest_openTab(event, 'Email')">Email</button>
+                        <button type="button" class="tab-link" onclick="nlTest_openTab(event, 'Discord')">Discord</button>
+                        <button type="button" class="tab-link" onclick="nlTest_openTab(event, 'Telegram')">Telegram</button>
+                        <button type="button" class="tab-link" onclick="nlTest_openTab(event, 'Matrix')">Matrix</button>
                     </div>
 
                     <!-- General Tab -->
@@ -81,7 +81,7 @@
                             <div class="config-header">
                                 <h3>Radarr Instances (Upcoming Movies)</h3>
                                 <button type="button" is="emby-button" class="raised button-submit"
-                                    onclick="addRadarrConfig()">
+                                    onclick="nlTest_addRadarrConfig()">
                                     <span>+ Add Radarr Instance</span>
                                 </button>
                             </div>
@@ -96,7 +96,7 @@
                             <div class="config-header">
                                 <h3>Sonarr Instances (Upcoming Episodes)</h3>
                                 <button type="button" is="emby-button" class="raised button-submit"
-                                    onclick="addSonarrConfig()">
+                                    onclick="nlTest_addSonarrConfig()">
                                     <span>+ Add Sonarr Instance</span>
                                 </button>
                             </div>
@@ -112,7 +112,7 @@
                         <div class="config-header">
                             <h3>Next Newsletter</h3>
                             <button type="button" is="emby-button" class="raised button-submit"
-                                onclick="loadQueue()">
+                                onclick="nlTest_loadQueue()">
                                 <span>Refresh</span>
                             </button>
                         </div>
@@ -130,11 +130,11 @@
                         <div id="QueueSummary" class="fieldDescription" style="margin-bottom: 10px;"></div>
                         <div class="queue-filter-bar">
                             <button type="button" class="queue-filter-btn active" data-queue-filter="all"
-                                onclick="setQueueFilter('all')">All</button>
+                                onclick="nlTest_setQueueFilter('all')">All</button>
                             <button type="button" class="queue-filter-btn" data-queue-filter="included"
-                                onclick="setQueueFilter('included')">Will be sent</button>
+                                onclick="nlTest_setQueueFilter('included')">Will be sent</button>
                             <button type="button" class="queue-filter-btn" data-queue-filter="excluded"
-                                onclick="setQueueFilter('excluded')">Excluded</button>
+                                onclick="nlTest_setQueueFilter('excluded')">Excluded</button>
                         </div>
                         <div id="QueueList" class="config-list">
                             <p class="no-configs-text">Loading&hellip;</p>
@@ -161,7 +161,7 @@
                         <div class="inputContainer">
                             <label class="inputLabel inputLabelUnfocused" for="FeaturedSearch">Add a title:</label>
                             <input id="FeaturedSearch" type="text" is="emby-input" placeholder="Search your library&hellip;"
-                                oninput="searchFeatured(this.value)" autocomplete="off" />
+                                oninput="nlTest_searchFeatured(this.value)" autocomplete="off" />
                         </div>
                         <div id="FeaturedResults" class="config-list"></div>
                         <div id="FeaturedList" class="config-list">
@@ -174,7 +174,7 @@
                         <div class="config-header">
                             <h3>Email Configurations</h3>
                             <button type="button" is="emby-button" class="raised button-submit"
-                                onclick="addEmailConfig()">
+                                onclick="nlTest_addEmailConfig()">
                                 <span>+ Add Email Configuration</span>
                             </button>
                         </div>
@@ -189,7 +189,7 @@
                         <div class="config-header">
                             <h3>Discord Webhook Configurations</h3>
                             <button type="button" is="emby-button" class="raised button-submit"
-                                onclick="addDiscordConfig()">
+                                onclick="nlTest_addDiscordConfig()">
                                 <span>+ Add Discord Webhook</span>
                             </button>
                         </div>
@@ -204,7 +204,7 @@
                         <div class="config-header">
                             <h3>Telegram Bot Configurations</h3>
                             <button type="button" is="emby-button" class="raised button-submit"
-                                onclick="addTelegramConfig()">
+                                onclick="nlTest_addTelegramConfig()">
                                 <span>+ Add Telegram Bot</span>
                             </button>
                         </div>
@@ -220,7 +220,7 @@
                         <div class="config-header">
                             <h3>Matrix Configurations</h3>
                             <button type="button" is="emby-button" class="raised button-submit"
-                                onclick="addMatrixConfig()">
+                                onclick="nlTest_addMatrixConfig()">
                                 <span>+ Add Matrix Config</span>
                             </button>
                         </div>
@@ -242,7 +242,7 @@
                 <div id="CfgPreviewPane">
                     <div class="cfg-preview-bar">
                         <strong id="CfgPreviewTitle">Preview</strong>
-                        <button type="button" class="config-action-btn" onclick="hideConfigPreview()">Close</button>
+                        <button type="button" class="config-action-btn" onclick="nlTest_hideConfigPreview()">Close</button>
                     </div>
                     <div class="cfg-preview-note">
                         Note: Email and chat apps may strip or change some CSS, so the real message can look slightly
@@ -706,20 +706,20 @@
             }
         </style>
         <script type="text/javascript">
-            var NewsletterConfig = {
+            var nlTest_NewsletterConfig = {
                 pluginUniqueId: '46b209f0-7073-4224-a212-cd9dc64efaa4'
             };
 
             // In-memory config storage for multi-config management
-            var discordConfigs = [];
-            var telegramConfigs = [];
-            var matrixConfigs = [];
-            var emailConfigs = [];
-            var radarrConfigs = [];
-            var sonarrConfigs = [];
+            var nlTest_discordConfigs = [];
+            var nlTest_telegramConfigs = [];
+            var nlTest_matrixConfigs = [];
+            var nlTest_emailConfigs = [];
+            var nlTest_radarrConfigs = [];
+            var nlTest_sonarrConfigs = [];
 
             // Tab switching function
-            window.openTab = function (evt, tabName) {
+            window.nlTest_openTab = function (evt, tabName) {
                 var i, tabcontent, tablinks;
                 tabcontent = document.getElementsByClassName("tab-content");
                 for (i = 0; i < tabcontent.length; i++) {
@@ -731,30 +731,30 @@
                 }
                 document.getElementById(tabName).style.display = "block";
                 evt.currentTarget.className += " active";
-                hideConfigPreview();
+                nlTest_hideConfigPreview();
             };
 
             // Configuration fields mapping (for General tab only now)
-            var FIELDS = {
+            var nlTest_FIELDS = {
                 checkboxes: ['DebugMode'],
                 inputs: ['Hostname', 'UpcomingDaysAhead']
             };
 
             // RADARR/SONARR CONFIG FUNCTIONS
 
-            function addRadarrConfig() {
-                radarrConfigs.push({ Id: generateUUID(), Name: 'Radarr', Url: '', ApiKey: '' });
-                renderRadarrConfigs();
+            function nlTest_addRadarrConfig() {
+                nlTest_radarrConfigs.push({ Id: nlTest_generateUUID(), Name: 'Radarr', Url: '', ApiKey: '' });
+                nlTest_renderRadarrConfigs();
             }
 
-            function removeRadarrConfig(id) {
+            function nlTest_removeRadarrConfig(id) {
                 if (confirm('Remove this Radarr instance?')) {
-                    radarrConfigs = radarrConfigs.filter(function (c) { return c.Id !== id; });
-                    renderRadarrConfigs();
+                    nlTest_radarrConfigs = nlTest_radarrConfigs.filter(function (c) { return c.Id !== id; });
+                    nlTest_renderRadarrConfigs();
                 }
             }
 
-            function testRadarrConfig(id) {
+            function nlTest_testRadarrConfig(id) {
                 Dashboard.showLoadingMsg();
                 var url = ApiClient.getUrl('NewslettersTest/UpcomingMedia/TestRadarr') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url }).then(function () {
@@ -766,13 +766,13 @@
                 });
             }
 
-            function toggleRadarrAccordion(id) {
+            function nlTest_toggleRadarrAccordion(id) {
                 var accordion = document.getElementById('radarr-accordion-' + id);
                 if (accordion) accordion.classList.toggle('expanded');
             }
 
-            function updateRadarrConfigFromUI(id) {
-                var config = radarrConfigs.find(function (c) { return c.Id === id; });
+            function nlTest_updateRadarrConfigFromUI(id) {
+                var config = nlTest_radarrConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
                 config.Name = document.getElementById('radarr-name-' + id).value || 'Radarr';
                 config.Url = document.getElementById('radarr-url-' + id).value;
@@ -781,39 +781,39 @@
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
-            function renderRadarrConfigs() {
+            function nlTest_renderRadarrConfigs() {
                 var container = document.getElementById('RadarrConfigList');
-                if (radarrConfigs.length === 0) {
+                if (nlTest_radarrConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Radarr instances configured. Click "Add Radarr Instance" to create one.</p>';
                     return;
                 }
                 var html = '';
-                radarrConfigs.forEach(function (config) {
+                nlTest_radarrConfigs.forEach(function (config) {
                     html += '<div id="radarr-accordion-' + config.Id + '" class="config-accordion">';
-                    html += '  <div class="config-accordion-header" onclick="toggleRadarrAccordion(\'' + config.Id + '\')"> ';
+                    html += '  <div class="config-accordion-header" onclick="nlTest_toggleRadarrAccordion(\'' + config.Id + '\')"> ';
                     html += '    <div class="config-accordion-title">';
                     html += '      <span class="expand-icon">▶</span>';
                     html += '      <span class="config-name">' + (config.Name || 'Radarr') + '</span>';
                     html += '    </div>';
                     html += '    <div class="config-accordion-actions">';
-                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); testRadarrConfig(\'' + config.Id + '\')">Test</button>';
-                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); removeRadarrConfig(\'' + config.Id + '\')">Delete</button>';
+                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_testRadarrConfig(\'' + config.Id + '\')">Test</button>';
+                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_removeRadarrConfig(\'' + config.Id + '\')">Delete</button>';
                     html += '    </div>';
                     html += '  </div>';
                     html += '  <div class="config-accordion-content">';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Instance Name:</label>';
-                    html += '      <input id="radarr-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="updateRadarrConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="radarr-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="nlTest_updateRadarrConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">This name will appear as the section header in your newsletter.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Radarr URL:</label>';
-                    html += '      <input id="radarr-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.Url || '') + '" onchange="updateRadarrConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="radarr-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.Url || '') + '" onchange="nlTest_updateRadarrConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">e.g. http://localhost:7878</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">API Key:</label>';
-                    html += '      <input id="radarr-apikey-' + config.Id + '" type="password" is="emby-input" value="' + (config.ApiKey || '') + '" onchange="updateRadarrConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="radarr-apikey-' + config.Id + '" type="password" is="emby-input" value="' + (config.ApiKey || '') + '" onchange="nlTest_updateRadarrConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Found in Radarr → Settings → General → API Key</div>';
                     html += '    </div>';
                     html += '  </div>';
@@ -822,19 +822,19 @@
                 container.innerHTML = html;
             }
 
-            function addSonarrConfig() {
-                sonarrConfigs.push({ Id: generateUUID(), Name: 'Sonarr', Url: '', ApiKey: '' });
-                renderSonarrConfigs();
+            function nlTest_addSonarrConfig() {
+                nlTest_sonarrConfigs.push({ Id: nlTest_generateUUID(), Name: 'Sonarr', Url: '', ApiKey: '' });
+                nlTest_renderSonarrConfigs();
             }
 
-            function removeSonarrConfig(id) {
+            function nlTest_removeSonarrConfig(id) {
                 if (confirm('Remove this Sonarr instance?')) {
-                    sonarrConfigs = sonarrConfigs.filter(function (c) { return c.Id !== id; });
-                    renderSonarrConfigs();
+                    nlTest_sonarrConfigs = nlTest_sonarrConfigs.filter(function (c) { return c.Id !== id; });
+                    nlTest_renderSonarrConfigs();
                 }
             }
 
-            function testSonarrConfig(id) {
+            function nlTest_testSonarrConfig(id) {
                 Dashboard.showLoadingMsg();
                 var url = ApiClient.getUrl('NewslettersTest/UpcomingMedia/TestSonarr') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url }).then(function () {
@@ -846,13 +846,13 @@
                 });
             }
 
-            function toggleSonarrAccordion(id) {
+            function nlTest_toggleSonarrAccordion(id) {
                 var accordion = document.getElementById('sonarr-accordion-' + id);
                 if (accordion) accordion.classList.toggle('expanded');
             }
 
-            function updateSonarrConfigFromUI(id) {
-                var config = sonarrConfigs.find(function (c) { return c.Id === id; });
+            function nlTest_updateSonarrConfigFromUI(id) {
+                var config = nlTest_sonarrConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
                 config.Name = document.getElementById('sonarr-name-' + id).value || 'Sonarr';
                 config.Url = document.getElementById('sonarr-url-' + id).value;
@@ -861,39 +861,39 @@
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
-            function renderSonarrConfigs() {
+            function nlTest_renderSonarrConfigs() {
                 var container = document.getElementById('SonarrConfigList');
-                if (sonarrConfigs.length === 0) {
+                if (nlTest_sonarrConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Sonarr instances configured. Click "Add Sonarr Instance" to create one.</p>';
                     return;
                 }
                 var html = '';
-                sonarrConfigs.forEach(function (config) {
+                nlTest_sonarrConfigs.forEach(function (config) {
                     html += '<div id="sonarr-accordion-' + config.Id + '" class="config-accordion">';
-                    html += '  <div class="config-accordion-header" onclick="toggleSonarrAccordion(\'' + config.Id + '\')"> ';
+                    html += '  <div class="config-accordion-header" onclick="nlTest_toggleSonarrAccordion(\'' + config.Id + '\')"> ';
                     html += '    <div class="config-accordion-title">';
                     html += '      <span class="expand-icon">▶</span>';
                     html += '      <span class="config-name">' + (config.Name || 'Sonarr') + '</span>';
                     html += '    </div>';
                     html += '    <div class="config-accordion-actions">';
-                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); testSonarrConfig(\'' + config.Id + '\')">Test</button>';
-                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); removeSonarrConfig(\'' + config.Id + '\')">Delete</button>';
+                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_testSonarrConfig(\'' + config.Id + '\')">Test</button>';
+                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_removeSonarrConfig(\'' + config.Id + '\')">Delete</button>';
                     html += '    </div>';
                     html += '  </div>';
                     html += '  <div class="config-accordion-content">';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Instance Name:</label>';
-                    html += '      <input id="sonarr-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="updateSonarrConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="sonarr-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="nlTest_updateSonarrConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">This name will appear as the section header in your newsletter.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Sonarr URL:</label>';
-                    html += '      <input id="sonarr-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.Url || '') + '" onchange="updateSonarrConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="sonarr-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.Url || '') + '" onchange="nlTest_updateSonarrConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">e.g. http://localhost:8989</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">API Key:</label>';
-                    html += '      <input id="sonarr-apikey-' + config.Id + '" type="password" is="emby-input" value="' + (config.ApiKey || '') + '" onchange="updateSonarrConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="sonarr-apikey-' + config.Id + '" type="password" is="emby-input" value="' + (config.ApiKey || '') + '" onchange="nlTest_updateSonarrConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Found in Sonarr → Settings → General → API Key</div>';
                     html += '    </div>';
                     html += '  </div>';
@@ -902,7 +902,7 @@
                 container.innerHTML = html;
             }
 
-            function generateUUID() {
+            function nlTest_generateUUID() {
                 return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
                     var r = Math.random() * 16 | 0;
                     var v = c === 'x' ? r : (r & 0x3 | 0x8);
@@ -910,7 +910,7 @@
                 });
             }
 
-            function formatMessage(msg) {
+            function nlTest_formatMessage(msg) {
                 if (typeof msg !== 'string') return msg;
                 try {
                     var parsed = JSON.parse(msg);
@@ -920,7 +920,7 @@
             }
 
             // Global libraries storage
-            var allLibraries = [];
+            var nlTest_allLibraries = [];
 
             // A library whose Jellyfin content type is "Mixed Movies and TV Shows" carries no
             // collection type at all: Jellyfin writes no .collection file for it, so the
@@ -929,7 +929,7 @@
             // contributed by other plugins report nothing either, and neither does anything that
             // is not a library at all. Only a real library is a CollectionFolder, so check that
             // first and leave everything else out of both lists.
-            function isMixedLibrary(lib) {
+            function nlTest_isMixedLibrary(lib) {
                 if (lib.Type !== 'CollectionFolder') {
                     return false;
                 }
@@ -941,31 +941,31 @@
             // Mixed libraries hold both kinds, so they are offered in both lists and the admin
             // decides which sections their content appears under. Music, books, photos, boxsets
             // and playlists all report a collection type, so they stay out of both.
-            function librariesForSection(collectionType) {
-                return allLibraries.filter(function (l) {
-                    return (l.CollectionType || '').toLowerCase() === collectionType || isMixedLibrary(l);
+            function nlTest_librariesForSection(collectionType) {
+                return nlTest_allLibraries.filter(function (l) {
+                    return (l.CollectionType || '').toLowerCase() === collectionType || nlTest_isMixedLibrary(l);
                 });
             }
 
             // Spelt out in the list so it is clear why one library appears under both headings.
-            function getLibraryDisplayName(lib) {
-                return isMixedLibrary(lib) ? lib.Name + ' (Mixed)' : lib.Name;
+            function nlTest_getLibraryDisplayName(lib) {
+                return nlTest_isMixedLibrary(lib) ? lib.Name + ' (Mixed)' : lib.Name;
             }
 
-            function getLibrarySelectionHtml(clientId, configType, selectedSeriesIds, selectedMoviesIds) {
+            function nlTest_getLibrarySelectionHtml(clientId, configType, selectedSeriesIds, selectedMoviesIds) {
                 var html = '<div class="inputContainer"><label class="inputLabel">Library Selection:</label>';
 
                 // Series
                 html += '<div style="margin-bottom: 10px; font-weight: bold;">TV Series</div>';
                 html += '<div class="library-checkbox-container" style="max-height: 150px; overflow-y: auto; border: 1px solid #444; padding: 10px; background: rgba(0,0,0,0.2);">';
-                var seriesLibs = librariesForSection('tvshows');
+                var seriesLibs = nlTest_librariesForSection('tvshows');
                 if (seriesLibs.length === 0) html += '<div style="opacity: 0.7;">No TV Series libraries found</div>';
                 seriesLibs.forEach(function (lib) {
                     var isChecked = (selectedSeriesIds || []).indexOf(lib.Id) !== -1;
                     html += '<div class="checkboxContainer">';
                     html += '<label class="emby-checkbox-label">';
-                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-series-lib-' + clientId + '" data-lib-id="' + lib.Id + '" ' + (isChecked ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
-                    html += '<span>' + getLibraryDisplayName(lib) + '</span>';
+                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-series-lib-' + clientId + '" data-lib-id="' + lib.Id + '" ' + (isChecked ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                    html += '<span>' + nlTest_getLibraryDisplayName(lib) + '</span>';
                     html += '</label></div>';
                 });
                 html += '</div>';
@@ -973,14 +973,14 @@
                 // Movies
                 html += '<div style="margin-top: 15px; margin-bottom: 10px; font-weight: bold;">Movies</div>';
                 html += '<div class="library-checkbox-container" style="max-height: 150px; overflow-y: auto; border: 1px solid #444; padding: 10px; background: rgba(0,0,0,0.2);">';
-                var movieLibs = librariesForSection('movies');
+                var movieLibs = nlTest_librariesForSection('movies');
                 if (movieLibs.length === 0) html += '<div style="opacity: 0.7;">No Movie libraries found</div>';
                 movieLibs.forEach(function (lib) {
                     var isChecked = (selectedMoviesIds || []).indexOf(lib.Id) !== -1;
                     html += '<div class="checkboxContainer">';
                     html += '<label class="emby-checkbox-label">';
-                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-movies-lib-' + clientId + '" data-lib-id="' + lib.Id + '" ' + (isChecked ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
-                    html += '<span>' + getLibraryDisplayName(lib) + '</span>';
+                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-movies-lib-' + clientId + '" data-lib-id="' + lib.Id + '" ' + (isChecked ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                    html += '<span>' + nlTest_getLibraryDisplayName(lib) + '</span>';
                     html += '</label></div>';
                 });
                 html += '</div></div>';
@@ -989,28 +989,28 @@
             }
 
             // Global collections storage
-            var allCollections = [];
+            var nlTest_allCollections = [];
 
             // A selection is matched by ID first, then by name: Maintainerr and similar tools delete
             // and recreate their collections, which gives them a new ID.
-            function findSelectedCollection(collection, selected) {
+            function nlTest_findSelectedCollection(collection, selected) {
                 return (selected || []).filter(function (s) { return s.Id === collection.Id; })[0]
                     || (selected || []).filter(function (s) { return (s.Name || '').toLowerCase() === (collection.Name || '').toLowerCase(); })[0];
             }
 
-            function getCollectionSelectionHtml(clientId, configType, selectedCollections) {
-                var updateFn = 'update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
+            function nlTest_getCollectionSelectionHtml(clientId, configType, selectedCollections) {
+                var updateFn = 'nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
                 var html = '<div class="inputContainer"><label class="inputLabel">Collections:</label>';
                 html += '<div class="library-checkbox-container" style="max-height: 150px; overflow-y: auto; border: 1px solid #444; padding: 10px; background: rgba(0,0,0,0.2);">';
 
                 var matched = [];
-                allCollections.forEach(function (collection) {
-                    var selection = findSelectedCollection(collection, selectedCollections);
+                nlTest_allCollections.forEach(function (collection) {
+                    var selection = nlTest_findSelectedCollection(collection, selectedCollections);
                     if (selection) matched.push(selection);
                     html += '<div class="checkboxContainer">';
                     html += '<label class="emby-checkbox-label">';
-                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-collection-' + clientId + '" data-collection-id="' + escapeHtml(collection.Id) + '" data-collection-name="' + escapeHtml(collection.Name) + '" ' + (selection ? 'checked' : '') + ' onchange="' + updateFn + '"/>';
-                    html += '<span>' + escapeHtml(collection.Name) + '</span>';
+                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-collection-' + clientId + '" data-collection-id="' + nlTest_escapeHtml(collection.Id) + '" data-collection-name="' + nlTest_escapeHtml(collection.Name) + '" ' + (selection ? 'checked' : '') + ' onchange="' + updateFn + '"/>';
+                    html += '<span>' + nlTest_escapeHtml(collection.Name) + '</span>';
                     html += '</label></div>';
                 });
 
@@ -1020,12 +1020,12 @@
                     if (matched.indexOf(selection) !== -1) return;
                     html += '<div class="checkboxContainer">';
                     html += '<label class="emby-checkbox-label">';
-                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-collection-' + clientId + '" data-collection-id="' + escapeHtml(selection.Id) + '" data-collection-name="' + escapeHtml(selection.Name) + '" checked onchange="' + updateFn + '"/>';
-                    html += '<span>' + escapeHtml(selection.Name) + ' (not found)</span>';
+                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-collection-' + clientId + '" data-collection-id="' + nlTest_escapeHtml(selection.Id) + '" data-collection-name="' + nlTest_escapeHtml(selection.Name) + '" checked onchange="' + updateFn + '"/>';
+                    html += '<span>' + nlTest_escapeHtml(selection.Name) + ' (not found)</span>';
                     html += '</label></div>';
                 });
 
-                if (allCollections.length === 0 && (selectedCollections || []).length === 0) html += '<div style="opacity: 0.7;">No collections found</div>';
+                if (nlTest_allCollections.length === 0 && (selectedCollections || []).length === 0) html += '<div style="opacity: 0.7;">No collections found</div>';
                 html += '</div>';
                 html += '<div class="fieldDescription">Each selected collection is shown as its own section, headed by the collection name, with what the collection holds when the newsletter is sent. The library selection and the maximum items per section still apply.</div>';
                 html += '</div>';
@@ -1033,35 +1033,35 @@
                 return html;
             }
 
-            function getSelectedCollections(configType, clientId) {
+            function nlTest_getSelectedCollections(configType, clientId) {
                 return Array.from(document.querySelectorAll('.' + configType + '-collection-' + clientId + ':checked')).map(function (cb) {
                     return { Id: cb.getAttribute('data-collection-id'), Name: cb.getAttribute('data-collection-name') };
                 });
             }
 
-            function getEventTogglesHtml(clientId, configType, added, updated, deleted, upcoming, featured) {
+            function nlTest_getEventTogglesHtml(clientId, configType, added, updated, deleted, upcoming, featured) {
                 var html = '<div>';
                 html += '  <label class="inputLabel">Events to Notify:</label>';
                 html += '  <table><tr>';
 
                 html += '    <td><div class="checkboxContainer"><label class="emby-checkbox-label">';
-                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-add-' + clientId + '" ' + (added !== false ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-add-' + clientId + '" ' + (added !== false ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
                 html += '    <span>Item Added</span></label></div></td>';
 
                 html += '    <td><div class="checkboxContainer"><label class="emby-checkbox-label">';
-                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-update-' + clientId + '" ' + (updated !== false ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-update-' + clientId + '" ' + (updated !== false ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
                 html += '    <span>Item Updated</span></label></div></td>';
 
                 html += '    <td><div class="checkboxContainer"><label class="emby-checkbox-label">';
-                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-delete-' + clientId + '" ' + (deleted !== false ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-delete-' + clientId + '" ' + (deleted !== false ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
                 html += '    <span>Item Deleted</span></label></div></td>';
 
                 html += '    <td><div class="checkboxContainer"><label class="emby-checkbox-label">';
-                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-upcoming-' + clientId + '" ' + (upcoming === true ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-upcoming-' + clientId + '" ' + (upcoming === true ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
                 html += '    <span>Upcoming Item</span></label></div></td>';
 
                 html += '    <td><div class="checkboxContainer"><label class="emby-checkbox-label">';
-                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-featured-' + clientId + '" ' + (featured !== false ? 'checked' : '') + ' onchange="update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
+                html += '    <input type="checkbox" is="emby-checkbox" id="' + configType + '-event-featured-' + clientId + '" ' + (featured !== false ? 'checked' : '') + ' onchange="nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')"/>';
                 html += '    <span>Featured</span></label></div></td>';
 
                 html += '  </tr></table>';
@@ -1069,8 +1069,8 @@
                 return html;
             }
 
-            function getMaxItemsHtml(clientId, configType, maxItems) {
-                var updateFn = 'update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
+            function nlTest_getMaxItemsHtml(clientId, configType, maxItems) {
+                var updateFn = 'nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
                 var html = '<div class="inputContainer">';
                 html += '  <label class="inputLabel inputLabelUnfocused">Max Items Per Section:</label>';
                 html += '  <input id="' + configType + '-max-items-' + clientId + '" type="number" is="emby-input" min="0" value="' + (maxItems || 0) + '" onchange="' + updateFn + '" />';
@@ -1079,8 +1079,8 @@
                 return html;
             }
 
-            function getPosterTypeHtml(clientId, configType, posterType) {
-                var updateFn = 'update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
+            function nlTest_getPosterTypeHtml(clientId, configType, posterType) {
+                var updateFn = 'nlTest_update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
                 var isAttachment = posterType === 'attachment';
                 var html = '<div class="selectContainer">';
                 html += '  <label class="selectLabel" for="' + configType + '-poster-type-' + clientId + '">Poster Type:</label>';
@@ -1093,10 +1093,10 @@
                 return html;
             }
 
-            function getMaxEmailSizeHtml(clientId, posterType, maxEmailSize) {
+            function nlTest_getMaxEmailSizeHtml(clientId, posterType, maxEmailSize) {
                 var html = '<div id="email-max-email-size-container-' + clientId + '" class="inputContainer" style="display: ' + (posterType === 'attachment' ? '' : 'none') + ';">';
                 html += '  <label class="inputLabel inputLabelUnfocused">Maximum Email Size (MB):</label>';
-                html += '  <input id="email-max-email-size-' + clientId + '" type="number" is="emby-input" min="5" value="' + (maxEmailSize || 15) + '" onchange="updateEmailConfigFromUI(\'' + clientId + '\')" />';
+                html += '  <input id="email-max-email-size-' + clientId + '" type="number" is="emby-input" min="5" value="' + (maxEmailSize || 15) + '" onchange="nlTest_updateEmailConfigFromUI(\'' + clientId + '\')" />';
                 html += '  <div class="fieldDescription">The largest email your provider accepts. Newsletters with local posters are split into several emails to stay under it. For reliable delivery, set this slightly below your provider\'s limit (e.g., use 20 MB if your provider supports up to 25 MB). <b>Default: 15 MB</b></div>';
                 html += '</div>';
                 return html;
@@ -1104,9 +1104,9 @@
 
             // ===================== DISCORD CONFIG FUNCTIONS =====================
 
-            function addDiscordConfig() {
+            function nlTest_addDiscordConfig() {
                 var newConfig = {
-                    Id: generateUUID(),
+                    Id: nlTest_generateUUID(),
                     Name: 'Discord Webhook',
                     IsEnabled: true,
                     WebhookURL: '',
@@ -1142,47 +1142,47 @@
                     MaxItemsPerSection: 0,
                     PosterType: 'tmdb'
                 };
-                discordConfigs.push(newConfig);
-                renderDiscordConfigs();
+                nlTest_discordConfigs.push(newConfig);
+                nlTest_renderDiscordConfigs();
             }
 
-            function removeDiscordConfig(id) {
+            function nlTest_removeDiscordConfig(id) {
                 if (confirm('Are you sure you want to remove this Discord webhook configuration?')) {
-                    discordConfigs = discordConfigs.filter(function (c) { return c.Id !== id; });
-                    renderDiscordConfigs();
-                    hideConfigPreviewFor(id);
+                    nlTest_discordConfigs = nlTest_discordConfigs.filter(function (c) { return c.Id !== id; });
+                    nlTest_renderDiscordConfigs();
+                    nlTest_hideConfigPreviewFor(id);
                 }
             }
 
-            function testDiscordConfig(id) {
+            function nlTest_testDiscordConfig(id) {
                 Dashboard.showLoadingMsg();
                 var url = ApiClient.getUrl('NewslettersTest/Discord/SendDiscordTestMessage') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
-                    alert(formatMessage(response) || "Test Discord message sent! Check your webhook channel.");
+                    alert(nlTest_formatMessage(response) || "Test Discord message sent! Check your webhook channel.");
                 }).catch(function (err) {
                     Dashboard.hideLoadingMsg();
                     var defaultMsg = "Failed to send test message. Check server logs for details.";
                     if (err && typeof err.text === 'function') {
-                        err.text().then(function (text) { alert(formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
+                        err.text().then(function (text) { alert(nlTest_formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
                     } else {
                         var msg = defaultMsg;
                         if (err && err.responseText) msg = err.responseText;
                         else if (typeof err === 'string') msg = err;
-                        alert(formatMessage(msg));
+                        alert(nlTest_formatMessage(msg));
                     }
                 });
             }
 
-            function toggleDiscordAccordion(id) {
+            function nlTest_toggleDiscordAccordion(id) {
                 var accordion = document.getElementById('discord-accordion-' + id);
                 if (accordion) {
                     accordion.classList.toggle('expanded');
                 }
             }
 
-            function updateDiscordConfigFromUI(id) {
-                var config = discordConfigs.find(function (c) { return c.Id === id; });
+            function nlTest_updateDiscordConfigFromUI(id) {
+                var config = nlTest_discordConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
                 config.Name = document.getElementById('discord-name-' + id).value || 'Unnamed';
@@ -1226,73 +1226,73 @@
                 var moviesChecked = document.querySelectorAll('.discord-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                config.SelectedCollections = getSelectedCollections('discord', id);
+                config.SelectedCollections = nlTest_getSelectedCollections('discord', id);
 
                 // Update header title
                 var headerTitle = document.querySelector('#discord-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
-            function renderDiscordConfigs() {
+            function nlTest_renderDiscordConfigs() {
                 var container = document.getElementById('DiscordConfigList');
-                if (discordConfigs.length === 0) {
+                if (nlTest_discordConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Discord configurations yet. Click "Add Discord Webhook" to create one.</p>';
                     return;
                 }
 
                 var html = '';
-                discordConfigs.forEach(function (config) {
+                nlTest_discordConfigs.forEach(function (config) {
                     html += '<div id="discord-accordion-' + config.Id + '" class="config-accordion">';
-                    html += '  <div class="config-accordion-header" onclick="toggleDiscordAccordion(\'' + config.Id + '\')">';
+                    html += '  <div class="config-accordion-header" onclick="nlTest_toggleDiscordAccordion(\'' + config.Id + '\')">';
                     html += '    <div class="config-accordion-title">';
                     html += '      <span class="expand-icon">▶</span>';
                     html += '      <span class="config-name">' + (config.Name || 'Unnamed') + '</span>';
                     html += '    </div>';
                     html += '    <div class="config-accordion-actions">';
                     html += '      <label class="emby-checkbox-label" style="margin-right: 15px; margin-bottom: 0;" onclick="event.stopPropagation()">';
-                    html += '        <input id="discord-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="discord-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
                     html += '        <span>Enabled</span>';
                     html += '      </label>';
-                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); testDiscordConfig(\'' + config.Id + '\')">Test</button>';
-                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); removeDiscordConfig(\'' + config.Id + '\')">Delete</button>';
-                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); showConfigPreview(\'discord\', \'' + config.Id + '\')">Preview</button>';
+                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_testDiscordConfig(\'' + config.Id + '\')">Test</button>';
+                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_removeDiscordConfig(\'' + config.Id + '\')">Delete</button>';
+                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); nlTest_showConfigPreview(\'discord\', \'' + config.Id + '\')">Preview</button>';
                     html += '    </div>';
                     html += '  </div>';
                     html += '  <div class="config-accordion-content">';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Configuration Name:</label>';
-                    html += '      <input id="discord-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="discord-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Webhook URL:</label>';
-                    html += '      <input id="discord-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.WebhookURL || '') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="discord-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.WebhookURL || '') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Separate multiple webhook URLs with commas.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Webhook Display Name:</label>';
-                    html += '      <input id="discord-webhookname-' + config.Id + '" type="text" is="emby-input" value="' + (config.WebhookName || '') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="discord-webhookname-' + config.Id + '" type="text" is="emby-input" value="' + (config.WebhookName || '') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Mentions:</label>';
-                    html += '      <input id="discord-mentions-' + config.Id + '" type="text" is="emby-input" value="' + (config.Mentions || '') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="discord-mentions-' + config.Id + '" type="text" is="emby-input" value="' + (config.Mentions || '') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Who to ping when this newsletter is posted. Separate multiple entries with commas, for example: @everyone, @here, &lt;@&amp;ROLE_ID&gt;, &lt;@USER_ID&gt;. Enable Developer Mode in Discord to copy role and user IDs. The mention is posted once per webhook, on the first message of the newsletter. Leave empty to post without pinging.</div>';
                     html += '    </div>';
-                    html += getLibrarySelectionHtml(config.Id, 'discord', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
-                    html += getCollectionSelectionHtml(config.Id, 'discord', config.SelectedCollections);
-                    html += getEventTogglesHtml(config.Id, 'discord', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
-                    html += getMaxItemsHtml(config.Id, 'discord', config.MaxItemsPerSection);
-                    html += getPosterTypeHtml(config.Id, 'discord', config.PosterType);
+                    html += nlTest_getLibrarySelectionHtml(config.Id, 'discord', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += nlTest_getCollectionSelectionHtml(config.Id, 'discord', config.SelectedCollections);
+                    html += nlTest_getEventTogglesHtml(config.Id, 'discord', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
+                    html += nlTest_getMaxItemsHtml(config.Id, 'discord', config.MaxItemsPerSection);
+                    html += nlTest_getPosterTypeHtml(config.Id, 'discord', config.PosterType);
                     html += '    <div>';
                     html += '      <label class="inputLabel">Message Fields:</label>';
                     html += '      <table><tr>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-desc-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DescriptionEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Description</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-thumb-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.ThumbnailEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Thumbnail</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-rating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.RatingEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Rating</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-pgrating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.PGRatingEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>PG Rating</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-desc-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DescriptionEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Description</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-thumb-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.ThumbnailEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Thumbnail</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-rating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.RatingEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Rating</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-pgrating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.PGRatingEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>PG Rating</span></label></div></td>';
                     html += '      </tr><tr>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-duration-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DurationEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Duration</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-genres-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.GenresEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Genres</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-episodes-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.EpisodesEnabled ? 'checked' : '') + ' onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Episodes</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-duration-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DurationEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Duration</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-genres-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.GenresEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Genres</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="discord-episodes-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.EpisodesEnabled ? 'checked' : '') + ' onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"><span>Episodes</span></label></div></td>';
                     html += '      </tr></table>';
                     html += '    </div>';
                     html += '    <div>';
@@ -1300,21 +1300,21 @@
                     html += '      <table class="color-table">';
                     html += '        <tr><th>Series Add</th><th>Series Delete</th><th>Series Update</th><th>Series Upcoming</th><th>Series Featured</th><th>Series Collection</th></tr>';
                     html += '        <tr>';
-                    html += '          <td><input id="discord-series-add-color-' + config.Id + '" type="color" value="' + (config.SeriesAddEmbedColor || '#00FF00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-series-delete-color-' + config.Id + '" type="color" value="' + (config.SeriesDeleteEmbedColor || '#FF0000') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-series-update-color-' + config.Id + '" type="color" value="' + (config.SeriesUpdateEmbedColor || '#0000FF') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-series-upcoming-color-' + config.Id + '" type="color" value="' + (config.SeriesUpcomingEmbedColor || '#FF8C00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-series-featured-color-' + config.Id + '" type="color" value="' + (config.SeriesFeaturedEmbedColor || '#FFC107') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-series-collection-color-' + config.Id + '" type="color" value="' + (config.SeriesCollectionEmbedColor || '#9C27B0') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-add-color-' + config.Id + '" type="color" value="' + (config.SeriesAddEmbedColor || '#00FF00') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-delete-color-' + config.Id + '" type="color" value="' + (config.SeriesDeleteEmbedColor || '#FF0000') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-update-color-' + config.Id + '" type="color" value="' + (config.SeriesUpdateEmbedColor || '#0000FF') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-upcoming-color-' + config.Id + '" type="color" value="' + (config.SeriesUpcomingEmbedColor || '#FF8C00') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-featured-color-' + config.Id + '" type="color" value="' + (config.SeriesFeaturedEmbedColor || '#FFC107') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-collection-color-' + config.Id + '" type="color" value="' + (config.SeriesCollectionEmbedColor || '#9C27B0') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '        </tr>';
                     html += '        <tr><th>Movies Add</th><th>Movies Delete</th><th>Movies Update</th><th>Movies Upcoming</th><th>Movies Featured</th><th>Movies Collection</th></tr>';
                     html += '        <tr>';
-                    html += '          <td><input id="discord-movies-add-color-' + config.Id + '" type="color" value="' + (config.MoviesAddEmbedColor || '#00FF00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-movies-delete-color-' + config.Id + '" type="color" value="' + (config.MoviesDeleteEmbedColor || '#FF0000') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-movies-update-color-' + config.Id + '" type="color" value="' + (config.MoviesUpdateEmbedColor || '#0000FF') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-movies-upcoming-color-' + config.Id + '" type="color" value="' + (config.MoviesUpcomingEmbedColor || '#FF8C00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-movies-featured-color-' + config.Id + '" type="color" value="' + (config.MoviesFeaturedEmbedColor || '#FFC107') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
-                    html += '          <td><input id="discord-movies-collection-color-' + config.Id + '" type="color" value="' + (config.MoviesCollectionEmbedColor || '#9C27B0') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-add-color-' + config.Id + '" type="color" value="' + (config.MoviesAddEmbedColor || '#00FF00') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-delete-color-' + config.Id + '" type="color" value="' + (config.MoviesDeleteEmbedColor || '#FF0000') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-update-color-' + config.Id + '" type="color" value="' + (config.MoviesUpdateEmbedColor || '#0000FF') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-upcoming-color-' + config.Id + '" type="color" value="' + (config.MoviesUpcomingEmbedColor || '#FF8C00') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-featured-color-' + config.Id + '" type="color" value="' + (config.MoviesFeaturedEmbedColor || '#FFC107') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-collection-color-' + config.Id + '" type="color" value="' + (config.MoviesCollectionEmbedColor || '#9C27B0') + '" onchange="nlTest_updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '        </tr>';
                     html += '      </table>';
                     html += '    </div>';
@@ -1326,9 +1326,9 @@
 
             // ===================== TELEGRAM CONFIG FUNCTIONS =====================
 
-            function addTelegramConfig() {
+            function nlTest_addTelegramConfig() {
                 var newConfig = {
-                    Id: generateUUID(),
+                    Id: nlTest_generateUUID(),
                     Name: 'Telegram Bot',
                     IsEnabled: true,
                     BotToken: '',
@@ -1351,47 +1351,47 @@
                     MaxItemsPerSection: 0,
                     PosterType: 'tmdb'
                 };
-                telegramConfigs.push(newConfig);
-                renderTelegramConfigs();
+                nlTest_telegramConfigs.push(newConfig);
+                nlTest_renderTelegramConfigs();
             }
 
-            function removeTelegramConfig(id) {
+            function nlTest_removeTelegramConfig(id) {
                 if (confirm('Are you sure you want to remove this Telegram bot configuration?')) {
-                    telegramConfigs = telegramConfigs.filter(function (c) { return c.Id !== id; });
-                    renderTelegramConfigs();
-                    hideConfigPreviewFor(id);
+                    nlTest_telegramConfigs = nlTest_telegramConfigs.filter(function (c) { return c.Id !== id; });
+                    nlTest_renderTelegramConfigs();
+                    nlTest_hideConfigPreviewFor(id);
                 }
             }
 
-            function testTelegramConfig(id) {
+            function nlTest_testTelegramConfig(id) {
                 Dashboard.showLoadingMsg();
                 var url = ApiClient.getUrl('NewslettersTest/Telegram/SendTelegramTestMessage') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
-                    alert(formatMessage(response) || "Test Telegram message sent! Check your chat.");
+                    alert(nlTest_formatMessage(response) || "Test Telegram message sent! Check your chat.");
                 }).catch(function (err) {
                     Dashboard.hideLoadingMsg();
                     var defaultMsg = "Failed to send test message. Check server logs for details.";
                     if (err && typeof err.text === 'function') {
-                        err.text().then(function (text) { alert(formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
+                        err.text().then(function (text) { alert(nlTest_formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
                     } else {
                         var msg = defaultMsg;
                         if (err && err.responseText) msg = err.responseText;
                         else if (typeof err === 'string') msg = err;
-                        alert(formatMessage(msg));
+                        alert(nlTest_formatMessage(msg));
                     }
                 });
             }
 
-            function toggleTelegramAccordion(id) {
+            function nlTest_toggleTelegramAccordion(id) {
                 var accordion = document.getElementById('telegram-accordion-' + id);
                 if (accordion) {
                     accordion.classList.toggle('expanded');
                 }
             }
 
-            function updateTelegramConfigFromUI(id) {
-                var config = telegramConfigs.find(function (c) { return c.Id === id; });
+            function nlTest_updateTelegramConfigFromUI(id) {
+                var config = nlTest_telegramConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
                 config.Name = document.getElementById('telegram-name-' + id).value || 'Unnamed';
@@ -1422,68 +1422,68 @@
                 var moviesChecked = document.querySelectorAll('.telegram-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                config.SelectedCollections = getSelectedCollections('telegram', id);
+                config.SelectedCollections = nlTest_getSelectedCollections('telegram', id);
 
                 var headerTitle = document.querySelector('#telegram-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
-            function renderTelegramConfigs() {
+            function nlTest_renderTelegramConfigs() {
                 var container = document.getElementById('TelegramConfigList');
-                if (telegramConfigs.length === 0) {
+                if (nlTest_telegramConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Telegram configurations yet. Click "Add Telegram Bot" to create one.</p>';
                     return;
                 }
 
                 var html = '';
-                telegramConfigs.forEach(function (config) {
+                nlTest_telegramConfigs.forEach(function (config) {
                     html += '<div id="telegram-accordion-' + config.Id + '" class="config-accordion">';
-                    html += '  <div class="config-accordion-header" onclick="toggleTelegramAccordion(\'' + config.Id + '\')">';
+                    html += '  <div class="config-accordion-header" onclick="nlTest_toggleTelegramAccordion(\'' + config.Id + '\')">';
                     html += '    <div class="config-accordion-title">';
                     html += '      <span class="expand-icon">▶</span>';
                     html += '      <span class="config-name">' + (config.Name || 'Unnamed') + '</span>';
                     html += '    </div>';
                     html += '    <div class="config-accordion-actions">';
                     html += '      <label class="emby-checkbox-label" style="margin-right: 15px; margin-bottom: 0;" onclick="event.stopPropagation()">';
-                    html += '        <input id="telegram-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="telegram-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
                     html += '        <span>Enabled</span>';
                     html += '      </label>';
-                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); testTelegramConfig(\'' + config.Id + '\')">Test</button>';
-                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); removeTelegramConfig(\'' + config.Id + '\')">Delete</button>';
-                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); showConfigPreview(\'telegram\', \'' + config.Id + '\')">Preview</button>';
+                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_testTelegramConfig(\'' + config.Id + '\')">Test</button>';
+                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_removeTelegramConfig(\'' + config.Id + '\')">Delete</button>';
+                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); nlTest_showConfigPreview(\'telegram\', \'' + config.Id + '\')">Preview</button>';
                     html += '    </div>';
                     html += '  </div>';
                     html += '  <div class="config-accordion-content">';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Configuration Name:</label>';
-                    html += '      <input id="telegram-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="telegram-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Bot Token:</label>';
-                    html += '      <input id="telegram-token-' + config.Id + '" type="text" is="emby-input" value="' + (config.BotToken || '') + '" onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="telegram-token-' + config.Id + '" type="text" is="emby-input" value="' + (config.BotToken || '') + '" onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Telegram bot token from @BotFather. Format: 123456789:ABCdefGhIJKlmnOPQRstuVWXyz123456789</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Chat ID:</label>';
-                    html += '      <input id="telegram-chatid-' + config.Id + '" type="text" is="emby-input" value="' + (config.ChatId || '') + '" onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="telegram-chatid-' + config.Id + '" type="text" is="emby-input" value="' + (config.ChatId || '') + '" onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Telegram chat ID or group ID to send messages to. Separate multiple IDs with commas.</div>';
                     html += '    </div>';
-                    html += getLibrarySelectionHtml(config.Id, 'telegram', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
-                    html += getCollectionSelectionHtml(config.Id, 'telegram', config.SelectedCollections);
-                    html += getEventTogglesHtml(config.Id, 'telegram', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
-                    html += getMaxItemsHtml(config.Id, 'telegram', config.MaxItemsPerSection);
-                    html += getPosterTypeHtml(config.Id, 'telegram', config.PosterType);
+                    html += nlTest_getLibrarySelectionHtml(config.Id, 'telegram', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += nlTest_getCollectionSelectionHtml(config.Id, 'telegram', config.SelectedCollections);
+                    html += nlTest_getEventTogglesHtml(config.Id, 'telegram', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
+                    html += nlTest_getMaxItemsHtml(config.Id, 'telegram', config.MaxItemsPerSection);
+                    html += nlTest_getPosterTypeHtml(config.Id, 'telegram', config.PosterType);
                     html += '    <div>';
                     html += '      <label class="inputLabel">Message Fields:</label>';
                     html += '      <table><tr>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-desc-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DescriptionEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Description</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-thumb-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.ThumbnailEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Thumbnail</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-rating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.RatingEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Rating</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-pgrating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.PGRatingEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>PG Rating</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-desc-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DescriptionEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Description</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-thumb-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.ThumbnailEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Thumbnail</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-rating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.RatingEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Rating</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-pgrating-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.PGRatingEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>PG Rating</span></label></div></td>';
                     html += '      </tr><tr>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-duration-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DurationEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Duration</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-genres-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.GenresEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Genres</span></label></div></td>';
-                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-episodes-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.EpisodesEnabled ? 'checked' : '') + ' onchange="updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Episodes</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-duration-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.DurationEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Duration</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-genres-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.GenresEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Genres</span></label></div></td>';
+                    html += '        <td><div class="checkboxContainer"><label class="emby-checkbox-label"><input id="telegram-episodes-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.EpisodesEnabled ? 'checked' : '') + ' onchange="nlTest_updateTelegramConfigFromUI(\'' + config.Id + '\')"><span>Episodes</span></label></div></td>';
                     html += '      </tr></table>';
                     html += '    </div>';
                     html += '  </div>';
@@ -1494,9 +1494,9 @@
 
             // ===================== EMAIL CONFIG FUNCTIONS =====================
 
-            function addEmailConfig() {
+            function nlTest_addEmailConfig() {
                 var newConfig = {
-                    Id: generateUUID(),
+                    Id: nlTest_generateUUID(),
                     Name: 'Email Configuration',
                     IsEnabled: true,
                     SMTPServer: 'smtp.gmail.com',
@@ -1526,47 +1526,47 @@
                     PosterType: 'tmdb',
                     MaxEmailSize: 15
                 };
-                emailConfigs.push(newConfig);
-                renderEmailConfigs();
+                nlTest_emailConfigs.push(newConfig);
+                nlTest_renderEmailConfigs();
             }
 
-            function removeEmailConfig(id) {
+            function nlTest_removeEmailConfig(id) {
                 if (confirm('Are you sure you want to remove this email configuration?')) {
-                    emailConfigs = emailConfigs.filter(function (c) { return c.Id !== id; });
-                    renderEmailConfigs();
-                    hideConfigPreviewFor(id);
+                    nlTest_emailConfigs = nlTest_emailConfigs.filter(function (c) { return c.Id !== id; });
+                    nlTest_renderEmailConfigs();
+                    nlTest_hideConfigPreviewFor(id);
                 }
             }
 
-            function testEmailConfig(id) {
+            function nlTest_testEmailConfig(id) {
                 Dashboard.showLoadingMsg();
                 var url = ApiClient.getUrl('NewslettersTest/SmtpMailer/SendTestMail') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
-                    alert(formatMessage(response) || "Test email sent! Check your inbox.");
+                    alert(nlTest_formatMessage(response) || "Test email sent! Check your inbox.");
                 }).catch(function (err) {
                     Dashboard.hideLoadingMsg();
                     var defaultMsg = "Failed to send test email. Check server logs for details.";
                     if (err && typeof err.text === 'function') {
-                        err.text().then(function (text) { alert(formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
+                        err.text().then(function (text) { alert(nlTest_formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
                     } else {
                         var msg = defaultMsg;
                         if (err && err.responseText) msg = err.responseText;
                         else if (typeof err === 'string') msg = err;
-                        alert(formatMessage(msg));
+                        alert(nlTest_formatMessage(msg));
                     }
                 });
             }
 
-            function toggleEmailAccordion(id) {
+            function nlTest_toggleEmailAccordion(id) {
                 var accordion = document.getElementById('email-accordion-' + id);
                 if (accordion) {
                     accordion.classList.toggle('expanded');
                 }
             }
 
-            function updateEmailConfigFromUI(id) {
-                var config = emailConfigs.find(function (c) { return c.Id === id; });
+            function nlTest_updateEmailConfigFromUI(id) {
+                var config = nlTest_emailConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
                 config.Name = document.getElementById('email-name-' + id).value || 'Unnamed';
@@ -1608,73 +1608,73 @@
                 var moviesChecked = document.querySelectorAll('.email-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                config.SelectedCollections = getSelectedCollections('email', id);
+                config.SelectedCollections = nlTest_getSelectedCollections('email', id);
 
                 var headerTitle = document.querySelector('#email-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
-            function renderEmailConfigs() {
+            function nlTest_renderEmailConfigs() {
                 var container = document.getElementById('EmailConfigList');
-                if (emailConfigs.length === 0) {
+                if (nlTest_emailConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No email configurations yet. Click "Add Email Configuration" to create one.</p>';
                     return;
                 }
 
                 var html = '';
-                emailConfigs.forEach(function (config) {
+                nlTest_emailConfigs.forEach(function (config) {
                     html += '<div id="email-accordion-' + config.Id + '" class="config-accordion">';
-                    html += '  <div class="config-accordion-header" onclick="toggleEmailAccordion(\'' + config.Id + '\')">';
+                    html += '  <div class="config-accordion-header" onclick="nlTest_toggleEmailAccordion(\'' + config.Id + '\')">';
                     html += '    <div class="config-accordion-title">';
                     html += '      <span class="expand-icon">▶</span>';
                     html += '      <span class="config-name">' + (config.Name || 'Unnamed') + '</span>';
                     html += '    </div>';
                     html += '    <div class="config-accordion-actions">';
                     html += '      <label class="emby-checkbox-label" style="margin-right: 15px; margin-bottom: 0;" onclick="event.stopPropagation()">';
-                    html += '        <input id="email-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="email-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '        <span>Enabled</span>';
                     html += '      </label>';
-                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); testEmailConfig(\'' + config.Id + '\')">Test</button>';
-                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); removeEmailConfig(\'' + config.Id + '\')">Delete</button>';
-                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); showConfigPreview(\'email\', \'' + config.Id + '\')">Preview</button>';
+                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_testEmailConfig(\'' + config.Id + '\')">Test</button>';
+                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_removeEmailConfig(\'' + config.Id + '\')">Delete</button>';
+                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); nlTest_showConfigPreview(\'email\', \'' + config.Id + '\')">Preview</button>';
                     html += '    </div>';
                     html += '  </div>';
                     html += '  <div class="config-accordion-content">';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Configuration Name:</label>';
-                    html += '      <input id="email-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="email-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="config-field-row">';
                     html += '      <div class="inputContainer">';
                     html += '        <label class="inputLabel inputLabelUnfocused">SMTP Server:</label>';
-                    html += '        <input id="email-server-' + config.Id + '" type="text" is="emby-input" value="' + (config.SMTPServer || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="email-server-' + config.Id + '" type="text" is="emby-input" value="' + (config.SMTPServer || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      </div>';
                     html += '      <div class="inputContainer">';
                     html += '        <label class="inputLabel inputLabelUnfocused">SMTP Port:</label>';
-                    html += '        <input id="email-port-' + config.Id + '" type="number" is="emby-input" value="' + (config.SMTPPort || 587) + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="email-port-' + config.Id + '" type="number" is="emby-input" value="' + (config.SMTPPort || 587) + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      </div>';
                     html += '    </div>';
                     html += '    <div class="config-field-row">';
                     html += '      <div class="inputContainer">';
                     html += '        <label class="inputLabel inputLabelUnfocused">SMTP Username:</label>';
-                    html += '        <input id="email-user-' + config.Id + '" type="text" is="emby-input" value="' + (config.SMTPUser || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="email-user-' + config.Id + '" type="text" is="emby-input" value="' + (config.SMTPUser || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      </div>';
                     html += '      <div class="inputContainer">';
                     html += '        <label class="inputLabel inputLabelUnfocused">SMTP Password:</label>';
-                    html += '        <input id="email-pass-' + config.Id + '" type="password" is="emby-input" value="' + (config.SMTPPass || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="email-pass-' + config.Id + '" type="password" is="emby-input" value="' + (config.SMTPPass || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      </div>';
                     html += '    </div>';
                     html += '    <div class="config-field-row">';
                     html += '      <div class="checkboxContainer checkboxContainer-withDescription" style="flex: 1; min-width: 200px;">';
                     html += '        <label class="emby-checkbox-label">';
-                    html += '          <input id="email-ssl-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.EnableSsl !== false ? 'checked' : '') + ' onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '          <input id="email-ssl-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.EnableSsl !== false ? 'checked' : '') + ' onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '          <span>Enable SSL/TLS</span>';
                     html += '        </label>';
                     html += '        <div class="fieldDescription checkboxDescription">Secure the connection to the SMTP server using SSL/TLS or STARTTLS automatically based on the port.</div>';
                     html += '      </div>';
                     html += '      <div class="checkboxContainer checkboxContainer-withDescription" style="flex: 1; min-width: 200px;">';
                     html += '        <label class="emby-checkbox-label">';
-                    html += '          <input id="email-auth-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.UseAuthentication !== false ? 'checked' : '') + ' onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '          <input id="email-auth-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.UseAuthentication !== false ? 'checked' : '') + ' onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '          <span>Use Authentication</span>';
                     html += '        </label>';
                     html += '        <div class="fieldDescription checkboxDescription">Disable if using a local or unauthenticated SMTP relay.</div>';
@@ -1682,36 +1682,36 @@
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">To Address:</label>';
-                    html += '      <input id="email-to-' + config.Id + '" type="text" is="emby-input" value="' + (config.VisibleToAddr || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="email-to-' + config.Id + '" type="text" is="emby-input" value="' + (config.VisibleToAddr || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Recipient\'s email. Separate multiple with commas.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">BCC Address:</label>';
-                    html += '      <input id="email-bcc-' + config.Id + '" type="text" is="emby-input" value="' + (config.ToAddr || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="email-bcc-' + config.Id + '" type="text" is="emby-input" value="' + (config.ToAddr || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">BCC recipients. Separate multiple with commas.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">From Address:</label>';
-                    html += '      <input id="email-from-' + config.Id + '" type="text" is="emby-input" value="' + (config.FromAddr || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="email-from-' + config.Id + '" type="text" is="emby-input" value="' + (config.FromAddr || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Subject:</label>';
-                    html += '      <input id="email-subject-' + config.Id + '" type="text" is="emby-input" value="' + (config.Subject || '') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="email-subject-' + config.Id + '" type="text" is="emby-input" value="' + (config.Subject || '') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Newsletter Title:</label>';
-                    html += '      <input id="email-title-' + config.Id + '" type="text" is="emby-input" value="' + (config.NewsletterTitle || 'Jellyfin Newsletter') + '" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="email-title-' + config.Id + '" type="text" is="emby-input" value="' + (config.NewsletterTitle || 'Jellyfin Newsletter') + '" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Heading shown at the top of the newsletter. Also available as the {NewsletterTitle} tag in the Body HTML.</div>';
                     html += '    </div>';
-                    html += getLibrarySelectionHtml(config.Id, 'email', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
-                    html += getCollectionSelectionHtml(config.Id, 'email', config.SelectedCollections);
-                    html += getEventTogglesHtml(config.Id, 'email', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
-                    html += getMaxItemsHtml(config.Id, 'email', config.MaxItemsPerSection);
-                    html += getPosterTypeHtml(config.Id, 'email', config.PosterType);
-                    html += getMaxEmailSizeHtml(config.Id, config.PosterType, config.MaxEmailSize);
+                    html += nlTest_getLibrarySelectionHtml(config.Id, 'email', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += nlTest_getCollectionSelectionHtml(config.Id, 'email', config.SelectedCollections);
+                    html += nlTest_getEventTogglesHtml(config.Id, 'email', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
+                    html += nlTest_getMaxItemsHtml(config.Id, 'email', config.MaxItemsPerSection);
+                    html += nlTest_getPosterTypeHtml(config.Id, 'email', config.PosterType);
+                    html += nlTest_getMaxEmailSizeHtml(config.Id, config.PosterType, config.MaxEmailSize);
                     html += '    <div class="inputContainer">';
                     html += '      <label class="selectLabel" for="email-category-' + config.Id + '">Template Category:</label>';
-                    html += '      <select id="email-category-' + config.Id + '" is="emby-select" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')" class="emby-select-withcolor emby-select">';
+                    html += '      <select id="email-category-' + config.Id + '" is="emby-select" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')" class="emby-select-withcolor emby-select">';
                     html += '        <option value="Modern" ' + ((config.TemplateCategory || 'Modern') === 'Modern' ? 'selected' : '') + '>Modern</option>';
                     html += '        <option value="Classic" ' + (config.TemplateCategory === 'Classic' ? 'selected' : '') + '>Classic</option>';
                     html += '      </select>';
@@ -1719,17 +1719,17 @@
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Body HTML:</label>';
-                    html += '      <textarea id="email-body-' + config.Id + '" style="width: 100%; height: 200px;" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')">' + (config.Body || '') + '</textarea>';
+                    html += '      <textarea id="email-body-' + config.Id + '" style="width: 100%; height: 200px;" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')">' + (config.Body || '') + '</textarea>';
                     html += '      <div class="fieldDescription">Custom body wrapper template. Leave empty to use the default template.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Entry HTML:</label>';
-                    html += '      <textarea id="email-entry-' + config.Id + '" style="width: 100%; height: 200px;" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')">' + (config.Entry || '') + '</textarea>';
+                    html += '      <textarea id="email-entry-' + config.Id + '" style="width: 100%; height: 200px;" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')">' + (config.Entry || '') + '</textarea>';
                     html += '      <div class="fieldDescription">Custom entry template for each item. Leave empty to use the default template.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Header HTML:</label>';
-                    html += '      <textarea id="email-header-' + config.Id + '" style="width: 100%; height: 200px;" onchange="updateEmailConfigFromUI(\'' + config.Id + '\')">' + (config.Header || '') + '</textarea>';
+                    html += '      <textarea id="email-header-' + config.Id + '" style="width: 100%; height: 200px;" onchange="nlTest_updateEmailConfigFromUI(\'' + config.Id + '\')">' + (config.Header || '') + '</textarea>';
                     html += '      <div class="fieldDescription">Custom section header template. Uses &lt;template&gt; tags with IDs: header-add, header-update, header-delete, header-upcoming. Placeholder: {LibraryName}. Leave empty to use the default template.</div>';
                     html += '    </div>';
                     html += '  </div>';
@@ -1741,9 +1741,9 @@
 
             // ===================== MATRIX CONFIG FUNCTIONS =====================
 
-            function addMatrixConfig() {
+            function nlTest_addMatrixConfig() {
                 var newConfig = {
-                    Id: generateUUID(),
+                    Id: nlTest_generateUUID(),
                     Name: 'Matrix Bot',
                     IsEnabled: true,
                     HomeserverUrl: '',
@@ -1765,45 +1765,45 @@
                     MaxItemsPerSection: 0,
                     PosterType: 'tmdb'
                 };
-                matrixConfigs.push(newConfig);
-                renderMatrixConfigs();
+                nlTest_matrixConfigs.push(newConfig);
+                nlTest_renderMatrixConfigs();
             }
 
-            function removeMatrixConfig(id) {
+            function nlTest_removeMatrixConfig(id) {
                 if (confirm('Are you sure you want to remove this Matrix configuration?')) {
-                    matrixConfigs = matrixConfigs.filter(function (c) { return c.Id !== id; });
-                    renderMatrixConfigs();
-                    hideConfigPreviewFor(id);
+                    nlTest_matrixConfigs = nlTest_matrixConfigs.filter(function (c) { return c.Id !== id; });
+                    nlTest_renderMatrixConfigs();
+                    nlTest_hideConfigPreviewFor(id);
                 }
             }
 
-            function testMatrixConfig(id) {
+            function nlTest_testMatrixConfig(id) {
                 Dashboard.showLoadingMsg();
                 var url = ApiClient.getUrl('NewslettersTest/Matrix/SendMatrixTestMessage') + '?configurationId=' + encodeURIComponent(id);
                 ApiClient.ajax({ type: 'POST', url: url, dataType: 'text' }).then(function (response) {
                     Dashboard.hideLoadingMsg();
-                    alert(formatMessage(response) || "Test Matrix message sent! Check your room.");
+                    alert(nlTest_formatMessage(response) || "Test Matrix message sent! Check your room.");
                 }).catch(function (err) {
                     Dashboard.hideLoadingMsg();
                     var defaultMsg = "Failed to send test message. Check server logs for details.";
                     if (err && typeof err.text === 'function') {
-                        err.text().then(function (text) { alert(formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
+                        err.text().then(function (text) { alert(nlTest_formatMessage(text) || defaultMsg); }).catch(function () { alert(defaultMsg); });
                     } else {
                         var msg = defaultMsg;
                         if (err && err.responseText) msg = err.responseText;
                         else if (typeof err === 'string') msg = err;
-                        alert(formatMessage(msg));
+                        alert(nlTest_formatMessage(msg));
                     }
                 });
             }
 
-            function toggleMatrixAccordion(id) {
+            function nlTest_toggleMatrixAccordion(id) {
                 var accordion = document.getElementById('matrix-accordion-' + id);
                 if (accordion) accordion.classList.toggle('expanded');
             }
 
-            function updateMatrixConfigFromUI(id) {
-                var config = matrixConfigs.find(function (c) { return c.Id === id; });
+            function nlTest_updateMatrixConfigFromUI(id) {
+                var config = nlTest_matrixConfigs.find(function (c) { return c.Id === id; });
                 if (!config) return;
 
                 config.Name = document.getElementById('matrix-name-' + id).value || 'Unnamed';
@@ -1831,86 +1831,86 @@
                 var moviesChecked = document.querySelectorAll('.matrix-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
-                config.SelectedCollections = getSelectedCollections('matrix', id);
+                config.SelectedCollections = nlTest_getSelectedCollections('matrix', id);
 
                 var headerTitle = document.querySelector('#matrix-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
 
-            function renderMatrixConfigs() {
+            function nlTest_renderMatrixConfigs() {
                 var container = document.getElementById('MatrixConfigList');
-                if (matrixConfigs.length === 0) {
+                if (nlTest_matrixConfigs.length === 0) {
                     container.innerHTML = '<p class="no-configs-text">No Matrix configurations yet. Click "Add Matrix Config" to create one.</p>';
                     return;
                 }
 
                 var html = '';
-                matrixConfigs.forEach(function (config) {
+                nlTest_matrixConfigs.forEach(function (config) {
                     html += '<div id="matrix-accordion-' + config.Id + '" class="config-accordion">';
-                    html += '  <div class="config-accordion-header" onclick="toggleMatrixAccordion(\'' + config.Id + '\')">';
+                    html += '  <div class="config-accordion-header" onclick="nlTest_toggleMatrixAccordion(\'' + config.Id + '\')">';
                     html += '    <div class="config-accordion-title">';
                     html += '      <span class="expand-icon">▶</span>';
                     html += '      <span class="config-name">' + (config.Name || 'Unnamed') + '</span>';
                     html += '    </div>';
                     html += '    <div class="config-accordion-actions">';
                     html += '      <label class="emby-checkbox-label" style="margin-right: 15px; margin-bottom: 0;" onclick="event.stopPropagation()">';
-                    html += '        <input id="matrix-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '        <input id="matrix-enabled-' + config.Id + '" type="checkbox" is="emby-checkbox" ' + (config.IsEnabled !== false ? 'checked' : '') + ' onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
                     html += '        <span>Enabled</span>';
                     html += '      </label>';
-                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); testMatrixConfig(\'' + config.Id + '\')">Test</button>';
-                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); removeMatrixConfig(\'' + config.Id + '\')">Delete</button>';
-                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); showConfigPreview(\'matrix\', \'' + config.Id + '\')">Preview</button>';
+                    html += '      <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_testMatrixConfig(\'' + config.Id + '\')">Test</button>';
+                    html += '      <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_removeMatrixConfig(\'' + config.Id + '\')">Delete</button>';
+                    html += '      <button type="button" class="config-action-btn cfg-preview-btn" onclick="event.stopPropagation(); nlTest_showConfigPreview(\'matrix\', \'' + config.Id + '\')">Preview</button>';
                     html += '    </div>';
                     html += '  </div>';
                     html += '  <div class="config-accordion-content">';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Configuration Name:</label>';
-                    html += '      <input id="matrix-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="matrix-name-' + config.Id + '" type="text" is="emby-input" value="' + (config.Name || '') + '" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Homeserver URL:</label>';
-                    html += '      <input id="matrix-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.HomeserverUrl || '') + '" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="matrix-url-' + config.Id + '" type="text" is="emby-input" value="' + (config.HomeserverUrl || '') + '" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">e.g., https://matrix.org</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Access Token:</label>';
-                    html += '      <input id="matrix-token-' + config.Id + '" type="password" is="emby-input" value="' + (config.AccessToken || '') + '" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="matrix-token-' + config.Id + '" type="password" is="emby-input" value="' + (config.AccessToken || '') + '" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Room ID:</label>';
-                    html += '      <input id="matrix-room-' + config.Id + '" type="text" is="emby-input" value="' + (config.RoomId || '') + '" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="matrix-room-' + config.Id + '" type="text" is="emby-input" value="' + (config.RoomId || '') + '" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">The internal room ID (e.g., !yourRoomId:example.com). Separate multiple with commas.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Newsletter Title:</label>';
-                    html += '      <input id="matrix-title-' + config.Id + '" type="text" is="emby-input" value="' + (config.NewsletterTitle || 'Jellyfin Newsletter') + '" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
+                    html += '      <input id="matrix-title-' + config.Id + '" type="text" is="emby-input" value="' + (config.NewsletterTitle || 'Jellyfin Newsletter') + '" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" />';
                     html += '      <div class="fieldDescription">Heading shown at the top of the newsletter. Also available as the {NewsletterTitle} tag in the Body HTML.</div>';
                     html += '    </div>';
-                    html += getLibrarySelectionHtml(config.Id, 'matrix', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
-                    html += getCollectionSelectionHtml(config.Id, 'matrix', config.SelectedCollections);
-                    html += getEventTogglesHtml(config.Id, 'matrix', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
-                    html += getMaxItemsHtml(config.Id, 'matrix', config.MaxItemsPerSection);
-                    html += getPosterTypeHtml(config.Id, 'matrix', config.PosterType);
+                    html += nlTest_getLibrarySelectionHtml(config.Id, 'matrix', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += nlTest_getCollectionSelectionHtml(config.Id, 'matrix', config.SelectedCollections);
+                    html += nlTest_getEventTogglesHtml(config.Id, 'matrix', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
+                    html += nlTest_getMaxItemsHtml(config.Id, 'matrix', config.MaxItemsPerSection);
+                    html += nlTest_getPosterTypeHtml(config.Id, 'matrix', config.PosterType);
                     html += '    <div class="inputContainer">';
                     html += '      <label class="selectLabel" for="matrix-category-' + config.Id + '">Template Category:</label>';
-                    html += '      <select id="matrix-category-' + config.Id + '" is="emby-select" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')" class="emby-select-withcolor emby-select">';
+                    html += '      <select id="matrix-category-' + config.Id + '" is="emby-select" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')" class="emby-select-withcolor emby-select">';
                     html += '        <option value="Matrix" ' + ((config.TemplateCategory || 'Matrix') === 'Matrix' ? 'selected' : '') + '>Matrix</option>';
                     html += '      </select>';
                     html += '      <div class="fieldDescription">Select the template style (e.g., \'Matrix\'). Clear the Body/Entry HTML fields below to use the template category.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Body HTML:</label>';
-                    html += '      <textarea id="matrix-body-' + config.Id + '" style="width: 100%; height: 200px;" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')">' + (config.Body || '') + '</textarea>';
+                    html += '      <textarea id="matrix-body-' + config.Id + '" style="width: 100%; height: 200px;" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')">' + (config.Body || '') + '</textarea>';
                     html += '      <div class="fieldDescription">Custom body wrapper template. Leave empty to use the default template.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Entry HTML:</label>';
-                    html += '      <textarea id="matrix-entry-' + config.Id + '" style="width: 100%; height: 200px;" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')">' + (config.Entry || '') + '</textarea>';
+                    html += '      <textarea id="matrix-entry-' + config.Id + '" style="width: 100%; height: 200px;" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')">' + (config.Entry || '') + '</textarea>';
                     html += '      <div class="fieldDescription">Custom entry template for each item. Leave empty to use the default template.</div>';
                     html += '    </div>';
                     html += '    <div class="inputContainer">';
                     html += '      <label class="inputLabel inputLabelUnfocused">Header HTML:</label>';
-                    html += '      <textarea id="matrix-header-' + config.Id + '" style="width: 100%; height: 200px;" onchange="updateMatrixConfigFromUI(\'' + config.Id + '\')">' + (config.Header || '') + '</textarea>';
+                    html += '      <textarea id="matrix-header-' + config.Id + '" style="width: 100%; height: 200px;" onchange="nlTest_updateMatrixConfigFromUI(\'' + config.Id + '\')">' + (config.Header || '') + '</textarea>';
                     html += '      <div class="fieldDescription">Custom section header template. Uses &lt;template&gt; tags with IDs: header-add, header-update, header-delete, header-upcoming. Leave empty to use the default template.</div>';
                     html += '    </div>';
                     html += '  </div>';
@@ -1921,7 +1921,7 @@
 
             // ===================== LIBRARY FUNCTIONS =====================
 
-            function escapeHtml(value) {
+            function nlTest_escapeHtml(value) {
                 return String(value === null || value === undefined ? '' : value)
                     .replace(/&/g, '&amp;')
                     .replace(/</g, '&lt;')
@@ -1932,33 +1932,33 @@
 
             // ===================== FEATURED =====================
 
-            var featuredItems = [];   // [{ Id, Name, Type, ProductionYear }]
-            var featuredSearchTimer = null;
+            var nlTest_featuredItems = [];   // [{ Id, Name, Type, ProductionYear }]
+            var nlTest_featuredSearchTimer = null;
 
-            function renderFeatured() {
+            function nlTest_renderFeatured() {
                 var container = document.getElementById('FeaturedList');
                 if (!container) return;
 
-                if (!featuredItems.length) {
+                if (!nlTest_featuredItems.length) {
                     container.innerHTML = '<p class="no-configs-text">Nothing featured for the next newsletter.</p>';
                     return;
                 }
 
                 var html = '';
-                featuredItems.forEach(function (item) {
+                nlTest_featuredItems.forEach(function (item) {
                     html += '<div class="featured-row">';
-                    html += '  <span class="featured-name">' + escapeHtml(item.Name) + '</span>';
-                    html += '  <span class="featured-meta">' + escapeHtml(item.Type === 'Movie' ? 'Movie' : 'Series')
-                        + (item.ProductionYear ? ' &middot; ' + escapeHtml(item.ProductionYear) : '') + '</span>';
+                    html += '  <span class="featured-name">' + nlTest_escapeHtml(item.Name) + '</span>';
+                    html += '  <span class="featured-meta">' + nlTest_escapeHtml(item.Type === 'Movie' ? 'Movie' : 'Series')
+                        + (item.ProductionYear ? ' &middot; ' + nlTest_escapeHtml(item.ProductionYear) : '') + '</span>';
                     html += '  <button type="button" class="config-action-btn delete-btn"'
-                        + ' onclick="removeFeatured(\'' + escapeHtml(item.Id) + '\')">Remove</button>';
+                        + ' onclick="nlTest_removeFeatured(\'' + nlTest_escapeHtml(item.Id) + '\')">Remove</button>';
                     html += '</div>';
                 });
                 container.innerHTML = html;
             }
 
-            function searchFeatured(term) {
-                if (featuredSearchTimer) clearTimeout(featuredSearchTimer);
+            function nlTest_searchFeatured(term) {
+                if (nlTest_featuredSearchTimer) clearTimeout(nlTest_featuredSearchTimer);
 
                 var results = document.getElementById('FeaturedResults');
                 if (!results) return;
@@ -1968,7 +1968,7 @@
                     return;
                 }
 
-                featuredSearchTimer = setTimeout(function () {
+                nlTest_featuredSearchTimer = setTimeout(function () {
                     var url = ApiClient.getUrl('Items', {
                         searchTerm: term.trim(),
                         IncludeItemTypes: 'Movie,Series',
@@ -1987,15 +1987,15 @@
 
                         var html = '';
                         items.forEach(function (item) {
-                            if (featuredItems.some(function (f) { return f.Id === item.Id; })) return;
-                            html += '<div class="featured-row" onclick="addFeatured(\'' + escapeHtml(item.Id) + '\')">';
-                            html += '  <span class="featured-name">' + escapeHtml(item.Name) + '</span>';
-                            html += '  <span class="featured-meta">' + escapeHtml(item.Type === 'Movie' ? 'Movie' : 'Series')
-                                + (item.ProductionYear ? ' &middot; ' + escapeHtml(item.ProductionYear) : '') + '</span>';
+                            if (nlTest_featuredItems.some(function (f) { return f.Id === item.Id; })) return;
+                            html += '<div class="featured-row" onclick="nlTest_addFeatured(\'' + nlTest_escapeHtml(item.Id) + '\')">';
+                            html += '  <span class="featured-name">' + nlTest_escapeHtml(item.Name) + '</span>';
+                            html += '  <span class="featured-meta">' + nlTest_escapeHtml(item.Type === 'Movie' ? 'Movie' : 'Series')
+                                + (item.ProductionYear ? ' &middot; ' + nlTest_escapeHtml(item.ProductionYear) : '') + '</span>';
                             html += '</div>';
                         });
                         results.innerHTML = html || '<p class="no-configs-text">Already featured.</p>';
-                        window._featuredSearchCache = items;
+                        window.nlTest__featuredSearchCache = items;
                     }).catch(function (error) {
                         console.error('Featured search failed:', error);
                         results.innerHTML = '<p class="no-configs-text">Search failed. Check the Jellyfin logs.</p>';
@@ -2003,13 +2003,13 @@
                 }, 300);
             }
 
-            function addFeatured(id) {
-                var found = (window._featuredSearchCache || []).filter(function (i) { return i.Id === id; })[0];
+            function nlTest_addFeatured(id) {
+                var found = (window.nlTest__featuredSearchCache || []).filter(function (i) { return i.Id === id; })[0];
                 if (!found) return;
 
-                if (!featuredItems.some(function (f) { return f.Id === id; })) {
-                    featuredItems.push(found);
-                    renderFeatured();
+                if (!nlTest_featuredItems.some(function (f) { return f.Id === id; })) {
+                    nlTest_featuredItems.push(found);
+                    nlTest_renderFeatured();
                 }
 
                 var search = document.getElementById('FeaturedSearch');
@@ -2018,15 +2018,15 @@
                 if (results) results.innerHTML = '';
             }
 
-            function removeFeatured(id) {
-                featuredItems = featuredItems.filter(function (f) { return f.Id !== id; });
-                renderFeatured();
+            function nlTest_removeFeatured(id) {
+                nlTest_featuredItems = nlTest_featuredItems.filter(function (f) { return f.Id !== id; });
+                nlTest_renderFeatured();
             }
 
-            function loadFeatured(ids) {
-                featuredItems = [];
+            function nlTest_loadFeatured(ids) {
+                nlTest_featuredItems = [];
                 if (!ids || !ids.length) {
-                    renderFeatured();
+                    nlTest_renderFeatured();
                     return;
                 }
 
@@ -2042,15 +2042,15 @@
                     var byId = {};
                     ((result && result.Items) || []).forEach(function (i) { byId[i.Id] = i; });
                     // Preserve the configured order, and drop anything no longer in the library.
-                    ids.forEach(function (id) { if (byId[id]) featuredItems.push(byId[id]); });
-                    renderFeatured();
+                    ids.forEach(function (id) { if (byId[id]) nlTest_featuredItems.push(byId[id]); });
+                    nlTest_renderFeatured();
                 }).catch(function (error) {
                     console.error('Could not resolve featured items:', error);
-                    renderFeatured();
+                    nlTest_renderFeatured();
                 });
             }
 
-            function loadCollections() {
+            function nlTest_loadCollections() {
                 // Collections are BoxSets; the admin sees every one of them.
                 var url = ApiClient.getUrl('Items', {
                     IncludeItemTypes: 'BoxSet',
@@ -2060,18 +2060,18 @@
                 });
 
                 return ApiClient.getJSON(url).then(function (result) {
-                    allCollections = (result && result.Items) || [];
-                    return allCollections;
+                    nlTest_allCollections = (result && result.Items) || [];
+                    return nlTest_allCollections;
                 }).catch(function (error) {
                     console.error('Error loading collections:', error);
                     return [];
                 });
             }
 
-            function loadLibraries() {
+            function nlTest_loadLibraries() {
                 // Return a promise to ensure libraries are loaded before rendering client configs
                 return ApiClient.getJSON(ApiClient.getUrl('Library/MediaFolders')).then(function (result) {
-                    allLibraries = result.Items || [];
+                    nlTest_allLibraries = result.Items || [];
                     return result.Items;
                 }).catch(function (error) {
                     console.error('Error loading libraries:', error);
@@ -2081,14 +2081,14 @@
 
             // ===================== SAVE / LOAD CONFIG =====================
 
-            function saveConfig() {
-                ApiClient.getPluginConfiguration(NewsletterConfig.pluginUniqueId).then(function (config) {
+            function nlTest_saveConfig() {
+                ApiClient.getPluginConfiguration(nlTest_NewsletterConfig.pluginUniqueId).then(function (config) {
                     // General tab fields
-                    FIELDS.checkboxes.forEach(function (id) {
+                    nlTest_FIELDS.checkboxes.forEach(function (id) {
                         var el = document.querySelector('#' + id);
                         if (el) config[id] = el.checked;
                     });
-                    FIELDS.inputs.forEach(function (id) {
+                    nlTest_FIELDS.inputs.forEach(function (id) {
                         var el = document.querySelector('#' + id);
                         if (el) config[id] = el.value;
                     });
@@ -2104,17 +2104,17 @@
                     config.UpcomingDaysAhead = isNaN(daysAhead) ? 7 : daysAhead;
 
                     // Save multi-configurations
-                    config.DiscordConfigurations = discordConfigs;
-                    config.TelegramConfigurations = telegramConfigs;
-                    config.MatrixConfigurations = matrixConfigs;
-                    config.EmailConfigurations = emailConfigs;
-                    config.RadarrConfigurations = radarrConfigs;
-                    config.SonarrConfigurations = sonarrConfigs;
-                    config.FeaturedItemIds = featuredItems.map(function (i) { return i.Id; });
+                    config.DiscordConfigurations = nlTest_discordConfigs;
+                    config.TelegramConfigurations = nlTest_telegramConfigs;
+                    config.MatrixConfigurations = nlTest_matrixConfigs;
+                    config.EmailConfigurations = nlTest_emailConfigs;
+                    config.RadarrConfigurations = nlTest_radarrConfigs;
+                    config.SonarrConfigurations = nlTest_sonarrConfigs;
+                    config.FeaturedItemIds = nlTest_featuredItems.map(function (i) { return i.Id; });
                     var featuredEmojiEl = document.querySelector('#FeaturedEmoji');
                     if (featuredEmojiEl) config.FeaturedEmoji = (featuredEmojiEl.value || '').trim() || '\u2B50';
 
-                    ApiClient.updatePluginConfiguration(NewsletterConfig.pluginUniqueId, config).then(function (result) {
+                    ApiClient.updatePluginConfiguration(nlTest_NewsletterConfig.pluginUniqueId, config).then(function (result) {
                         Dashboard.processPluginConfigurationUpdateResult(result);
                         console.log("Config saved: ", result);
                     });
@@ -2125,23 +2125,23 @@
 
             // Per client type: API route, in-memory config list, and the function that copies
             // the form's current (unsaved) values into that list.
-            var cfgPreviewTypes = {
-                email: { route: 'Email', list: function () { return emailConfigs; }, sync: updateEmailConfigFromUI },
-                discord: { route: 'Discord', list: function () { return discordConfigs; }, sync: updateDiscordConfigFromUI },
-                telegram: { route: 'Telegram', list: function () { return telegramConfigs; }, sync: updateTelegramConfigFromUI },
-                matrix: { route: 'Matrix', list: function () { return matrixConfigs; }, sync: updateMatrixConfigFromUI }
+            var nlTest_cfgPreviewTypes = {
+                email: { route: 'Email', list: function () { return nlTest_emailConfigs; }, sync: nlTest_updateEmailConfigFromUI },
+                discord: { route: 'Discord', list: function () { return nlTest_discordConfigs; }, sync: nlTest_updateDiscordConfigFromUI },
+                telegram: { route: 'Telegram', list: function () { return nlTest_telegramConfigs; }, sync: nlTest_updateTelegramConfigFromUI },
+                matrix: { route: 'Matrix', list: function () { return nlTest_matrixConfigs; }, sync: nlTest_updateMatrixConfigFromUI }
             };
 
             // Id of the configuration currently shown in the preview pane, or null when closed.
-            var cfgPreviewId = null;
+            var nlTest_cfgPreviewId = null;
 
-            function showConfigPreview(type, id) {
-                var client = cfgPreviewTypes[type];
+            function nlTest_showConfigPreview(type, id) {
+                var client = nlTest_cfgPreviewTypes[type];
                 client.sync(id);
                 var config = client.list().find(function (c) { return c.Id === id; });
                 if (!config) return;
 
-                cfgPreviewId = id;
+                nlTest_cfgPreviewId = id;
                 var frame = document.getElementById('CfgPreviewFrame');
                 document.getElementById('CfgPreviewTitle').textContent = 'Preview: ' + config.Name;
                 document.querySelector('#NewsletterTestConfigPage .content-primary').classList.add('cfg-preview-open');
@@ -2164,78 +2164,78 @@
                 });
             }
 
-            function hideConfigPreview() {
-                cfgPreviewId = null;
+            function nlTest_hideConfigPreview() {
+                nlTest_cfgPreviewId = null;
                 document.querySelector('#NewsletterTestConfigPage .content-primary').classList.remove('cfg-preview-open');
                 document.getElementById('CfgPreviewFrame').srcdoc = '';
             }
 
             // Closes the pane when the configuration it is previewing is deleted.
-            function hideConfigPreviewFor(id) {
-                if (cfgPreviewId === id) hideConfigPreview();
+            function nlTest_hideConfigPreviewFor(id) {
+                if (nlTest_cfgPreviewId === id) nlTest_hideConfigPreview();
             }
 
             // ===================== QUEUE TAB =====================
 
-            var queueData = null;
-            var queueExpanded = {};
-            var queueFilter = 'all';
+            var nlTest_queueData = null;
+            var nlTest_queueExpanded = {};
+            var nlTest_queueFilter = 'all';
 
-            var QUEUE_SECTIONS = [
+            var nlTest_QUEUE_SECTIONS = [
                 { key: 'add', label: 'Added', color: '#2e7d32' },
                 { key: 'update', label: 'Updated', color: '#1565c0' },
                 { key: 'delete', label: 'Removed', color: '#c62828' }
             ];
 
-            function queueGroupKey(group) {
+            function nlTest_queueGroupKey(group) {
                 return group.Title + ' ' + group.EventType;
             }
 
             // Groups shown under the current filter.
-            function queueVisibleGroups() {
-                return ((queueData && queueData.Groups) || []).filter(function (g) {
-                    if (queueFilter === 'included') return g.ExcludedCount !== g.TotalCount;
-                    if (queueFilter === 'excluded') return g.ExcludedCount === g.TotalCount;
+            function nlTest_queueVisibleGroups() {
+                return ((nlTest_queueData && nlTest_queueData.Groups) || []).filter(function (g) {
+                    if (nlTest_queueFilter === 'included') return g.ExcludedCount !== g.TotalCount;
+                    if (nlTest_queueFilter === 'excluded') return g.ExcludedCount === g.TotalCount;
                     return true;
                 });
             }
 
             // Groups shown in one event section (add/update/delete) under the current filter.
-            function queueSectionGroups(sectionKey) {
-                return queueVisibleGroups().filter(function (g) {
+            function nlTest_queueSectionGroups(sectionKey) {
+                return nlTest_queueVisibleGroups().filter(function (g) {
                     return (g.EventType || 'add').toLowerCase() === sectionKey;
                 });
             }
 
-            function setQueueFilter(filter) {
-                queueFilter = filter;
+            function nlTest_setQueueFilter(filter) {
+                nlTest_queueFilter = filter;
                 document.querySelectorAll('.queue-filter-btn').forEach(function (btn) {
                     btn.classList.toggle('active', btn.getAttribute('data-queue-filter') === filter);
                 });
-                renderQueue();
+                nlTest_renderQueue();
             }
 
-            function loadQueue() {
+            function nlTest_loadQueue() {
                 var list = document.getElementById('QueueList');
                 if (!list) return;
 
                 list.innerHTML = '<p class="no-configs-text">Loading&hellip;</p>';
 
                 ApiClient.getJSON(ApiClient.getUrl('NewslettersTest/Preview')).then(function (data) {
-                    queueData = data;
-                    renderQueue();
+                    nlTest_queueData = data;
+                    nlTest_renderQueue();
                 }).catch(function (error) {
                     console.error('Error loading newsletter queue:', error);
                     list.innerHTML = '<p class="no-configs-text">Could not load the queue. Check the Jellyfin logs.</p>';
                 });
             }
 
-            function renderQueue() {
+            function nlTest_renderQueue() {
                 var list = document.getElementById('QueueList');
                 var summary = document.getElementById('QueueSummary');
-                if (!list || !queueData) return;
+                if (!list || !nlTest_queueData) return;
 
-                var allGroups = queueData.Groups || [];
+                var allGroups = nlTest_queueData.Groups || [];
 
                 // The newsletter shows one card per title, not one per episode/file, so the
                 // summary counts entries (titles) rather than the raw file/episode totals.
@@ -2243,13 +2243,13 @@
                 var includedEntries = allGroups.length - excludedEntries;
 
                 if (summary) {
-                    var sent = queueData.LastPublishedDate
-                        ? new Date(queueData.LastPublishedDate).toLocaleString()
+                    var sent = nlTest_queueData.LastPublishedDate
+                        ? new Date(nlTest_queueData.LastPublishedDate).toLocaleString()
                         : 'never';
                     summary.innerHTML = '<b>' + includedEntries + '</b> '
                         + (includedEntries === 1 ? 'entry' : 'entries') + ' will be sent'
                         + (excludedEntries ? ', <b>' + excludedEntries + '</b> excluded' : '')
-                        + '. Last newsletter sent: ' + escapeHtml(sent) + '.';
+                        + '. Last newsletter sent: ' + nlTest_escapeHtml(sent) + '.';
                 }
 
                 if (!allGroups.length) {
@@ -2257,14 +2257,14 @@
                     return;
                 }
 
-                if (!queueVisibleGroups().length) {
+                if (!nlTest_queueVisibleGroups().length) {
                     list.innerHTML = '<p class="no-configs-text">Nothing matches this filter.</p>';
                     return;
                 }
 
                 var html = '';
-                QUEUE_SECTIONS.forEach(function (section) {
-                    var inSection = queueSectionGroups(section.key);
+                nlTest_QUEUE_SECTIONS.forEach(function (section) {
+                    var inSection = nlTest_queueSectionGroups(section.key);
                     if (!inSection.length) return;
 
                     // Entries are what the newsletter actually shows - one card per title, so
@@ -2273,7 +2273,7 @@
                     // parentheses and is dropped when the two are equal. The "Excluded" view lists
                     // only fully excluded titles, so there it counts what is being left out
                     // instead, which would otherwise always be zero.
-                    var countingExcluded = queueFilter === 'excluded';
+                    var countingExcluded = nlTest_queueFilter === 'excluded';
                     var entries = countingExcluded
                         ? inSection.length
                         : inSection.filter(function (g) { return g.ExcludedCount < g.TotalCount; }).length;
@@ -2291,19 +2291,19 @@
                     html += '<div class="queue-section">';
                     html += '  <div class="queue-section-header" style="color: ' + section.color
                         + '; border-bottom-color: ' + section.color + ';">'
-                        + '<span>' + escapeHtml(section.label) + '</span><span class="queue-section-count">'
-                        + escapeHtml(countLabel) + '</span>';
+                        + '<span>' + nlTest_escapeHtml(section.label) + '</span><span class="queue-section-count">'
+                        + nlTest_escapeHtml(countLabel) + '</span>';
                     html += '<span class="queue-section-actions">';
                     if (hasExcluded) {
-                        html += '<button type="button" class="config-action-btn test-btn" onclick="setQueueSectionExcluded(\'' + section.key + '\', false)">Restore all</button>';
+                        html += '<button type="button" class="config-action-btn test-btn" onclick="nlTest_setQueueSectionExcluded(\'' + section.key + '\', false)">Restore all</button>';
                     }
                     if (hasIncluded) {
-                        html += '<button type="button" class="config-action-btn delete-btn" onclick="setQueueSectionExcluded(\'' + section.key + '\', true)">Exclude all</button>';
+                        html += '<button type="button" class="config-action-btn delete-btn" onclick="nlTest_setQueueSectionExcluded(\'' + section.key + '\', true)">Exclude all</button>';
                     }
                     html += '</span></div>';
 
                     inSection.forEach(function (group) {
-                        html += renderQueueGroup(group);
+                        html += nlTest_renderQueueGroup(group);
                     });
 
                     html += '</div>';
@@ -2312,11 +2312,11 @@
                 list.innerHTML = html;
             }
 
-            function renderQueueGroup(group) {
-                var key = queueGroupKey(group);
+            function nlTest_renderQueueGroup(group) {
+                var key = nlTest_queueGroupKey(group);
                 var allExcluded = group.ExcludedCount === group.TotalCount;
                 var expandable = group.TotalCount > 1;
-                var classes = 'queue-group' + (queueExpanded[key] ? ' expanded' : '')
+                var classes = 'queue-group' + (nlTest_queueExpanded[key] ? ' expanded' : '')
                     + (allExcluded ? ' queue-excluded' : '')
                     + (expandable ? ' queue-expandable' : '');
 
@@ -2328,14 +2328,14 @@
                     meta.push(group.ExcludedCount + ' of ' + group.TotalCount + ' excluded');
                 }
 
-                var html = '<div class="' + classes + '" data-queue-key="' + escapeHtml(key) + '">';
-                html += '  <div class="queue-group-header" onclick="toggleQueueGroup(this)">';
+                var html = '<div class="' + classes + '" data-queue-key="' + nlTest_escapeHtml(key) + '">';
+                html += '  <div class="queue-group-header" onclick="nlTest_toggleQueueGroup(this)">';
                 html += '    <span class="expand-icon">' + (expandable ? '&#9656;' : '&nbsp;') + '</span>';
-                html += '    <span class="queue-title">' + escapeHtml(group.Title) + '</span>';
-                html += '    <span class="queue-meta">' + escapeHtml(meta.join(' \u00b7 ')) + '</span>';
+                html += '    <span class="queue-title">' + nlTest_escapeHtml(group.Title) + '</span>';
+                html += '    <span class="queue-meta">' + nlTest_escapeHtml(meta.join(' \u00b7 ')) + '</span>';
                 html += allExcluded
-                    ? '    <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); setQueueGroupExcluded(this, false)">Restore</button>'
-                    : '    <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); setQueueGroupExcluded(this, true)">Exclude</button>';
+                    ? '    <button type="button" class="config-action-btn test-btn" onclick="event.stopPropagation(); nlTest_setQueueGroupExcluded(this, false)">Restore</button>'
+                    : '    <button type="button" class="config-action-btn delete-btn" onclick="event.stopPropagation(); nlTest_setQueueGroupExcluded(this, true)">Exclude</button>';
                 html += '  </div>';
 
                 if (expandable) {
@@ -2347,12 +2347,12 @@
                             : item.Filename.split(/[\\/]/).pop();
 
                         html += '<div class="queue-episode' + (item.Excluded ? ' queue-excluded' : '') + '"'
-                            + ' data-queue-file="' + escapeHtml(item.Filename) + '">';
-                        html += '  <span class="queue-episode-label" title="' + escapeHtml(item.Filename) + '">'
-                            + escapeHtml(label) + '</span>';
+                            + ' data-queue-file="' + nlTest_escapeHtml(item.Filename) + '">';
+                        html += '  <span class="queue-episode-label" title="' + nlTest_escapeHtml(item.Filename) + '">'
+                            + nlTest_escapeHtml(label) + '</span>';
                         html += item.Excluded
-                            ? '  <button type="button" class="config-action-btn test-btn" onclick="setQueueItemExcluded(this, false)">Restore</button>'
-                            : '  <button type="button" class="config-action-btn delete-btn" onclick="setQueueItemExcluded(this, true)">Exclude</button>';
+                            ? '  <button type="button" class="config-action-btn test-btn" onclick="nlTest_setQueueItemExcluded(this, false)">Restore</button>'
+                            : '  <button type="button" class="config-action-btn delete-btn" onclick="nlTest_setQueueItemExcluded(this, true)">Exclude</button>';
                         html += '</div>';
                     });
                     html += '  </div>';
@@ -2362,19 +2362,19 @@
                 return html;
             }
 
-            function toggleQueueGroup(headerEl) {
+            function nlTest_toggleQueueGroup(headerEl) {
                 var groupEl = headerEl.closest('.queue-group');
                 if (!groupEl || !groupEl.querySelector('.queue-episodes')) return;
 
                 var key = groupEl.getAttribute('data-queue-key');
-                queueExpanded[key] = !queueExpanded[key];
+                nlTest_queueExpanded[key] = !nlTest_queueExpanded[key];
                 groupEl.classList.toggle('expanded');
             }
 
             // Mirrors SeasonSummary.Format on the server: excluded items are left out so the
             // summary describes what will be sent, falling back to the full set when everything
             // is excluded. Recomputed locally because nothing re-fetches after an exclude/restore.
-            function buildSeasonSummary(group) {
+            function nlTest_buildSeasonSummary(group) {
                 if ((group.Type || '').toLowerCase() === 'movie') return '';
 
                 var items = group.Items.filter(function (i) { return !i.Excluded; });
@@ -2409,25 +2409,25 @@
                 }).join(', ');
             }
 
-            function applyLocalQueueChange(filenames, excluded) {
+            function nlTest_applyLocalQueueChange(filenames, excluded) {
                 var fileSet = {};
                 filenames.forEach(function (f) { fileSet[f] = true; });
 
-                (queueData.Groups || []).forEach(function (group) {
+                (nlTest_queueData.Groups || []).forEach(function (group) {
                     group.Items.forEach(function (item) {
                         if (fileSet[item.Filename]) item.Excluded = excluded;
                     });
                     group.ExcludedCount = group.Items.filter(function (i) { return i.Excluded; }).length;
-                    group.SeasonSummary = buildSeasonSummary(group);
+                    group.SeasonSummary = nlTest_buildSeasonSummary(group);
                 });
             }
 
-            function postQueueChange(filenames, excluded) {
-                if (!filenames.length || !queueData) return;
+            function nlTest_postQueueChange(filenames, excluded) {
+                if (!filenames.length || !nlTest_queueData) return;
 
-                var previousSnapshot = JSON.parse(JSON.stringify(queueData));
-                applyLocalQueueChange(filenames, excluded);
-                renderQueue();
+                var previousSnapshot = JSON.parse(JSON.stringify(nlTest_queueData));
+                nlTest_applyLocalQueueChange(filenames, excluded);
+                nlTest_renderQueue();
 
                 var url = ApiClient.getUrl('NewslettersTest/Preview/' + (excluded ? 'Exclude' : 'Include'));
                 ApiClient.ajax({
@@ -2438,32 +2438,32 @@
                 }).catch(function (error) {
                     console.error('Error updating newsletter queue:', error);
                     alert('Could not update the newsletter queue. Check the Jellyfin logs.');
-                    queueData = previousSnapshot;
-                    renderQueue();
+                    nlTest_queueData = previousSnapshot;
+                    nlTest_renderQueue();
                 });
             }
 
-            function setQueueGroupExcluded(buttonEl, excluded) {
+            function nlTest_setQueueGroupExcluded(buttonEl, excluded) {
                 var groupEl = buttonEl.closest('.queue-group');
-                if (!groupEl || !queueData) return;
+                if (!groupEl || !nlTest_queueData) return;
 
                 var key = groupEl.getAttribute('data-queue-key');
-                var group = (queueData.Groups || []).filter(function (g) {
-                    return queueGroupKey(g) === key;
+                var group = (nlTest_queueData.Groups || []).filter(function (g) {
+                    return nlTest_queueGroupKey(g) === key;
                 })[0];
                 if (!group) return;
 
-                postQueueChange(group.Items.map(function (i) { return i.Filename; }), excluded);
+                nlTest_postQueueChange(group.Items.map(function (i) { return i.Filename; }), excluded);
             }
 
             // Bulk version of the per-title buttons, for clearing out a large queue (for example
             // after a server migration re-queues the whole library). Acts on what the section
             // currently shows, so it respects the active filter.
-            function setQueueSectionExcluded(sectionKey, excluded) {
-                if (!queueData) return;
+            function nlTest_setQueueSectionExcluded(sectionKey, excluded) {
+                if (!nlTest_queueData) return;
 
-                var section = QUEUE_SECTIONS.filter(function (s) { return s.key === sectionKey; })[0];
-                var groups = queueSectionGroups(sectionKey);
+                var section = nlTest_QUEUE_SECTIONS.filter(function (s) { return s.key === sectionKey; })[0];
+                var groups = nlTest_queueSectionGroups(sectionKey);
                 var filenames = [];
                 var entries = 0;
                 groups.forEach(function (group) {
@@ -2484,18 +2484,18 @@
                     : 'Restore ' + what + ' in "' + section.label + '" to the next newsletter?';
                 if (!confirm(message)) return;
 
-                postQueueChange(filenames, excluded);
+                nlTest_postQueueChange(filenames, excluded);
             }
 
-            function setQueueItemExcluded(buttonEl, excluded) {
+            function nlTest_setQueueItemExcluded(buttonEl, excluded) {
                 var episodeEl = buttonEl.closest('.queue-episode');
                 if (!episodeEl) return;
 
-                postQueueChange([episodeEl.getAttribute('data-queue-file')], excluded);
+                nlTest_postQueueChange([episodeEl.getAttribute('data-queue-file')], excluded);
             }
 
-            function loadConfig() {
-                ApiClient.getPluginConfiguration(NewsletterConfig.pluginUniqueId).then(function (config) {
+            function nlTest_loadConfig() {
+                ApiClient.getPluginConfiguration(nlTest_NewsletterConfig.pluginUniqueId).then(function (config) {
                     console.log("Loading config...", config);
 
                     // Display Last Published Date
@@ -2510,12 +2510,12 @@
                     }
 
                     // General tab fields
-                    FIELDS.checkboxes.forEach(function (id) {
+                    nlTest_FIELDS.checkboxes.forEach(function (id) {
                         var el = document.querySelector('#' + id);
                         if (el) el.checked = config[id];
                     });
 
-                    FIELDS.inputs.forEach(function (id) {
+                    nlTest_FIELDS.inputs.forEach(function (id) {
                         var el = document.querySelector('#' + id);
                         if (el && config[id] !== undefined) el.value = config[id];
                     });
@@ -2532,23 +2532,23 @@
                     if (daysAheadEl) daysAheadEl.value = config.UpcomingDaysAhead !== undefined ? config.UpcomingDaysAhead : 7;
 
                     // Load multi-configurations
-                    discordConfigs = config.DiscordConfigurations || [];
-                    telegramConfigs = config.TelegramConfigurations || [];
-                    matrixConfigs = config.MatrixConfigurations || [];
-                    emailConfigs = config.EmailConfigurations || [];
-                    radarrConfigs = config.RadarrConfigurations || [];
-                    sonarrConfigs = config.SonarrConfigurations || [];
+                    nlTest_discordConfigs = config.DiscordConfigurations || [];
+                    nlTest_telegramConfigs = config.TelegramConfigurations || [];
+                    nlTest_matrixConfigs = config.MatrixConfigurations || [];
+                    nlTest_emailConfigs = config.EmailConfigurations || [];
+                    nlTest_radarrConfigs = config.RadarrConfigurations || [];
+                    nlTest_sonarrConfigs = config.SonarrConfigurations || [];
 
                     // Load libraries and collections first, then render configs
-                    Promise.all([loadLibraries(), loadCollections()]).then(function () {
-                        renderDiscordConfigs();
-                        renderTelegramConfigs();
-                        renderMatrixConfigs();
-                        renderEmailConfigs();
-                        renderRadarrConfigs();
-                        renderSonarrConfigs();
-                        loadQueue();
-                        loadFeatured(config.FeaturedItemIds || []);
+                    Promise.all([nlTest_loadLibraries(), nlTest_loadCollections()]).then(function () {
+                        nlTest_renderDiscordConfigs();
+                        nlTest_renderTelegramConfigs();
+                        nlTest_renderMatrixConfigs();
+                        nlTest_renderEmailConfigs();
+                        nlTest_renderRadarrConfigs();
+                        nlTest_renderSonarrConfigs();
+                        nlTest_loadQueue();
+                        nlTest_loadFeatured(config.FeaturedItemIds || []);
                         Dashboard.hideLoadingMsg();
                     });
                 });
@@ -2557,13 +2557,13 @@
             document.querySelector('#NewsletterTestConfigPage')
                 .addEventListener('pageshow', function () {
                     Dashboard.showLoadingMsg();
-                    loadConfig();
+                    nlTest_loadConfig();
                 });
 
             document.querySelector('#NewsletterConfigForm')
                 .addEventListener('submit', function (e) {
                     Dashboard.showLoadingMsg();
-                    saveConfig();
+                    nlTest_saveConfig();
 
                     e.preventDefault();
                     return false;
