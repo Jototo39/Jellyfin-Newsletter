@@ -6,14 +6,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Jellyfin.Plugin.Newsletters.Collections;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Collections;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Matrix;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Matrix;
 
 /// <summary>
 /// Builds HTML content for Matrix newsletters based on templates.

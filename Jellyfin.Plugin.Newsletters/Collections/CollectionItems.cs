@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Jellyfin.Data.Enums;
-using Jellyfin.Plugin.Newsletters.Featured;
-using Jellyfin.Plugin.Newsletters.Scanner;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Featured;
+using Jellyfin.Plugin.NewslettersTest.Scanner;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Collections;
+namespace Jellyfin.Plugin.NewslettersTest.Collections;
 
 /// <summary>
 /// Resolves the collections selected in a client configuration into newsletter entries.

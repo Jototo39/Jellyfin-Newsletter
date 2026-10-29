@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 
-namespace Jellyfin.Plugin.Newsletters.Configuration;
+namespace Jellyfin.Plugin.NewslettersTest.Configuration;
 
 /// <summary>
 /// Interface for newsletter configurations that support item filtering.

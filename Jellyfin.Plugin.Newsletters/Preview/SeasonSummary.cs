@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Jellyfin.Plugin.Newsletters.Preview;
+namespace Jellyfin.Plugin.NewslettersTest.Preview;
 
 /// <summary>
 /// Formats the season and episode numbers of a queued group into a short human-readable summary.

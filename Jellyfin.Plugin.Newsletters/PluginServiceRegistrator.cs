@@ -1,18 +1,18 @@
-using Jellyfin.Plugin.Newsletters.Clients;
-using Jellyfin.Plugin.Newsletters.Clients.Discord;
-using Jellyfin.Plugin.Newsletters.Clients.Email;
-using Jellyfin.Plugin.Newsletters.Clients.Matrix;
-using Jellyfin.Plugin.Newsletters.Clients.Telegram;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.ItemEventNotifier;
-using Jellyfin.Plugin.Newsletters.Preview;
-using Jellyfin.Plugin.Newsletters.Scanner;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Clients;
+using Jellyfin.Plugin.NewslettersTest.Clients.Discord;
+using Jellyfin.Plugin.NewslettersTest.Clients.Email;
+using Jellyfin.Plugin.NewslettersTest.Clients.Matrix;
+using Jellyfin.Plugin.NewslettersTest.Clients.Telegram;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.ItemEventNotifier;
+using Jellyfin.Plugin.NewslettersTest.Preview;
+using Jellyfin.Plugin.NewslettersTest.Scanner;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
 using MediaBrowser.Controller;
 using MediaBrowser.Controller.Plugins;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Jellyfin.Plugin.Newsletters;
+namespace Jellyfin.Plugin.NewslettersTest;
 
 /// <summary>
 /// Register newsletter services.

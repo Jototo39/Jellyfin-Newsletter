@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using Jellyfin.Plugin.Newsletters.Scanner;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Scanner;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Featured;
+namespace Jellyfin.Plugin.NewslettersTest.Featured;
 
 /// <summary>
 /// Resolves the admin's pinned library items into newsletter entries.

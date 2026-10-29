@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.Newsletters.Shared.Models;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Models;
 
 /// <summary>
 /// A Jellyfin collection picked to appear as its own section of the newsletter.

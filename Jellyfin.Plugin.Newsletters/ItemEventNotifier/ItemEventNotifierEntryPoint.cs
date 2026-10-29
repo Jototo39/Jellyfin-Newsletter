@@ -2,14 +2,14 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
 using Microsoft.Extensions.Hosting;
 
-namespace Jellyfin.Plugin.Newsletters.ItemEventNotifier;
+namespace Jellyfin.Plugin.NewslettersTest.ItemEventNotifier;
 
 /// <summary>
 /// Notifier when a library item is added or removed.

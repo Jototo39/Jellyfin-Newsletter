@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jellyfin.Plugin.Newsletters.Preview;
+namespace Jellyfin.Plugin.NewslettersTest.Preview;
 
 /// <summary>
 /// API controller for previewing and editing the contents of the next newsletter.

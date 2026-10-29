@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.ItemEventNotifier;
+using Jellyfin.Plugin.NewslettersTest.ItemEventNotifier;
 using MediaBrowser.Model.Tasks;
 
-namespace Jellyfin.Plugin.Newsletters.ScheduledTasks
+namespace Jellyfin.Plugin.NewslettersTest.ScheduledTasks
 {
     /// <summary>
     /// Class ItemEventTask.

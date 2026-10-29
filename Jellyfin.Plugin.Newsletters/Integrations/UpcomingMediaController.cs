@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jellyfin.Plugin.Newsletters.Integrations;
+namespace Jellyfin.Plugin.NewslettersTest.Integrations;
 
 /// <summary>
 /// API controller for testing Radarr/Sonarr connections.

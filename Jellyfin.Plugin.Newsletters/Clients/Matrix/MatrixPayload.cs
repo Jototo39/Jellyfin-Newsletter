@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Matrix;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Matrix;
 
 /// <summary>
 /// JSON payload representation for a Matrix message.

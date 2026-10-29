@@ -4,16 +4,16 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using Jellyfin.Plugin.Newsletters.Collections;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Featured;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.Shared;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Collections;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Featured;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.Shared;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Discord;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Discord;
 
 /// <summary>
 /// Provides functionality to build Discord embeds from newsletter data for sending via Discord webhooks.

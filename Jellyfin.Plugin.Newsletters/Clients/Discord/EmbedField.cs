@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Discord;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Discord;
 
 /// <summary>
 /// Represents a field within a Discord embed with name, value, and inline properties.

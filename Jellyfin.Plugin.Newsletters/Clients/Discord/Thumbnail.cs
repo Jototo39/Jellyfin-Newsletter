@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Discord;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Discord;
 
 /// <summary>
 /// Represents a thumbnail image for a Discord embed.

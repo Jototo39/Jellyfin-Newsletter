@@ -5,10 +5,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 
-namespace Jellyfin.Plugin.Newsletters.Integrations;
+namespace Jellyfin.Plugin.NewslettersTest.Integrations;
 
 /// <summary>
 /// Service that fetches upcoming media from Radarr and Sonarr APIs.

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Jellyfin.Plugin.Newsletters.Clients;
+namespace Jellyfin.Plugin.NewslettersTest.Clients;
 
 /// <summary>
 /// Represents a client that can send newsletters and archive newsletter data.

@@ -4,19 +4,19 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Featured;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.Shared;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Featured;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.Shared;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 using MediaBrowser.Controller.Library;
 using Microsoft.AspNetCore.Mvc;
 
 // using System.Net.NetworkCredential;
 
-namespace Jellyfin.Plugin.Newsletters.Clients;
+namespace Jellyfin.Plugin.NewslettersTest.Clients;
 
 /// <summary>
 /// Represents a base client for handling newsletter-related operations.

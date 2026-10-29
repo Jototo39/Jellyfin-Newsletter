@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.Movies;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Scanner;
+namespace Jellyfin.Plugin.NewslettersTest.Scanner;
 
 /// <summary>
 /// Provides methods for scanning and scraping media items for the Jellyfin Newsletters plugin.

@@ -85,4 +85,19 @@ edit("ScheduledTasks/ItemEventTask.cs", [
 
 edit("Logger.cs", [('$"[NLP]: ', '$"[NLP-TEST]: ', 1)])
 
+# Jellyfin caches XML serializers by type full name, so identical type names in the two plugins
+# collide (the TEST plugin gets the official PluginConfiguration back). Rename the namespace.
+import re
+NS = re.compile(r"Jellyfin\.Plugin\.Newsletters\b")
+for path in SRC.rglob("*.cs"):
+    if "obj" in path.parts or "bin" in path.parts:
+        continue
+    text = path.read_text(encoding="utf-8")
+    new = NS.sub("Jellyfin.Plugin.NewslettersTest", text)
+    if new != text:
+        path.write_text(new, encoding="utf-8")
+edit("Jellyfin.Plugin.Newsletters.csproj", [
+    ("<RootNamespace>Jellyfin.Plugin.Newsletters</RootNamespace>", "<RootNamespace>Jellyfin.Plugin.NewslettersTest</RootNamespace>", 1),
+])
+
 print("TEST edition applied. GUID:", TEST_GUID)

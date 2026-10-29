@@ -1,9 +1,9 @@
 using System;
 using System.Collections.ObjectModel;
 
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 
-namespace Jellyfin.Plugin.Newsletters.Configuration;
+namespace Jellyfin.Plugin.NewslettersTest.Configuration;
 
 /// <summary>
 /// Represents a single Discord webhook configuration.

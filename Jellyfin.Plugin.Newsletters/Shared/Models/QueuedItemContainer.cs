@@ -1,7 +1,7 @@
 using System;
 using MediaBrowser.Controller.Entities;
 
-namespace Jellyfin.Plugin.Newsletters.Shared.Models;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Models;
 
 /// <summary>
 /// Represents the type of event that occurred for a queued item.

@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.Newsletters.Shared.Models;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Models;
 
 /// <summary>
 /// The combined media totals for a set of libraries, as rendered into a newsletter.

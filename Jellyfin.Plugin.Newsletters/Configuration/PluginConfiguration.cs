@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using MediaBrowser.Model.Plugins;
 
-namespace Jellyfin.Plugin.Newsletters.Configuration;
+namespace Jellyfin.Plugin.NewslettersTest.Configuration;
 
 /// <summary>
 /// Plugin configuration.

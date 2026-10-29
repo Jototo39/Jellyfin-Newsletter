@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.Newsletters.Shared.Models;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Models;
 
 /// <summary>
 /// How much media a single library held when the last newsletter was sent.

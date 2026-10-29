@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using Jellyfin.Plugin.Newsletters.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
 
-namespace Jellyfin.Plugin.Newsletters;
+namespace Jellyfin.Plugin.NewslettersTest;
 
 /// <summary>
 /// Initializes a new instance of the <see cref="Logger"/> class.

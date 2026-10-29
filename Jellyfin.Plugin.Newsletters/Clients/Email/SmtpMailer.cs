@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MediaBrowser.Common.Api;
@@ -20,7 +20,7 @@ using MimeKit;
 
 // using System.Net.NetworkCredential;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Email;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Email;
 
 /// <summary>
 /// Interaction logic for SendMail.xaml.

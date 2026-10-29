@@ -3,11 +3,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 using Newtonsoft.Json.Linq;
 
-namespace Jellyfin.Plugin.Newsletters.Scanner;
+namespace Jellyfin.Plugin.NewslettersTest.Scanner;
 
 /// <summary>
 /// Handles fetching and processing of poster images from external sources such as TMDB.

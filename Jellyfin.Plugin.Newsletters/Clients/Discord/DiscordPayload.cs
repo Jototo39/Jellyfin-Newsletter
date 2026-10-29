@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Discord;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Discord;
 
 /// <summary>
 /// Represents the payload structure for sending messages to Discord webhooks.

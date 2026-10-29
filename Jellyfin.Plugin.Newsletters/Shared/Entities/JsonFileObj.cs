@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using SQLitePCL.pretty;
 
-namespace Jellyfin.Plugin.Newsletters.Shared.Entities;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 
 /// <summary>
 /// Represents a JSON file object containing metadata for a newsletter item.

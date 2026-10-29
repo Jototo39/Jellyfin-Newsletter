@@ -3,15 +3,15 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Scanner;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Scanner;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 using MediaBrowser.Controller;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Entities.TV;
 using MediaBrowser.Controller.Library;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Jellyfin.Plugin.Newsletters.ItemEventNotifier;
+namespace Jellyfin.Plugin.NewslettersTest.ItemEventNotifier;
 
 /// <summary>
 /// Manages item events and notification processing for the Jellyfin Newsletter plugin.

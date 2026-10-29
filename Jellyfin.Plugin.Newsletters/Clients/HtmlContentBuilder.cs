@@ -5,18 +5,18 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Jellyfin.Plugin.Newsletters.Collections;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Featured;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.Shared;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Collections;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Featured;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.Shared;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 using MediaBrowser.Controller.Library;
 using Newtonsoft.Json;
 
-namespace Jellyfin.Plugin.Newsletters.Clients;
+namespace Jellyfin.Plugin.NewslettersTest.Clients;
 
 /// <summary>
 /// Abstract base class for newsletter builders that produce HTML content using templates.

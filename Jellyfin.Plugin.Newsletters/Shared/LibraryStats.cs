@@ -5,12 +5,12 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using Jellyfin.Data.Enums;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Shared.Models;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Shared.Models;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Shared;
+namespace Jellyfin.Plugin.NewslettersTest.Shared;
 
 /// <summary>
 /// Counts the media a newsletter configuration's selected libraries hold.

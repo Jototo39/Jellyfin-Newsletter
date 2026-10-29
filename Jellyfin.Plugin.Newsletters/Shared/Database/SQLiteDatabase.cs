@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
-using Jellyfin.Plugin.Newsletters.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
 using SQLitePCL;
 using SQLitePCL.pretty;
 
-namespace Jellyfin.Plugin.Newsletters.Shared.Database;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Database;
 
 /// <summary>
 /// Provides methods for interacting with the SQLite database used by the plugin.

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Shared;
+namespace Jellyfin.Plugin.NewslettersTest.Shared;
 
 /// <summary>
 /// Resolves Jellyfin library (virtual folder) IDs to their display names.

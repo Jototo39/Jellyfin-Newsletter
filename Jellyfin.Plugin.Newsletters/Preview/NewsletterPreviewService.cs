@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Jellyfin.Plugin.Newsletters.Shared;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
 using MediaBrowser.Controller.Library;
 
-namespace Jellyfin.Plugin.Newsletters.Preview;
+namespace Jellyfin.Plugin.NewslettersTest.Preview;
 
 /// <summary>
 /// Reads and edits the queue of items awaiting the next newsletter.

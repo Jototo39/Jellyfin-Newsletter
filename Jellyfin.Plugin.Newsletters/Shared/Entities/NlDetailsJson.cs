@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.Newsletters.Shared.Entities;
+namespace Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 
 /// <summary>
 /// Represents the details of a newsletter item.

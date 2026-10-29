@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
-namespace Jellyfin.Plugin.Newsletters.Clients.Discord;
+namespace Jellyfin.Plugin.NewslettersTest.Clients.Discord;
 
 /// <summary>
 /// Represents a Discord embed message with title, description, fields, and other formatting options.

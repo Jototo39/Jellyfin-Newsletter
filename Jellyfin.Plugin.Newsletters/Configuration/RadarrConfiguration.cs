@@ -1,6 +1,6 @@
 using System;
 
-namespace Jellyfin.Plugin.Newsletters.Configuration;
+namespace Jellyfin.Plugin.NewslettersTest.Configuration;
 
 /// <summary>
 /// Represents a single Radarr instance configuration.

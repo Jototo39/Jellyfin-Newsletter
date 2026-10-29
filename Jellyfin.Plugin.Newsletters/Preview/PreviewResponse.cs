@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Jellyfin.Plugin.Newsletters.Preview;
+namespace Jellyfin.Plugin.NewslettersTest.Preview;
 
 /// <summary>
 /// The full preview of the next newsletter.

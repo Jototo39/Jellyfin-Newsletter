@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Jellyfin.Plugin.Newsletters.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
 using MediaBrowser.Common.Configuration;
 using MediaBrowser.Common.Plugins;
 using MediaBrowser.Controller.Configuration;
 using MediaBrowser.Model.Plugins;
 using MediaBrowser.Model.Serialization;
 
-namespace Jellyfin.Plugin.Newsletters;
+namespace Jellyfin.Plugin.NewslettersTest;
 
 /// <summary>
 /// The main plugin.

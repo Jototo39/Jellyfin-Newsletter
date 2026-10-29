@@ -1,4 +1,4 @@
-namespace Jellyfin.Plugin.Newsletters.Preview;
+namespace Jellyfin.Plugin.NewslettersTest.Preview;
 
 /// <summary>
 /// A single queued file (one episode, or one movie) awaiting the next newsletter.

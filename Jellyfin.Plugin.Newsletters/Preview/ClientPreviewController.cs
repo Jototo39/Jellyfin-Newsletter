@@ -7,21 +7,21 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Jellyfin.Plugin.Newsletters.Clients.Discord;
-using Jellyfin.Plugin.Newsletters.Clients.Email;
-using Jellyfin.Plugin.Newsletters.Clients.Matrix;
-using Jellyfin.Plugin.Newsletters.Clients.Telegram;
-using Jellyfin.Plugin.Newsletters.Configuration;
-using Jellyfin.Plugin.Newsletters.Integrations;
-using Jellyfin.Plugin.Newsletters.Shared.Database;
-using Jellyfin.Plugin.Newsletters.Shared.Entities;
+using Jellyfin.Plugin.NewslettersTest.Clients.Discord;
+using Jellyfin.Plugin.NewslettersTest.Clients.Email;
+using Jellyfin.Plugin.NewslettersTest.Clients.Matrix;
+using Jellyfin.Plugin.NewslettersTest.Clients.Telegram;
+using Jellyfin.Plugin.NewslettersTest.Configuration;
+using Jellyfin.Plugin.NewslettersTest.Integrations;
+using Jellyfin.Plugin.NewslettersTest.Shared.Database;
+using Jellyfin.Plugin.NewslettersTest.Shared.Entities;
 using MediaBrowser.Controller;
 using MediaBrowser.Controller.Library;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jellyfin.Plugin.Newsletters.Preview;
+namespace Jellyfin.Plugin.NewslettersTest.Preview;
 
 /// <summary>
 /// Renders what the next newsletter would look like for one client configuration, without sending anything.
