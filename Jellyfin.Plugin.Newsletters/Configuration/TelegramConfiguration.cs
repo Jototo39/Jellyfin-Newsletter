@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 
+using Jellyfin.Plugin.Newsletters.Shared.Models;
+
 namespace Jellyfin.Plugin.Newsletters.Configuration;
 
 /// <summary>
@@ -77,6 +79,12 @@ public class TelegramConfiguration : INewsletterConfiguration
     /// Gets or sets the collection of selected movies libraries.
     /// </summary>
     public Collection<string> SelectedMoviesLibraries { get; set; } = new Collection<string>();
+
+    /// <summary>
+    /// Gets or sets the collections shown as their own sections in the newsletter.
+    /// Empty by default, which leaves collections out of the newsletter.
+    /// </summary>
+    public Collection<CollectionSelection> SelectedCollections { get; set; } = new Collection<CollectionSelection>();
 
     /// <summary>
     /// Gets or sets a value indicating whether to send newsletter on item added.

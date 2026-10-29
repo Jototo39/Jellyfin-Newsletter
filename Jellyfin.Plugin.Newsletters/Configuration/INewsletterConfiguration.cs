@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Jellyfin.Plugin.Newsletters.Shared.Models;
 
 namespace Jellyfin.Plugin.Newsletters.Configuration;
 
@@ -21,6 +22,11 @@ public interface INewsletterConfiguration
     /// Gets the collection of selected movies libraries.
     /// </summary>
     Collection<string> SelectedMoviesLibraries { get; }
+
+    /// <summary>
+    /// Gets the collections shown as their own sections in the newsletter.
+    /// </summary>
+    Collection<CollectionSelection> SelectedCollections { get; }
 
     /// <summary>
     /// Gets a value indicating whether to send newsletter on item added.

@@ -31,6 +31,7 @@ public class JsonFileObj
         ExternalIds = new Dictionary<string, string>();
         LibraryId = string.Empty;
         Genres = string.Empty;
+        CollectionName = string.Empty;
     }
 
     /// <summary>
@@ -117,6 +118,12 @@ public class JsonFileObj
     /// Gets or sets the genres of the item.
     /// </summary>
     public string Genres { get; set; }
+
+    /// <summary>
+    /// Gets or sets the name of the collection section the item is shown under.
+    /// Only set for collection entries, which are resolved at send time and never stored.
+    /// </summary>
+    public string CollectionName { get; set; }
 
     /// <summary>
     /// Converts a database row to a <see cref="JsonFileObj"/> instance.
