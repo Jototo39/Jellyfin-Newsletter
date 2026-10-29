@@ -988,6 +988,57 @@
                 return html;
             }
 
+            // Global collections storage
+            var allCollections = [];
+
+            // A selection is matched by ID first, then by name: Maintainerr and similar tools delete
+            // and recreate their collections, which gives them a new ID.
+            function findSelectedCollection(collection, selected) {
+                return (selected || []).filter(function (s) { return s.Id === collection.Id; })[0]
+                    || (selected || []).filter(function (s) { return (s.Name || '').toLowerCase() === (collection.Name || '').toLowerCase(); })[0];
+            }
+
+            function getCollectionSelectionHtml(clientId, configType, selectedCollections) {
+                var updateFn = 'update' + (configType.charAt(0).toUpperCase() + configType.slice(1)) + 'ConfigFromUI(\'' + clientId + '\')';
+                var html = '<div class="inputContainer"><label class="inputLabel">Collections:</label>';
+                html += '<div class="library-checkbox-container" style="max-height: 150px; overflow-y: auto; border: 1px solid #444; padding: 10px; background: rgba(0,0,0,0.2);">';
+
+                var matched = [];
+                allCollections.forEach(function (collection) {
+                    var selection = findSelectedCollection(collection, selectedCollections);
+                    if (selection) matched.push(selection);
+                    html += '<div class="checkboxContainer">';
+                    html += '<label class="emby-checkbox-label">';
+                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-collection-' + clientId + '" data-collection-id="' + escapeHtml(collection.Id) + '" data-collection-name="' + escapeHtml(collection.Name) + '" ' + (selection ? 'checked' : '') + ' onchange="' + updateFn + '"/>';
+                    html += '<span>' + escapeHtml(collection.Name) + '</span>';
+                    html += '</label></div>';
+                });
+
+                // Keep selections that are not on the server right now, so saving does not drop them.
+                // A collection that is recreated later with the same name is picked up again by name.
+                (selectedCollections || []).forEach(function (selection) {
+                    if (matched.indexOf(selection) !== -1) return;
+                    html += '<div class="checkboxContainer">';
+                    html += '<label class="emby-checkbox-label">';
+                    html += '<input type="checkbox" is="emby-checkbox" class="' + configType + '-collection-' + clientId + '" data-collection-id="' + escapeHtml(selection.Id) + '" data-collection-name="' + escapeHtml(selection.Name) + '" checked onchange="' + updateFn + '"/>';
+                    html += '<span>' + escapeHtml(selection.Name) + ' (not found)</span>';
+                    html += '</label></div>';
+                });
+
+                if (allCollections.length === 0 && (selectedCollections || []).length === 0) html += '<div style="opacity: 0.7;">No collections found</div>';
+                html += '</div>';
+                html += '<div class="fieldDescription">Each selected collection is shown as its own section, headed by the collection name, with what the collection holds when the newsletter is sent. The library selection and the maximum items per section still apply.</div>';
+                html += '</div>';
+
+                return html;
+            }
+
+            function getSelectedCollections(configType, clientId) {
+                return Array.from(document.querySelectorAll('.' + configType + '-collection-' + clientId + ':checked')).map(function (cb) {
+                    return { Id: cb.getAttribute('data-collection-id'), Name: cb.getAttribute('data-collection-name') };
+                });
+            }
+
             function getEventTogglesHtml(clientId, configType, added, updated, deleted, upcoming, featured) {
                 var html = '<div>';
                 html += '  <label class="inputLabel">Events to Notify:</label>';
@@ -1073,13 +1124,16 @@
                     SeriesUpdateEmbedColor: '#0000FF',
                     SeriesUpcomingEmbedColor: '#FF8C00',
                     SeriesFeaturedEmbedColor: '#FFC107',
+                    SeriesCollectionEmbedColor: '#9C27B0',
                     MoviesAddEmbedColor: '#00FF00',
                     MoviesDeleteEmbedColor: '#FF0000',
                     MoviesUpdateEmbedColor: '#0000FF',
                     MoviesUpcomingEmbedColor: '#FF8C00',
                     MoviesFeaturedEmbedColor: '#FFC107',
+                    MoviesCollectionEmbedColor: '#9C27B0',
                     SelectedSeriesLibraries: [],
                     SelectedMoviesLibraries: [],
+                    SelectedCollections: [],
                     NewsletterOnItemAddedEnabled: true,
                     NewsletterOnItemUpdatedEnabled: false,
                     NewsletterOnItemDeletedEnabled: true,
@@ -1148,11 +1202,13 @@
                 config.SeriesUpdateEmbedColor = document.getElementById('discord-series-update-color-' + id).value;
                 config.SeriesUpcomingEmbedColor = document.getElementById('discord-series-upcoming-color-' + id).value;
                 config.SeriesFeaturedEmbedColor = document.getElementById('discord-series-featured-color-' + id).value;
+                config.SeriesCollectionEmbedColor = document.getElementById('discord-series-collection-color-' + id).value;
                 config.MoviesAddEmbedColor = document.getElementById('discord-movies-add-color-' + id).value;
                 config.MoviesDeleteEmbedColor = document.getElementById('discord-movies-delete-color-' + id).value;
                 config.MoviesUpdateEmbedColor = document.getElementById('discord-movies-update-color-' + id).value;
                 config.MoviesUpcomingEmbedColor = document.getElementById('discord-movies-upcoming-color-' + id).value;
                 config.MoviesFeaturedEmbedColor = document.getElementById('discord-movies-featured-color-' + id).value;
+                config.MoviesCollectionEmbedColor = document.getElementById('discord-movies-collection-color-' + id).value;
                 config.MaxItemsPerSection = Math.max(0, parseInt(document.getElementById('discord-max-items-' + id).value) || 0);
                 config.PosterType = document.getElementById('discord-poster-type-' + id).value;
 
@@ -1169,6 +1225,8 @@
 
                 var moviesChecked = document.querySelectorAll('.discord-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
+
+                config.SelectedCollections = getSelectedCollections('discord', id);
 
                 // Update header title
                 var headerTitle = document.querySelector('#discord-accordion-' + id + ' .config-name');
@@ -1220,6 +1278,7 @@
                     html += '      <div class="fieldDescription">Who to ping when this newsletter is posted. Separate multiple entries with commas, for example: @everyone, @here, &lt;@&amp;ROLE_ID&gt;, &lt;@USER_ID&gt;. Enable Developer Mode in Discord to copy role and user IDs. The mention is posted once per webhook, on the first message of the newsletter. Leave empty to post without pinging.</div>';
                     html += '    </div>';
                     html += getLibrarySelectionHtml(config.Id, 'discord', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += getCollectionSelectionHtml(config.Id, 'discord', config.SelectedCollections);
                     html += getEventTogglesHtml(config.Id, 'discord', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
                     html += getMaxItemsHtml(config.Id, 'discord', config.MaxItemsPerSection);
                     html += getPosterTypeHtml(config.Id, 'discord', config.PosterType);
@@ -1239,21 +1298,23 @@
                     html += '    <div>';
                     html += '      <label class="inputLabel">Embed Colors:</label>';
                     html += '      <table class="color-table">';
-                    html += '        <tr><th>Series Add</th><th>Series Delete</th><th>Series Update</th><th>Series Upcoming</th><th>Series Featured</th></tr>';
+                    html += '        <tr><th>Series Add</th><th>Series Delete</th><th>Series Update</th><th>Series Upcoming</th><th>Series Featured</th><th>Series Collection</th></tr>';
                     html += '        <tr>';
                     html += '          <td><input id="discord-series-add-color-' + config.Id + '" type="color" value="' + (config.SeriesAddEmbedColor || '#00FF00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-series-delete-color-' + config.Id + '" type="color" value="' + (config.SeriesDeleteEmbedColor || '#FF0000') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-series-update-color-' + config.Id + '" type="color" value="' + (config.SeriesUpdateEmbedColor || '#0000FF') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-series-upcoming-color-' + config.Id + '" type="color" value="' + (config.SeriesUpcomingEmbedColor || '#FF8C00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-series-featured-color-' + config.Id + '" type="color" value="' + (config.SeriesFeaturedEmbedColor || '#FFC107') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-series-collection-color-' + config.Id + '" type="color" value="' + (config.SeriesCollectionEmbedColor || '#9C27B0') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '        </tr>';
-                    html += '        <tr><th>Movies Add</th><th>Movies Delete</th><th>Movies Update</th><th>Movies Upcoming</th><th>Movies Featured</th></tr>';
+                    html += '        <tr><th>Movies Add</th><th>Movies Delete</th><th>Movies Update</th><th>Movies Upcoming</th><th>Movies Featured</th><th>Movies Collection</th></tr>';
                     html += '        <tr>';
                     html += '          <td><input id="discord-movies-add-color-' + config.Id + '" type="color" value="' + (config.MoviesAddEmbedColor || '#00FF00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-movies-delete-color-' + config.Id + '" type="color" value="' + (config.MoviesDeleteEmbedColor || '#FF0000') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-movies-update-color-' + config.Id + '" type="color" value="' + (config.MoviesUpdateEmbedColor || '#0000FF') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-movies-upcoming-color-' + config.Id + '" type="color" value="' + (config.MoviesUpcomingEmbedColor || '#FF8C00') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '          <td><input id="discord-movies-featured-color-' + config.Id + '" type="color" value="' + (config.MoviesFeaturedEmbedColor || '#FFC107') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
+                    html += '          <td><input id="discord-movies-collection-color-' + config.Id + '" type="color" value="' + (config.MoviesCollectionEmbedColor || '#9C27B0') + '" onchange="updateDiscordConfigFromUI(\'' + config.Id + '\')"></td>';
                     html += '        </tr>';
                     html += '      </table>';
                     html += '    </div>';
@@ -1281,6 +1342,7 @@
                     GenresEnabled: false,
                     SelectedSeriesLibraries: [],
                     SelectedMoviesLibraries: [],
+                    SelectedCollections: [],
                     NewsletterOnItemAddedEnabled: true,
                     NewsletterOnItemUpdatedEnabled: false,
                     NewsletterOnItemDeletedEnabled: true,
@@ -1360,6 +1422,8 @@
                 var moviesChecked = document.querySelectorAll('.telegram-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
+                config.SelectedCollections = getSelectedCollections('telegram', id);
+
                 var headerTitle = document.querySelector('#telegram-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
@@ -1405,6 +1469,7 @@
                     html += '      <div class="fieldDescription">Telegram chat ID or group ID to send messages to. Separate multiple IDs with commas.</div>';
                     html += '    </div>';
                     html += getLibrarySelectionHtml(config.Id, 'telegram', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += getCollectionSelectionHtml(config.Id, 'telegram', config.SelectedCollections);
                     html += getEventTogglesHtml(config.Id, 'telegram', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
                     html += getMaxItemsHtml(config.Id, 'telegram', config.MaxItemsPerSection);
                     html += getPosterTypeHtml(config.Id, 'telegram', config.PosterType);
@@ -1449,6 +1514,7 @@
                     TemplateCategory: 'Modern',
                     SelectedSeriesLibraries: [],
                     SelectedMoviesLibraries: [],
+                    SelectedCollections: [],
                     NewsletterOnItemAddedEnabled: true,
                     NewsletterOnItemUpdatedEnabled: false,
                     NewsletterOnItemDeletedEnabled: true,
@@ -1541,6 +1607,8 @@
 
                 var moviesChecked = document.querySelectorAll('.email-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
+
+                config.SelectedCollections = getSelectedCollections('email', id);
 
                 var headerTitle = document.querySelector('#email-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
@@ -1636,6 +1704,7 @@
                     html += '      <div class="fieldDescription">Heading shown at the top of the newsletter. Also available as the {NewsletterTitle} tag in the Body HTML.</div>';
                     html += '    </div>';
                     html += getLibrarySelectionHtml(config.Id, 'email', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += getCollectionSelectionHtml(config.Id, 'email', config.SelectedCollections);
                     html += getEventTogglesHtml(config.Id, 'email', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
                     html += getMaxItemsHtml(config.Id, 'email', config.MaxItemsPerSection);
                     html += getPosterTypeHtml(config.Id, 'email', config.PosterType);
@@ -1687,6 +1756,7 @@
                     Header: '',
                     SelectedSeriesLibraries: [],
                     SelectedMoviesLibraries: [],
+                    SelectedCollections: [],
                     NewsletterOnItemAddedEnabled: true,
                     NewsletterOnItemUpdatedEnabled: false,
                     NewsletterOnItemDeletedEnabled: true,
@@ -1761,6 +1831,8 @@
                 var moviesChecked = document.querySelectorAll('.matrix-movies-lib-' + id + ':checked');
                 config.SelectedMoviesLibraries = Array.from(moviesChecked).map(function (cb) { return cb.getAttribute('data-lib-id'); });
 
+                config.SelectedCollections = getSelectedCollections('matrix', id);
+
                 var headerTitle = document.querySelector('#matrix-accordion-' + id + ' .config-name');
                 if (headerTitle) headerTitle.textContent = config.Name;
             }
@@ -1815,6 +1887,7 @@
                     html += '      <div class="fieldDescription">Heading shown at the top of the newsletter. Also available as the {NewsletterTitle} tag in the Body HTML.</div>';
                     html += '    </div>';
                     html += getLibrarySelectionHtml(config.Id, 'matrix', config.SelectedSeriesLibraries, config.SelectedMoviesLibraries);
+                    html += getCollectionSelectionHtml(config.Id, 'matrix', config.SelectedCollections);
                     html += getEventTogglesHtml(config.Id, 'matrix', config.NewsletterOnItemAddedEnabled, config.NewsletterOnItemUpdatedEnabled, config.NewsletterOnItemDeletedEnabled, config.NewsletterOnUpcomingItemEnabled, config.NewsletterOnFeaturedEnabled);
                     html += getMaxItemsHtml(config.Id, 'matrix', config.MaxItemsPerSection);
                     html += getPosterTypeHtml(config.Id, 'matrix', config.PosterType);
@@ -1974,6 +2047,24 @@
                 }).catch(function (error) {
                     console.error('Could not resolve featured items:', error);
                     renderFeatured();
+                });
+            }
+
+            function loadCollections() {
+                // Collections are BoxSets; the admin sees every one of them.
+                var url = ApiClient.getUrl('Items', {
+                    IncludeItemTypes: 'BoxSet',
+                    Recursive: true,
+                    SortBy: 'SortName',
+                    userId: ApiClient.getCurrentUserId()
+                });
+
+                return ApiClient.getJSON(url).then(function (result) {
+                    allCollections = (result && result.Items) || [];
+                    return allCollections;
+                }).catch(function (error) {
+                    console.error('Error loading collections:', error);
+                    return [];
                 });
             }
 
@@ -2448,8 +2539,8 @@
                     radarrConfigs = config.RadarrConfigurations || [];
                     sonarrConfigs = config.SonarrConfigurations || [];
 
-                    // Load libraries first, then render configs
-                    loadLibraries().then(function () {
+                    // Load libraries and collections first, then render configs
+                    Promise.all([loadLibraries(), loadCollections()]).then(function () {
                         renderDiscordConfigs();
                         renderTelegramConfigs();
                         renderMatrixConfigs();
