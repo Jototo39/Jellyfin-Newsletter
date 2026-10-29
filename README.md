@@ -20,6 +20,7 @@ This repository is a maintained fork of the [Jellyfin Newsletter Plugin](https:/
 * Newsletter Queue to review and curate what will be sent, with per-section Exclude all / Restore all
 * Per-client rendered preview of the next newsletter, without sending it
 * Featured section to pin hand-picked titles to the top of the newsletter
+* Jellyfin collections as newsletter sections (for example a Maintainerr "Leaving soon" collection)
 * Multiple Bug Fixes, Enhancements and much more!!!
 
 # Description
@@ -307,6 +308,13 @@ Manifest is up and running! You can now import the manifest in Jellyfin and this
 
 - Choose specific libraries within each item type (Movies/Series) to include in newsletters for this email client.
 
+### Collections
+
+- Choose Jellyfin collections to show in newsletters for this email client. Each selected collection becomes its own section, headed by the collection name, placed after the Removed sections and before Upcoming. Nothing is selected by default.
+- A collection section shows what the collection holds when the newsletter is sent; it does not depend on the queue. Movies and whole series are listed as titles, and seasons and episodes are listed under their series with the usual "Season: X - Eps. Y" lines.
+- The library selection and **Max Items Per Section** still apply. A title can appear in a collection section and in another section of the same newsletter.
+- A selection stores the collection ID and name. If the collection is deleted and recreated with the same name (as Maintainerr does), it is found again by name. A collection that cannot be found is skipped and a warning is logged.
+
 ### Newsletter Event Settings
 
 - Configure which library events (Add/Update/Delete/Upcoming/Featured) should trigger the newsletters for this email client:
@@ -351,11 +359,13 @@ You can select between different email templates:
   - `<template id="header-add">` - Header for newly added items
   - `<template id="header-update">` - Header for updated items
   - `<template id="header-delete">` - Header for deleted items
+  - `<template id="header-collection">` - Header for each collection section
   - `<template id="header-upcoming">` - Header for upcoming items
 - **Placeholders**:
   - `{LibraryName}` - replaced with the library name (e.g., "Movies", "TV Shows")
   - `{FeaturedEmoji}` - replaced with the emoji configured on the **Featured** tab (only used in `header-featured`)
-- If a custom Header HTML was saved before the Featured section existed and has no `header-featured` template, the Featured section is skipped for that client and a warning is logged.
+  - `{CollectionName}` - replaced with the collection name (only used in `header-collection`)
+- If a custom Header HTML was saved before the Featured section existed and has no `header-featured` template, the Featured section is skipped for that client and a warning is logged. The same applies to collection sections and the `header-collection` template.
 - If left empty, the default header template from the selected **Newsletter Template Category** will be used.
 
 </details>
@@ -384,6 +394,13 @@ You can select between different email templates:
 
 - Choose specific libraries within each item type (Movies/Series) to include in newsletters for this Discord client.
 
+### Collections
+
+- Choose Jellyfin collections to show in newsletters for this Discord client. Each selected collection becomes its own section, headed by the collection name, placed after the Removed sections and before Upcoming. Nothing is selected by default.
+- A collection section shows what the collection holds when the newsletter is sent; it does not depend on the queue. Movies and whole series are listed as titles, and seasons and episodes are listed under their series with the usual "Season: X - Eps. Y" lines.
+- The library selection and **Max Items Per Section** still apply. A title can appear in a collection section and in another section of the same newsletter.
+- A selection stores the collection ID and name. If the collection is deleted and recreated with the same name (as Maintainerr does), it is found again by name. A collection that cannot be found is skipped and a warning is logged.
+
 ### Newsletter Event Settings
 
 - Configure which library events (Add/Update/Delete/Upcoming/Featured) should trigger Discord notifications:
@@ -406,7 +423,7 @@ You can select between different email templates:
 ### Fields & Color selection
 
 - Select the fields that you want as part of your embed.
-- Select the embed color for each event type (Add, Update, Delete, Upcoming, Featured) and item type (Series, Movies).
+- Select the embed color for each event type (Add, Update, Delete, Upcoming, Featured, Collection) and item type (Series, Movies).
 
 </details>
 
@@ -426,6 +443,13 @@ You can select between different email templates:
 ### Library Selection
 
 - Choose specific libraries within each item type (Movies/Series) to include in newsletters for this Telegram client.
+
+### Collections
+
+- Choose Jellyfin collections to show in newsletters for this Telegram client. Each selected collection becomes its own section, headed by the collection name, placed after the Removed sections and before Upcoming. Nothing is selected by default.
+- A collection section shows what the collection holds when the newsletter is sent; it does not depend on the queue. Movies and whole series are listed as titles, and seasons and episodes are listed under their series with the usual "Season: X - Eps. Y" lines.
+- The library selection and **Max Items Per Section** still apply. A title can appear in a collection section and in another section of the same newsletter.
+- A selection stores the collection ID and name. If the collection is deleted and recreated with the same name (as Maintainerr does), it is found again by name. A collection that cannot be found is skipped and a warning is logged.
 
 ### Newsletter Event Settings
 
@@ -482,6 +506,13 @@ You can select between different email templates:
 
 - Choose specific libraries within each item type (Movies/Series) to include in newsletters for this Matrix client.
 
+### Collections
+
+- Choose Jellyfin collections to show in newsletters for this Matrix client. Each selected collection becomes its own section, headed by the collection name, placed after the Removed sections and before Upcoming. Nothing is selected by default.
+- A collection section shows what the collection holds when the newsletter is sent; it does not depend on the queue. Movies and whole series are listed as titles, and seasons and episodes are listed under their series with the usual "Season: X - Eps. Y" lines.
+- The library selection and **Max Items Per Section** still apply. A title can appear in a collection section and in another section of the same newsletter.
+- A selection stores the collection ID and name. If the collection is deleted and recreated with the same name (as Maintainerr does), it is found again by name. A collection that cannot be found is skipped and a warning is logged.
+
 ### Newsletter Event Settings
 
 - Configure which library events (Add/Update/Delete/Upcoming/Featured) should trigger Matrix notifications:
@@ -521,11 +552,13 @@ You can select between different email templates:
   - `<template id="header-add">` - Header for newly added items
   - `<template id="header-update">` - Header for updated items
   - `<template id="header-delete">` - Header for deleted items
+  - `<template id="header-collection">` - Header for each collection section
   - `<template id="header-upcoming">` - Header for upcoming items
 - **Placeholders**:
   - `{LibraryName}` - replaced with the library name (e.g., "Movies", "TV Shows")
   - `{FeaturedEmoji}` - replaced with the emoji configured on the **Featured** tab (only used in `header-featured`)
-- If a custom Header HTML was saved before the Featured section existed and has no `header-featured` template, the Featured section is skipped for that client and a warning is logged.
+  - `{CollectionName}` - replaced with the collection name (only used in `header-collection`)
+- If a custom Header HTML was saved before the Featured section existed and has no `header-featured` template, the Featured section is skipped for that client and a warning is logged. The same applies to collection sections and the `header-collection` template.
 - If left empty, the default header template from the selected **Newsletter Template Category** will be used.
 
 </details>
