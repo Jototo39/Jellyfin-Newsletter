@@ -95,7 +95,17 @@ public static class FeaturedItems
         return featured;
     }
 
-    private static JsonFileObj ToEntry(BaseItem item, ILibraryManager libraryManager, Logger logger, SQLiteDatabase db, PosterImageHandler imageHandler, string? hostname)
+    /// <summary>
+    /// Builds the newsletter entry for a whole title: a movie or a series.
+    /// </summary>
+    /// <param name="item">The movie or series.</param>
+    /// <param name="libraryManager">The Jellyfin library manager.</param>
+    /// <param name="logger">The logger used to report poster lookups.</param>
+    /// <param name="db">The database searched for an already known poster URL.</param>
+    /// <param name="imageHandler">The handler used to look up and fetch poster URLs.</param>
+    /// <param name="hostname">The configured server URL, used as the poster URL of last resort.</param>
+    /// <returns>The entry, carrying the featured event type.</returns>
+    internal static JsonFileObj ToEntry(BaseItem item, ILibraryManager libraryManager, Logger logger, SQLiteDatabase db, PosterImageHandler imageHandler, string? hostname)
     {
         var entry = new JsonFileObj
         {

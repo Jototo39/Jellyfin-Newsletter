@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
 
+using Jellyfin.Plugin.Newsletters.Shared.Models;
+
 namespace Jellyfin.Plugin.Newsletters.Configuration;
 
 /// <summary>
@@ -99,6 +101,11 @@ public class DiscordConfiguration : INewsletterConfiguration
     public string SeriesFeaturedEmbedColor { get; set; } = "#ffc107";
 
     /// <summary>
+    /// Gets or sets the embed color for series in a collection section.
+    /// </summary>
+    public string SeriesCollectionEmbedColor { get; set; } = "#9c27b0";
+
+    /// <summary>
     /// Gets or sets the embed color for movies add events.
     /// </summary>
     public string MoviesAddEmbedColor { get; set; } = "#00ff00";
@@ -124,6 +131,11 @@ public class DiscordConfiguration : INewsletterConfiguration
     public string MoviesFeaturedEmbedColor { get; set; } = "#ffc107";
 
     /// <summary>
+    /// Gets or sets the embed color for movies in a collection section.
+    /// </summary>
+    public string MoviesCollectionEmbedColor { get; set; } = "#9c27b0";
+
+    /// <summary>
     /// Gets or sets the collection of selected series libraries.
     /// </summary>
     public Collection<string> SelectedSeriesLibraries { get; set; } = new Collection<string>();
@@ -132,6 +144,12 @@ public class DiscordConfiguration : INewsletterConfiguration
     /// Gets or sets the collection of selected movies libraries.
     /// </summary>
     public Collection<string> SelectedMoviesLibraries { get; set; } = new Collection<string>();
+
+    /// <summary>
+    /// Gets or sets the collections shown as their own sections in the newsletter.
+    /// Empty by default, which leaves collections out of the newsletter.
+    /// </summary>
+    public Collection<CollectionSelection> SelectedCollections { get; set; } = new Collection<CollectionSelection>();
 
     /// <summary>
     /// Gets or sets a value indicating whether to send newsletter on item added.

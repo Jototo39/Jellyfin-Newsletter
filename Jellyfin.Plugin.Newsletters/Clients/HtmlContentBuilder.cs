@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Jellyfin.Plugin.Newsletters.Collections;
 using Jellyfin.Plugin.Newsletters.Configuration;
 using Jellyfin.Plugin.Newsletters.Featured;
 using Jellyfin.Plugin.Newsletters.Integrations;
@@ -39,6 +40,7 @@ public abstract class HtmlContentBuilder(
     private string headerDeleteHtml = string.Empty;
     private string headerUpcomingHtml = string.Empty;
     private string headerFeaturedHtml = string.Empty;
+    private string headerCollectionHtml = string.Empty;
     private bool _isSetup;
 
     /// <summary>
@@ -67,6 +69,7 @@ public abstract class HtmlContentBuilder(
             "delete" => headerDeleteHtml,
             "upcoming" => headerUpcomingHtml,
             "featured" => headerFeaturedHtml,
+            CollectionItems.EventType => headerCollectionHtml,
             _ => headerAddHtml
         };
 
@@ -77,6 +80,7 @@ public abstract class HtmlContentBuilder(
         }
 
         string header = this.TemplateReplace(headerTemplate, "{LibraryName}", libraryName);
+        header = this.TemplateReplace(header, "{CollectionName}", libraryName);
         return this.TemplateReplace(header, "{FeaturedEmoji}", Config.FeaturedEmoji);
     }
 
@@ -342,6 +346,13 @@ public abstract class HtmlContentBuilder(
             sortedItems = sortedItems.Where(i => !string.Equals(i.EventType, FeaturedItems.EventType, StringComparison.OrdinalIgnoreCase));
         }
 
+        // Same for a custom header saved before collection sections existed.
+        if (string.IsNullOrWhiteSpace(this.headerCollectionHtml) && sortedItems.Any(i => i.EventType == CollectionItems.EventType))
+        {
+            Logger.Warn($"[{clientName}] Header HTML has no 'header-collection' section - skipping the collection sections.");
+            sortedItems = sortedItems.Where(i => !string.Equals(i.EventType, CollectionItems.EventType, StringComparison.OrdinalIgnoreCase));
+        }
+
         return sortedItems
             .GroupBy(i => i.EventType?.ToLowerInvariant() ?? "add")
             .Select(eventGroup => new EventGroupResult
@@ -350,6 +361,7 @@ public abstract class HtmlContentBuilder(
                 Libraries = eventGroup
                     .GroupBy(i => i.EventType == FeaturedItems.EventType
                         ? FeaturedItems.SectionName
+                        : i.EventType == CollectionItems.EventType ? i.CollectionName
                         : i.EventType == "upcoming" ? i.LibraryId : LibraryNames.Resolve(i.LibraryId, libraryNameMap))
                     .Select(libGroup => new LibraryGroupResult { LibraryName = libGroup.Key, Items = libGroup.ToList() })
             });
@@ -419,8 +431,8 @@ public abstract class HtmlContentBuilder(
 
         StringBuilder testHTML = new StringBuilder();
 
-        string[] eventTypes = { FeaturedItems.EventType, "add", "update", "delete", "upcoming" };
-        string[] titles = { "Test Featured Movie", "Test Added Series", "Test Updated Movie", "Test Deleted Series", "Test Upcoming Movie" };
+        string[] eventTypes = { FeaturedItems.EventType, "add", "update", "delete", CollectionItems.EventType, "upcoming" };
+        string[] titles = { "Test Featured Movie", "Test Added Series", "Test Updated Movie", "Test Deleted Series", "Test Collection Movie", "Test Upcoming Movie" };
 
         for (int i = 0; i < eventTypes.Length; i++)
         {
@@ -431,7 +443,14 @@ public abstract class HtmlContentBuilder(
                 continue;
             }
 
-            testHTML.Append(GetEventSectionHeader(eventType));
+            if (eventType == CollectionItems.EventType && string.IsNullOrWhiteSpace(this.headerCollectionHtml))
+            {
+                continue;
+            }
+
+            testHTML.Append(eventType == CollectionItems.EventType
+                ? GetEventSectionHeader(eventType, "Test Collection")
+                : GetEventSectionHeader(eventType));
 
             JsonFileObj item = JsonFileObj.GetTestObj();
             item.Title = titles[i];
@@ -570,8 +589,9 @@ public abstract class HtmlContentBuilder(
         this.headerDeleteHtml = ExtractTemplateSection(fullHeaderHtml, "header-delete");
         this.headerUpcomingHtml = ExtractTemplateSection(fullHeaderHtml, "header-upcoming");
         this.headerFeaturedHtml = ExtractTemplateSection(fullHeaderHtml, "header-featured");
+        this.headerCollectionHtml = ExtractTemplateSection(fullHeaderHtml, "header-collection");
 
-        Logger.Debug($"Header sections parsed — Featured: {!string.IsNullOrEmpty(this.headerFeaturedHtml)}, Add: {!string.IsNullOrEmpty(this.headerAddHtml)}, Update: {!string.IsNullOrEmpty(this.headerUpdateHtml)}, Delete: {!string.IsNullOrEmpty(this.headerDeleteHtml)}, Upcoming: {!string.IsNullOrEmpty(this.headerUpcomingHtml)}");
+        Logger.Debug($"Header sections parsed — Featured: {!string.IsNullOrEmpty(this.headerFeaturedHtml)}, Add: {!string.IsNullOrEmpty(this.headerAddHtml)}, Update: {!string.IsNullOrEmpty(this.headerUpdateHtml)}, Delete: {!string.IsNullOrEmpty(this.headerDeleteHtml)}, Collection: {!string.IsNullOrEmpty(this.headerCollectionHtml)}, Upcoming: {!string.IsNullOrEmpty(this.headerUpcomingHtml)}");
     }
 
     /// <summary>

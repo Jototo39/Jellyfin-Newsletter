@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Jellyfin.Plugin.Newsletters.Collections;
 using Jellyfin.Plugin.Newsletters.Configuration;
 using Jellyfin.Plugin.Newsletters.Featured;
 using Jellyfin.Plugin.Newsletters.Scanner;
@@ -31,6 +32,10 @@ public class ClientBuilder(Logger loggerInstance,
     private const int PreviewImageWidth = 300;
 
     private IReadOnlyList<JsonFileObj>? featuredEntries;
+
+    // Every member row of the collections last built, kept for ParseSeriesInfo: only one row per
+    // series reaches the renderers, and the season/episode lines are built from all of them.
+    private IReadOnlyList<JsonFileObj> collectionEntries = Array.Empty<JsonFileObj>();
 
     /// <summary>
     /// Gets the plugin configuration instance.
@@ -137,6 +142,18 @@ public class ClientBuilder(Logger loggerInstance,
             itemsByKey[$"{item.Title}_{FeaturedItems.EventType}"] = item;
         }
 
+        // Append the selected collections, resolved from the library like the featured picks. They are
+        // not de-duplicated against the other sections: being in a collection is news of its own, and a
+        // title can sit in several collections, so the collection is part of the key.
+        collectionEntries = CollectionItems.Build(LibraryManager, Logger, Db, new PosterImageHandler(Logger), Config.Hostname, config.SelectedCollections)
+            .Where(item => ShouldIncludeItem(item, config, clientName))
+            .ToList();
+
+        foreach (var item in collectionEntries)
+        {
+            itemsByKey.TryAdd($"{item.Title}_{CollectionItems.EventType}_{item.CollectionName}", item);
+        }
+
         // Append prefetched upcoming items and deduplicate by title
         if (upcomingItems != null && upcomingItems.Count > 0)
         {
@@ -155,10 +172,11 @@ public class ClientBuilder(Logger loggerInstance,
 
         var allItems = itemsByKey.Values.ToList();
 
-        var eventTypeOrder = new Dictionary<string, int> { { "featured", 0 }, { "add", 1 }, { "update", 2 }, { "delete", 3 }, { "upcoming", 4 } };
+        var eventTypeOrder = new Dictionary<string, int> { { "featured", 0 }, { "add", 1 }, { "update", 2 }, { "delete", 3 }, { CollectionItems.EventType, 4 }, { "upcoming", 5 } };
 
         var sortedItems = allItems
             .OrderBy(i => eventTypeOrder.GetValueOrDefault(i.EventType?.ToLowerInvariant() ?? "add", 0))
+            .ThenBy(i => i.CollectionName, StringComparer.OrdinalIgnoreCase)
             .ThenBy(i => i.Type == "Movie" ? 0 : 1)
             .ThenBy(i => i.EventType == "upcoming" ? i.LibraryId : LibraryNames.Resolve(i.LibraryId, libraryNameMap))
             .ToList();
@@ -204,6 +222,25 @@ public class ClientBuilder(Logger loggerInstance,
                     Logger.Debug("tempVar.Season: " + tempVar.Season + " : tempVar.Episode: " + tempVar.Episode);
                     compiledList.Add(tempVar);
                 }
+            }
+        }
+        else if (currObj.EventType == CollectionItems.EventType)
+        {
+            // A whole series in the collection carries no episode (-1), and a season added along with
+            // some of its episodes lists those episodes twice, so keep each episode once.
+            foreach (var itemObj in collectionEntries
+                .Where(i => i.Title == currObj.Title && i.CollectionName == currObj.CollectionName && i.Season >= 0)
+                .DistinctBy(i => (i.Season, i.Episode)))
+            {
+                NlDetailsJson tempVar = new()
+                {
+                    Title = itemObj.Title,
+                    Season = itemObj.Season,
+                    Episode = itemObj.Episode
+                };
+
+                Logger.Debug("tempVar.Season: " + tempVar.Season + " : tempVar.Episode: " + tempVar.Episode);
+                compiledList.Add(tempVar);
             }
         }
         else
@@ -542,7 +579,7 @@ public class ClientBuilder(Logger loggerInstance,
     /// This is the base implementation shared across all clients.
     /// </summary>
     /// <param name="eventType">The event type (add, delete, update).</param>
-    /// <param name="libraryName">Optional library name to include in the prefix.</param>
+    /// <param name="libraryName">Optional library name to include in the prefix. For a collection entry, the collection name.</param>
     /// <returns>The formatted description prefix with emoji.</returns>
     protected string GetEventDescriptionPrefixBase(string? eventType, string? libraryName = null)
     {
@@ -560,6 +597,7 @@ public class ClientBuilder(Logger loggerInstance,
             "update" => $"🔄 Updated in {libDisplay}",
             "upcoming" => $"📅 Upcoming in {libDisplay}",
             "featured" => $"{Config.FeaturedEmoji} Featured",
+            CollectionItems.EventType => $"📂 {libDisplay}",
             _ => $"🎬 Added to {libDisplay}"
         };
     }

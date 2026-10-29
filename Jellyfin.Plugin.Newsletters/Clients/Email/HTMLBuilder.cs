@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Jellyfin.Plugin.Newsletters.Collections;
 using Jellyfin.Plugin.Newsletters.Configuration;
 using Jellyfin.Plugin.Newsletters.Integrations;
 using Jellyfin.Plugin.Newsletters.Shared.Database;
@@ -262,6 +263,7 @@ public class HtmlBuilder(
             "delete" => ("REMOVED", "🗑️", "#F44336"),
             "upcoming" => ("UPCOMING", "📅", "#FF8C00"),
             "featured" => ("FEATURED", Config.FeaturedEmoji, "#FFC107"),
+            CollectionItems.EventType => ("COLLECTION", "📂", "#9C27B0"),
             _ => ("NEW", "🎬", "#4CAF50")
         };
 

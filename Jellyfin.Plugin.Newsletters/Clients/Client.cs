@@ -72,8 +72,10 @@ public class Client(Logger loggerInstance,
             {
                 Logger.Info($"Clearing {Config.FeaturedItemIds.Count} featured item(s) after send");
                 Config.FeaturedItemIds.Clear();
-                FeaturedItems.ClearPosterCache();
             }
+
+            // Collection entries share the featured poster cache, so drop it on every send.
+            FeaturedItems.ClearPosterCache();
 
             // Snapshot each configuration's library counts so the next newsletter can report the
             // change since this one. Every config carries its own library selection, so the counts

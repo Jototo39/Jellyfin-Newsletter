@@ -77,6 +77,12 @@ public class MatrixConfiguration : ITemplatedConfiguration
     public Collection<string> SelectedMoviesLibraries { get; set; } = new Collection<string>();
 
     /// <summary>
+    /// Gets or sets the collections shown as their own sections in the newsletter.
+    /// Empty by default, which leaves collections out of the newsletter.
+    /// </summary>
+    public Collection<CollectionSelection> SelectedCollections { get; set; } = new Collection<CollectionSelection>();
+
+    /// <summary>
     /// Gets or sets a value indicating whether to send newsletter on item added.
     /// </summary>
     public bool NewsletterOnItemAddedEnabled { get; set; } = true;

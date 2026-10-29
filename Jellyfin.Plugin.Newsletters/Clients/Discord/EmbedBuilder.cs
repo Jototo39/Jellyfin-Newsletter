@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Jellyfin.Plugin.Newsletters.Collections;
 using Jellyfin.Plugin.Newsletters.Configuration;
 using Jellyfin.Plugin.Newsletters.Featured;
 using Jellyfin.Plugin.Newsletters.Integrations;
@@ -57,13 +58,16 @@ public class EmbedBuilder(
             foreach (var item in sortedItems)
             {
                 string eventType = item.EventType?.ToLowerInvariant() ?? "add";
-                string libraryName = eventType == "upcoming" ? (item.LibraryId ?? string.Empty) : LibraryNames.Resolve(item.LibraryId, libraryNameMap);
+                string libraryName = eventType == CollectionItems.EventType
+                    ? item.CollectionName
+                    : eventType == "upcoming" ? (item.LibraryId ?? string.Empty) : LibraryNames.Resolve(item.LibraryId, libraryNameMap);
 
                 // Skip items beyond the per-section cap
                 if (maxItemsPerSection > 0)
                 {
                     // Featured picks form a single section spanning libraries, the way the HTML
-                    // clients group them, so the cap applies to that whole section.
+                    // clients group them, so the cap applies to that whole section. A collection
+                    // entry carries its collection name as libraryName, so each collection is a section.
                     string sectionKey = eventType == FeaturedItems.EventType
                         ? $"{eventType}|{FeaturedItems.SectionName}"
                         : $"{eventType}|{libraryName}";
@@ -291,6 +295,7 @@ public class EmbedBuilder(
                 "update" => Convert.ToInt32(discordConfig.SeriesUpdateEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
                 "upcoming" => Convert.ToInt32(discordConfig.SeriesUpcomingEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
                 "featured" => Convert.ToInt32(discordConfig.SeriesFeaturedEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
+                CollectionItems.EventType => Convert.ToInt32(discordConfig.SeriesCollectionEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
                 _ => Convert.ToInt32(discordConfig.SeriesAddEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16)
             };
         }
@@ -303,6 +308,7 @@ public class EmbedBuilder(
                 "update" => Convert.ToInt32(discordConfig.MoviesUpdateEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
                 "upcoming" => Convert.ToInt32(discordConfig.MoviesUpcomingEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
                 "featured" => Convert.ToInt32(discordConfig.MoviesFeaturedEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
+                CollectionItems.EventType => Convert.ToInt32(discordConfig.MoviesCollectionEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16),
                 _ => Convert.ToInt32(discordConfig.MoviesAddEmbedColor.Replace("#", string.Empty, StringComparison.Ordinal), 16)
             };
         }
@@ -320,6 +326,11 @@ public class EmbedBuilder(
         string libDisplay = string.IsNullOrEmpty(libraryName) ? "Library" : libraryName;
 
         // Discord uses bold formatting for the description prefix
+        if (eventType?.ToLowerInvariant() == CollectionItems.EventType)
+        {
+            return basePrefix.Replace(libDisplay, $"**{libDisplay}**", StringComparison.Ordinal);
+        }
+
         return basePrefix.Replace($"Added to {libDisplay}", $"**Added to {libDisplay}**", StringComparison.Ordinal)
                         .Replace($"Removed from {libDisplay}", $"**Removed from {libDisplay}**", StringComparison.Ordinal)
                         .Replace($"Updated in {libDisplay}", $"**Updated in {libDisplay}**", StringComparison.Ordinal)
